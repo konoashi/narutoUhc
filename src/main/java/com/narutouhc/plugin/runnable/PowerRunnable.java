@@ -1,0 +1,29 @@
+package com.narutouhc.plugin.runnable;
+
+import org.bukkit.scheduler.BukkitRunnable;
+
+import com.narutouhc.plugin.roles.Role;
+
+public class PowerRunnable extends BukkitRunnable
+{
+    private Role role;
+    
+    public PowerRunnable(Role r)
+    {
+        this.role = r;
+    }
+    
+    @Override
+    public void run()
+    {
+        if(this.role.getCurrentCooldown() >= 1)
+        {
+            this.role.shrinkCooldown(1);
+        }
+        else
+        {
+            this.cancel();
+        }
+    }
+    
+}

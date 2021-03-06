@@ -2,23 +2,69 @@ package com.narutouhc.plugin.roles;
 
 import org.bukkit.entity.Player;
 
+import com.narutouhc.plugin.runnable.PowerRunnable;
+
 public class Role
 {
     public Player p;
-    private long cooldown;
+    private int defaultCooldown = 20 * 60 * 5;
+    private int currentCooldown = 0;
+
+    private PowerRunnable powerRunnable;
+    
+    public EnumRole type = EnumRole.NONE;
 
     public Role(Player player)
     {
         this.p = player;
+        this.powerRunnable = new PowerRunnable(this);
     }
 
-    public void setCooldown(long l)
+    public void setDefaultCooldown(int i)
     {
-        this.cooldown = l;
+        this.defaultCooldown = i;
+    }
+
+    public int getDefaultCooldown()
+    {
+        return this.defaultCooldown;
+    }
+
+    public void setCurrentCooldown(int i)
+    {
+        this.currentCooldown = i;
+    }
+
+    public int getCurrentCooldown()
+    {
+        return this.currentCooldown;
+    }
+
+    public void resetCurrentCooldown()
+    {
+        this.currentCooldown = this.defaultCooldown;
+    }
+
+    public void useAbility()
+    {}
+    
+    public void addCooldown(int i)
+    {
+        this.currentCooldown += i;
     }
     
-    public long getCooldown()
+    public void shrinkCooldown(int i)
     {
-        return this.cooldown;
+        this.currentCooldown -= i;
+    }
+    
+    public boolean isAvailable()
+    {
+        return this.currentCooldown == 0;
+    }
+    
+    public PowerRunnable getPowerRunnable()
+    {
+        return this.powerRunnable;
     }
 }

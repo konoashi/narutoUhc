@@ -5,15 +5,17 @@ import java.util.Map;
 
 import org.bukkit.entity.Player;
 
+import com.narutouhc.plugin.roles.EnumRole;
+
 public class GamePlayer
 {
     // Joueur
     private Player p;
     // Roles
-    private boolean naruto = false, sakura = false, shikamaru = false, choji = false, minato = false, sasuke = false, orochimaru = false, kakuzu = false, itachi = false, deidara = false, pain;
-
+    private EnumRole role = EnumRole.NONE;
+    
     public static Map<Player, GamePlayer> gamePlayers = new HashMap<Player, GamePlayer>();
-
+    
     public GamePlayer(Player player)
     {
         this.p = player;
@@ -24,139 +26,73 @@ public class GamePlayer
 
     public boolean isNaruto()
     {
-        return this.naruto;
+        return this.role == EnumRole.NARUTO;
     }
 
     public boolean iSakura()
     {
-        return this.sakura;
+        return this.role == EnumRole.SAKURA;
     }
 
     public boolean isShikamaru()
     {
-        return this.shikamaru;
+        return this.role == EnumRole.SHIKAMARU;
     }
 
     public boolean isChoji()
     {
-        return this.choji;
+        return this.role == EnumRole.CHOJI;
     }
 
     public boolean isMinato()
     {
-        return this.minato;
+        return this.role == EnumRole.MINATO;
     }
 
     public boolean isSasuke()
     {
-        return this.sasuke;
+        return this.role == EnumRole.SASUKE;
     }
 
     public boolean isOrochimaru()
     {
-        return this.orochimaru;
+        return this.role == EnumRole.OROCHIMARU;
     }
 
     public boolean isKakuzu()
     {
-        return this.kakuzu;
+        return this.role == EnumRole.KAKUZU;
     }
 
     public boolean isItachi()
     {
-        return this.itachi;
+        return this.role == EnumRole.ITACHI;
     }
 
     public boolean isDeidara()
     {
-        return this.deidara;
+        return this.role == EnumRole.DEIDARA;
     }
 
     public boolean isPain()
     {
-        return this.pain;
+        return this.role == EnumRole.PAIN;
     }
 
     /* Conditions publiques permettant de préciser le rôle du joueur */
     
     public void resetRoles()
     {
-        this.naruto = false;
-        this.sakura = false;
-        this.shikamaru = false;
-        this.choji = false;
-        this.minato = false;
-        this.sasuke = false;
-        this.orochimaru = false;
-        this.kakuzu = false;
-        this.itachi = false;
-        this.deidara = false;
-        this.pain = false;
+        this.role = EnumRole.NONE;
     }
 
-    public void setNaruto()
+    public void setRole(EnumRole role)
     {
-        this.resetRoles();
-        this.naruto = true;
-    }
-
-    public void setSakura()
-    {
-        this.resetRoles();
-        this.sakura = true;
-    }
-
-    public void setShikamaru()
-    {
-        this.resetRoles();
-        this.shikamaru = true;
-    }
-
-    public void setChoji()
-    {
-        this.resetRoles();
-        this.choji = true;
+        this.role = role;
     }
     
-    public void setMinato()
+    public EnumRole getRole()
     {
-        this.resetRoles();
-        this.minato = true;
-    }
-    
-    public void setSasuke()
-    {
-        this.resetRoles();
-        this.choji = true;
-    }
-    
-    public void setOrochimaru()
-    {
-        this.resetRoles();
-        this.orochimaru = true;
-    }
-    
-    public void setKakuzu()
-    {
-        this.resetRoles();
-        this.kakuzu = true;
-    }
-    
-    public void setItachi()
-    {
-        this.resetRoles();
-        this.choji = true;
-    }
-    
-    public void setDeidara()
-    {
-        this.resetRoles();
-        this.deidara = true;
-    }
-    
-    public void setSpain()
-    {
-        this.resetRoles();
-        this.pain = true;
+        return this.role;
     }
 }
