@@ -39,8 +39,10 @@ public class Choji extends Role
             skull.setDisplayName("§6" + p.getName());
             item.setItemMeta(skull);
 
-            inv.setItem(Arrays.asList(Main.getInstance().getServer().getOnlinePlayers()).indexOf(p), item);
+            inv.addItem(item);
         }
+
+        p.openInventory(inv);
 
     }
 
