@@ -12,11 +12,11 @@ public class Naruto extends Role
 {
     private boolean ticks;
 
-    public Naruto(Player player, boolean b)
+    public Naruto(Player player)
     {
         super(player);
         this.type = EnumRole.NARUTO;
-        this.ticks = b;
+        this.ticks = false;
         this.setDefaultCooldown(5 * 60);
         Main.getInstance().konohas.add(player);
     }
