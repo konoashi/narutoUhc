@@ -15,7 +15,7 @@ public class Kakuzu extends Role
     public Kakuzu(Player player, boolean b)
     {
         super(player);
-        this.type = EnumRole.NARUTO;
+        this.type = EnumRole.KAKUZU;
         this.p.setMaxHealth(20 + 4);
         this.p.setHealth(20 + 4);
         Main.getInstance().akatsukis.add(player);
