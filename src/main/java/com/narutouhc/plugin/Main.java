@@ -1,5 +1,6 @@
 package com.narutouhc.plugin;
 
+import com.narutouhc.plugin.listeners.ListenerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,9 @@ public class Main extends JavaPlugin
     @Override
     public void onEnable()
     {
+
+        new ListenerManager(this).registerListeners();
+
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
     }
     
