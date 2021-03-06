@@ -10,13 +10,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoinListener implements Listener
 {
 
-        @EventHandler
-        public void onPlayerJoin(PlayerJoinEvent e){
-            Player p = e.getPlayer();
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e)
+    {
+        Player p = e.getPlayer();
 
-            new GamePlayer(p);
+        new GamePlayer(p);
 
-            e.setJoinMessage(Main.getInstance().getPrefix() + p.getDisplayName() + "§e vient de rejoindre la partie");
-        }
+        e.setJoinMessage(Main.getInstance().getPrefix() + p.getDisplayName() + "§e vient de rejoindre la partie");
+    }
 
 }

@@ -13,9 +13,9 @@ public class GamePlayer
     private Player p;
     // Roles
     private EnumRole role = EnumRole.NONE;
-    
+
     public static Map<Player, GamePlayer> gamePlayers = new HashMap<Player, GamePlayer>();
-    
+
     public GamePlayer(Player player)
     {
         this.p = player;
@@ -80,7 +80,7 @@ public class GamePlayer
     }
 
     /* Conditions publiques permettant de préciser le rôle du joueur */
-    
+
     public void resetRoles()
     {
         this.role = EnumRole.NONE;
@@ -90,7 +90,7 @@ public class GamePlayer
     {
         this.role = role;
     }
-    
+
     public EnumRole getRole()
     {
         return this.role;

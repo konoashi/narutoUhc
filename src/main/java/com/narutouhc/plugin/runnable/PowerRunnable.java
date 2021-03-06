@@ -7,12 +7,12 @@ import com.narutouhc.plugin.roles.Role;
 public class PowerRunnable extends BukkitRunnable
 {
     private Role role;
-    
+
     public PowerRunnable(Role r)
     {
         this.role = r;
     }
-    
+
     @Override
     public void run()
     {
@@ -25,5 +25,5 @@ public class PowerRunnable extends BukkitRunnable
             this.cancel();
         }
     }
-    
+
 }

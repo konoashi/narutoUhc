@@ -1,10 +1,12 @@
-package com.narutouhc.plugin.roles;
+package com.narutouhc.plugin.roles.konoha;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
+import com.narutouhc.plugin.roles.Role;
 
 public class Naruto extends Role
 {
@@ -16,6 +18,7 @@ public class Naruto extends Role
         this.type = EnumRole.NARUTO;
         this.ticks = b;
         this.setDefaultCooldown(5 * 60);
+        Main.getInstance().konohas.add(player);
     }
 
     @Override

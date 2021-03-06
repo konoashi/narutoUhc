@@ -11,7 +11,7 @@ public class Role
     private int currentCooldown = 0;
 
     private PowerRunnable powerRunnable;
-    
+
     public EnumRole type = EnumRole.NONE;
 
     public Role(Player player)
@@ -47,22 +47,22 @@ public class Role
 
     public void useAbility()
     {}
-    
+
     public void addCooldown(int i)
     {
         this.currentCooldown += i;
     }
-    
+
     public void shrinkCooldown(int i)
     {
         this.currentCooldown -= i;
     }
-    
+
     public boolean isAvailable()
     {
         return this.currentCooldown == 0;
     }
-    
+
     public PowerRunnable getPowerRunnable()
     {
         return this.powerRunnable;
