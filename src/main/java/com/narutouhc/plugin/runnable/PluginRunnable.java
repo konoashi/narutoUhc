@@ -15,8 +15,7 @@ public class PluginRunnable extends BukkitRunnable
     private int gameTimer = 20 * 60;
     public boolean starting = false;
     public boolean started = false;
-    
-    @SuppressWarnings("deprecation")
+
     @Override
     public void run()
     {
@@ -32,15 +31,16 @@ public class PluginRunnable extends BukkitRunnable
                     String format = " secondes";
 
                     if(this.startTimer == 1)
+                    {
                         format = " seconde";
+                    }
+
+                    Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§eDébut de la partie dans §6" + this.startTimer + format);
 
                     for(Player p : Bukkit.getOnlinePlayers())
                     {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
-                        p.sendTitle("§c" + this.startTimer, "");
                     }
-                    
-                    Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§eDébut de la partie dans §6" + this.startTimer + format);
                 }
             }
             else
@@ -58,14 +58,14 @@ public class PluginRunnable extends BukkitRunnable
                 }
 
                 RolesUtils.setRoles();
-                
+
                 this.started = true;
                 this.starting = false;
             }
         }
         else if(GameStatus.isStatus(GameStatus.GAME) && !starting)
         {
-            
+
         }
     }
 
