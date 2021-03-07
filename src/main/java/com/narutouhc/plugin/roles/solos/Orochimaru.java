@@ -8,44 +8,41 @@ import org.bukkit.entity.Player;
 
 public class Orochimaru extends Role
 {
+    private Player sasuke;
 
-	private boolean hasGot = false;
+    public Orochimaru(Player player, boolean b)
+    {
+        super(player);
+        this.type = EnumRole.OROCHIMARU;
+        Main.getInstance().solos.add(player);
+        this.p.setMaxHealth(20 + 10);
+    }
 
-	private Player sasuke;
+    public Player getSasuke()
+    {
+        // SI ON A PAS ENCORE GET SASUKE
+        if(this.sasuke == null)
+        {
+            // ON GET TOUT LES JOUEURS
+            for(Player pl : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(pl);
 
-	public Orochimaru(Player player, boolean b)
-	{
-		super(player);
-		this.type = EnumRole.OROCHIMARU;
-		Main.getInstance().solos.add(player);
-		this.p.setMaxHealth(15 * 2);
-	}
+                if(gp.isSasuke())
+                {
+                    // ON SET LA VARIABLE LOCALE
+                    this.sasuke = pl;
+                }
+            }
 
-	public Player getSasuke()
-	{
-		// SI ON A PAS ENCORE GET SASUKE
-		if(!hasGot)
-		{
-			hasGot= true;
+        }
+        
+        // ON RENVOIE LE RESULTAT
+        return this.sasuke;
+    }
 
-			// ON GET TOUT LES JOUEURS
-			for(Player p : Main.getInstance().getServer().getOnlinePlayers())
-			{
-				GamePlayer gp = GamePlayer.gamePlayers.get(p);
-
-				if(gp.isSasuke()){
-					// ON SET LA VARIABLE LOCALE
-					sasuke = p;
-				}
-			}
-
-		}
-		// ON RENVOIS LE RESULTAT
-
-		return sasuke;
-	}
-
-	public void sasukeDie() {
-		this.p.setMaxHealth(8 * 2);
-	}
+    public void sasukeDie()
+    {
+        this.p.setMaxHealth(8 * 2);
+    }
 }

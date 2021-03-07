@@ -1,13 +1,13 @@
 package com.narutouhc.plugin.roles.akatsuki;
 
-import com.narutouhc.plugin.Main;
-import com.narutouhc.plugin.roles.EnumRole;
-import com.narutouhc.plugin.roles.Role;
-import org.bukkit.Location;
+import java.util.List;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
+import com.narutouhc.plugin.roles.Role;
 
 public class Pain extends Role
 {
@@ -19,7 +19,7 @@ public class Pain extends Role
 		this.type = EnumRole.PAIN;
 		this.ticks = false;
 		this.setDefaultCooldown(7 * 60);
-		Main.getInstance().konohas.add(player);
+		Main.getInstance().akatsukis.add(player);
 	}
 
 	@Override
@@ -33,12 +33,7 @@ public class Pain extends Role
 				{
 					Player pl = (Player) e;
 
-					Location loc = this.p.getLocation();
-
-					loc.setX(loc.getX() + 5 + (Math.random() * (10 - 5)));
-					loc.setZ(loc.getZ() + 5 + (Math.random() * (10 - 5)));
-
-					pl.teleport(loc);
+					pl.setVelocity(this.p.getLocation().toVector());
 				}
 			}
 

@@ -1,8 +1,5 @@
 package com.narutouhc.plugin.listeners.player;
 
-import com.narutouhc.plugin.roles.Role;
-import com.narutouhc.plugin.roles.solos.Orochimaru;
-import com.narutouhc.plugin.roles.solos.Sasuke;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +10,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
+import com.narutouhc.plugin.roles.solos.Orochimaru;
+import com.narutouhc.plugin.roles.solos.Sasuke;
 
 public class PlayerDeathListener implements Listener
 {
@@ -40,24 +39,24 @@ public class PlayerDeathListener implements Listener
 
             if(gp.isOrochimaru())
             {
-                Player sasukePl = Main.getInstance().solos.get(0);
+                Player sasuke = Main.getInstance().solos.get(0);
 
-                GamePlayer sasukeGP = GamePlayer.gamePlayers.get(sasukePl);
+                GamePlayer sasukeGP = GamePlayer.gamePlayers.get(sasuke);
 
-                if(sasukeGP.isSasuke())
+                if(sasuke != null && sasukeGP.isSasuke())
                 {
-                    ((Orochimaru) Main.getInstance().roles.get(sasukePl)).sasukeDie();
+                    ((Sasuke) Main.getInstance().roles.get(sasuke)).orochimaruDie();
                 }
 
             } else if(gp.isSasuke())
             {
-                Player orochimaruPl = Main.getInstance().solos.get(0);
+                Player orochimaru = Main.getInstance().solos.get(0);
 
-                GamePlayer orochimaruGP = GamePlayer.gamePlayers.get(orochimaruPl);
+                GamePlayer orochimaruGP = GamePlayer.gamePlayers.get(orochimaru);
 
-                if(orochimaruGP.isOrochimaru())
+                if(orochimaru != null && orochimaruGP.isOrochimaru())
                 {
-                    ((Orochimaru) Main.getInstance().roles.get(orochimaruPl)).sasukeDie();
+                    ((Orochimaru) Main.getInstance().roles.get(orochimaru)).sasukeDie();
                 }
 
             }

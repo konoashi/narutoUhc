@@ -10,8 +10,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.Arrays;
-
 public class Choji extends Role
 {
     private boolean used = false;
@@ -23,7 +21,6 @@ public class Choji extends Role
         Main.getInstance().konohas.add(player);
     }
 
-    @SuppressWarnings("unlikely-arg-type")
     @Override
     public void useAbility()
     {

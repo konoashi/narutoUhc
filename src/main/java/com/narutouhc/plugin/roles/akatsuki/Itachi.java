@@ -1,14 +1,15 @@
 package com.narutouhc.plugin.roles.akatsuki;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.Role;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class Itachi extends Role
 {
@@ -101,5 +102,13 @@ public class Itachi extends Role
 
 			this.p.sendMessage(Main.getInstance().getPrefix() + "§cVous devez encore attendre §6" + remaining + " §c" + format + " avant de réutiliser votre pouvoir");
 		}
+	}
+	
+	public void addLifeAbility()
+	{
+	    Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
+	    Objective o = sb.registerNewObjective("❤️", "health");
+	    o.setDisplaySlot(DisplaySlot.BELOW_NAME);
+	    this.p.setScoreboard(sb);
 	}
 }
