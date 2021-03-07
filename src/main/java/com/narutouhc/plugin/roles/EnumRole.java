@@ -19,7 +19,12 @@ public enum EnumRole
     {
         if(role == NARUTO)
         {
-            return "Vous avez §bVitesse 1§2.\nVous pouvez utiliser votre pouvoir toutes les 5 minutes.\nIl vous permet d'avoir §bVitesse 2 §2et §cForce 1§2 pour 30 secondes.\nVous devez gagner avec §aKonoha";
+            return "§e========= §6Naruto §e=========\n" +
+                    "§6Effets : §cVitesse 1\n" +
+                    "§6Cooldown : §c5 minutes.\n" +
+                    "§6Pouvoir : §cDonne vitesse 2 & Force 1 pendant 30 secondes.\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e=========================";
         }
         else if(role == SAKURA)
         {

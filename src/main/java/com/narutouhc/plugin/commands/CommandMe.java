@@ -20,7 +20,7 @@ public class CommandMe implements CommandExecutor
             
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
             
-            p.sendMessage("§2Vous êtes §e" + gp.getRole().name() + "§2\n" + EnumRole.getDescription(gp.getRole()));
+            p.sendMessage(EnumRole.getDescription(gp.getRole()));
             return true;
         }
         
