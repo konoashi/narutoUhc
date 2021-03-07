@@ -1,10 +1,7 @@
 package com.narutouhc.plugin.roles.konoha;
 
-import java.util.List;
 import java.util.Map;
 
-import com.narutouhc.plugin.Main;
-import com.narutouhc.plugin.roles.EnumRole;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,6 +12,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.Role;
 
 public class Minato extends Role
@@ -38,14 +37,18 @@ public class Minato extends Role
 
     public void teleport(Player pl)
     {
-        if(this.balises.contains(pl))
+        if(this.balises.containsKey(pl))
         {
-            Location pLoc = pl.getLocation().clone();
-            this.p.teleport(pLoc);
+            if(!this.balises.get(pl))
+            {
+                Location pLoc = pl.getLocation().clone();
+                this.p.teleport(pLoc);
 
-            this.p.getWorld().strikeLightning(pLoc);
+                this.p.getWorld().strikeLightning(pLoc);
 
-            this.balises.remove(pl);
+                this.balises.remove(pl);
+                this.balises.put(pl, true);
+            }
         }
     }
 
@@ -54,15 +57,18 @@ public class Minato extends Role
     {
         Inventory inv = Bukkit.createInventory(null, 9, "Super pouvoir");
 
-        for(Player p : balises)
+        for(Player pl : balises.keySet())
         {
-            ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
-            SkullMeta skull = (SkullMeta)item.getItemMeta();
-            skull.setOwner(p.getName());
-            skull.setDisplayName("§6" + p.getName());
-            item.setItemMeta(skull);
+            if(!this.balises.get(pl))
+            {
+                ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+                SkullMeta skull = (SkullMeta)item.getItemMeta();
+                skull.setOwner(pl.getName());
+                skull.setDisplayName("§6" + pl.getName());
+                item.setItemMeta(skull);
 
-            inv.addItem(item);
+                inv.addItem(item);
+            } 
         }
 
         this.p.openInventory(inv);
