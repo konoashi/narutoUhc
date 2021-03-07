@@ -1,5 +1,7 @@
 package com.narutouhc.plugin.roles;
 
+import com.narutouhc.plugin.utils.RolesUtils;
+
 public enum EnumRole
 {
     NARUTO, 
@@ -28,43 +30,101 @@ public enum EnumRole
         }
         else if(role == SAKURA)
         {
-            return "Vous pouvez utiliser votre pouvoir toutes les 5 minutes.\nIl vous permet de donner un effet de §cRégénération 1 §2à tous vos alliés pour 30 secondes.\nIl est effectif dans un rayon de 5 blocs.\\nVous devez gagner avec §aKonoha";
+            return "§e========= §6Sakura §e=========\n" +
+                    "§6Effets : §cAucun 1\n" +
+                    "§6Cooldown : §c5 minutes.\n" +
+                    "§6Pouvoir : §cDonne un effet de régénération à chaque allié.\n" +
+                    "§6Rayon : §c5 blocs\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e=========================";
         }
         else if(role == SHIKAMARU)
         {
-            return "Vous pouvez utiliser votre chaque minute.\nIl vous permet de bloquer un joueur pendant 1.5 secondes.\nUtilisez-le en tirant une flèche sur votre cible.\nVous devez gagner avec §aKonoha";
+            return "§e========= §6Shikamaru §e=========\n" +
+                    "§6Effets : §cAucun 1\n" +
+                    "§6Cooldown : §c1 minute.\n" +
+                    "§6Pouvoir : §cFige une cible à l'arc pendant 1.5 secondes.\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e============================";
         }
         else if(role == CHOJI)
         {
-            return "Vous pouvez utiliser votre une fois dans la partie.\nIl vous permet de retirer la moitié de la vie d'un joueur.\nVous devez gagner avec §aKonoha";
+            return "§e========= §6Choji §e=========\n" +
+                    "§6Effets : §cAucun 1\n" +
+                    "§6Nombres d'utilisations : §cUne fois dans la partie.\n" +
+                    "§6Pouvoir : §cEnlève la moitié de sa vie à une cible choisie.\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e========================";
         }
         else if(role == MINATO)
         {
-            return "Vous avez §bVitesse 2§2.\nVous pouvez utiliser votre deux fois dans la partie.\nIl vous permet vous téléporter à vos balises marquées sur des joueurs.\nVous devez gagner avec §aKonoha";
+            return "§e========= §6Minato §e=========\n" +
+                    "§6Effets : §cVitesse 2\n" +
+                    "§6Nombres d'utilisations : §cDeux fois dans la partie.\n" +
+                    "§6Pouvoir : §cPeut se téléporter à une des ses balises posées sur un joueur.\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§6Naruto : §c" + RolesUtils.getNaruto().getDisplayName() + "\n" +
+                    "§e=========================";
         }
         else if(role == SASUKE)
         {
-            return "Vous avez §bVitesse 1§2.\nVous pouvez utiliser votre pouvoir toutes les 5 minutes.\nIl vous permet d'envoyer un éclair sur vos ennemis dans un rayon de 5 blocs.\nVous devez gagner avec §eOrochimaru";
+            return "§e========= §6Sasuke §e=========\n" +
+                    "§6Effets : §cVitesse 1 et Faiblesse 1 (si Orochimaru meurt)\n" +
+                    "§6Cooldown : §c5 minutes.\n" +
+                    "§6Pouvoir : §cEnvoie un éclair sur chaque ennemi.\n" +
+                    "§6Rayon : §c5 blocs\n" +
+                    "§6Victoire : §cAvec Orochimaru\n" +
+                    "§6Itachi : §c" + RolesUtils.getItachi().getDisplayName() + "\n" +
+                    "§e=========================";
         }
         else if(role == OROCHIMARU)
         {
-            return "Vous possédez 15 coeurs. Si Sasuke meurt, vous n'en aurez que 8.\nVous devez gagner avec §eSasuke";
+            return "§e========= §6Orochimaru §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : §cVous avez 15 coeurs (8 si Sasuke meurt).\n" +
+                    "§6Victoire : §cAvec Sasuke\n" +
+                    "§6Sasuke: §c" + RolesUtils.getSasuke().getDisplayName() + "\n" +
+                    "§e=============================";
         }
         else if(role == KAKUZU)
         {
-            return "Vous possédez 12 coeurs. Vous pouvez ressuciter une fois mais vout tomberez à 8 coeurs maximum.\nVous devez gagner avec §cl'Akatsuki";
+            return "§e========= §6Kakuzu §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : §cVous pouvez ressuciter et avez 12 coeurs (8 après resurrection).\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§e=========================";
         }
         else if(role == ITACHI)
         {
-            return "Vous avez §bVitesse 1§2.\nVous pouvez voir la vie des gens.\nVous pouvez utiliser votre pouvoir toutes les 2 minutes.\nIl vous permet de mettre en feu vos ennemis dans un rayon de 15 blocs.\nVous devez gagner avec §cl'Akatsuki";
+            return "§e========= §6Itachi §e=========\n" +
+                    "§6Effets : §cVitesse 2\n" +
+                    "§6Cooldown : §c7 minutes.\n" +
+                    "§6Pouvoir : - §cVous pouvez voir la vie des joueurs.\n" +
+                    "          §6- §cEnflamme chaque ennemi\n" +
+                    "§6Rayon : §c15 blocs\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§e=========================";
         }
         else if(role == DEIDARA)
         {
-            return "Vous pouvez créer des §coeufs explosifs§2.\nVous devez gagner avec §cl'Akatsuki";
+            return "§e========= §6Deidara §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cVous créer des §cOeufs explosifs§c.\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§e==========================";
         }
         else if(role == PAIN)
         {
-            return "Vous pouvez utiliser votre pouvoir toutes les 7 minutes.\nIl vous permet d'attirer vers vous tous les joueurs dans un rayon de 20 blocs.\nVous devez gagner avec §cl'Akatsuki";
+            return "§e========= §6Pain §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Cooldown : §c2 minutes.\n" +
+                    "§6Pouvoir : - §cVous pouvez attirer les joueurs vers vous mais perdez 3 coeurs définitivement à chaque utilisation.\n" +
+                    "§6Rayon : §c20 blocs\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§6Itachi : §c" + RolesUtils.getItachi().getDisplayName() + "\n" +
+                    "§6Kakuzu : §c" + RolesUtils.getKakuzu().getDisplayName() + "\n" +
+                    "§6Deidara : §c" + RolesUtils.getDeidara().getDisplayName() + "\n" +
+                   "§e=======================";
         }
         
         return null;

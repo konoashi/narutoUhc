@@ -18,7 +18,7 @@ public class Pain extends Role
 		super(player);
 		this.type = EnumRole.PAIN;
 		this.ticks = false;
-		this.setDefaultCooldown(7 * 60);
+		this.setDefaultCooldown(2 * 60);
 		Main.getInstance().akatsukis.add(player);
 		
         if(Main.getInstance().roles.containsKey(p))
@@ -45,7 +45,7 @@ public class Pain extends Role
 			}
 
 			this.setCurrentCooldown(this.getDefaultCooldown());
-			this.p.setMaxHealth(this.p.getMaxHealth() - 2);
+			this.p.setMaxHealth(this.p.getMaxHealth() - 6);
 			this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez d'utiliser votre §6POUVOIR");
 
 			if (ticks)

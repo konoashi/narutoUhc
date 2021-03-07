@@ -7,6 +7,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.utils.GameStatus;
 import com.narutouhc.plugin.utils.RolesUtils;
@@ -71,6 +72,14 @@ public class PluginRunnable extends BukkitRunnable
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
             }
             
+            if(ep >= 2)
+            {
+                for(Player p : Bukkit.getOnlinePlayers())
+                {
+                    addEffects(p);
+                }
+            }
+            
             if(this.gameTimer >= 1)
             {
                 this.gameTimer --;
@@ -91,6 +100,13 @@ public class PluginRunnable extends BukkitRunnable
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
                     }
                 }
+                
+                for(Player p : Bukkit.getOnlinePlayers())
+                {
+                    p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
+                }
+                
+                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "====================\n§bDébut de l'épisode §6" + this.ep + "\n§f====================");
             }
         }
     }
@@ -106,5 +122,39 @@ public class PluginRunnable extends BukkitRunnable
     private boolean shouldBcStart()
     {
         return this.startTimer == 15 || this.startTimer == 10 || this.startTimer <= 5 && this.startTimer != 0;
+    }
+    
+    private void addEffects(Player p)
+    {
+        GamePlayer gp = GamePlayer.gamePlayers.get(p);
+        
+        if(gp.isNaruto())
+        {
+            if(!p.hasPotionEffect(PotionEffectType.SPEED))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+            }
+        }
+        else if(gp.isMinato())
+        {
+            if(!p.hasPotionEffect(PotionEffectType.SPEED))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+            }
+        }
+        else if(gp.isSasuke())
+        {
+            if(!p.hasPotionEffect(PotionEffectType.SPEED))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+            }
+        }
+        else if(gp.isItachi())
+        {
+            if(!p.hasPotionEffect(PotionEffectType.SPEED))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+            }
+        }
     }
 }
