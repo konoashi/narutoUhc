@@ -1,6 +1,7 @@
 package com.narutouhc.plugin.roles.konoha;
 
 import java.util.List;
+import java.util.Map;
 
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
@@ -18,7 +19,7 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Minato extends Role
 {
-    private List<Player> balises;
+    private Map<Player, Boolean> balises;
 
     public Minato(Player p)
     {
@@ -26,29 +27,32 @@ public class Minato extends Role
         this.type = EnumRole.MINATO;
         this.p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 30, 2, true, false));
         Main.getInstance().konohas.add(p);
-        
+
         if(Main.getInstance().roles.containsKey(p))
         {
             Main.getInstance().roles.remove(p);
         }
-        
+
         Main.getInstance().roles.put(p, this);
     }
 
-    public void teleport(Player p)
+    public void teleport(Player pl)
     {
-        if(this.balises.contains(p))
+        if(this.balises.contains(pl))
         {
-            Location pLoc = p.getLocation();
+            Location pLoc = pl.getLocation().clone();
             this.p.teleport(pLoc);
-            this.balises.remove(p);
+
+            this.p.getWorld().strikeLightning(pLoc);
+
+            this.balises.remove(pl);
         }
     }
 
     @Override
     public void useAbility()
     {
-        Inventory inv = Bukkit.createInventory(null, 9, "Se téléporter");
+        Inventory inv = Bukkit.createInventory(null, 9, "Super pouvoir");
 
         for(Player p : balises)
         {
@@ -62,5 +66,10 @@ public class Minato extends Role
         }
 
         this.p.openInventory(inv);
+    }
+
+    public Map<Player, Boolean> getTargets()
+    {
+        return this.balises;
     }
 }

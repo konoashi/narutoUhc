@@ -58,9 +58,20 @@ public class Choji extends Role
             this.p.sendMessage(Main.getInstance().getPrefix() + "§cVous avez déjà utilisé votre pouvoir");
         }
     }
+
+    public void damagePlayer(Player pl) {
+
+        pl.damage(pl.getMaxHealth() / 2);
+
+        pl.sendMessage(Main.getInstance().getPrefix() + "§cChôji vient d'abattre sa rage sur vous !");
+
+        this.used = true;
+
+        this.p.sendMessage(Main.getInstance().getPrefix()+"§cVous venez d'utiliser votre pouvoir sur §6" + pl.getDisplayName());
+    }
     
     public boolean isUsed()
     {
-        return used;
+        return this.used;
     }
 }
