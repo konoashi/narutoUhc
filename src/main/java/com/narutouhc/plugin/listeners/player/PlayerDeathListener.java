@@ -1,5 +1,6 @@
 package com.narutouhc.plugin.listeners.player;
 
+import com.narutouhc.plugin.utils.RolesUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,22 +40,22 @@ public class PlayerDeathListener implements Listener
 
             if(gp.isOrochimaru())
             {
-                Player sasuke = Main.getInstance().solos.get(0);
+                Player sasuke = RolesUtils.getSasuke();
 
-                GamePlayer sasukeGP = GamePlayer.gamePlayers.get(sasuke);
+                GamePlayer sasukeGp = GamePlayer.gamePlayers.get(sasuke);
 
-                if(sasuke != null && sasukeGP.isSasuke())
+                if(sasuke != null && sasukeGp.isSasuke())
                 {
                     ((Sasuke) Main.getInstance().roles.get(sasuke)).orochimaruDie();
                 }
 
             } else if(gp.isSasuke())
             {
-                Player orochimaru = Main.getInstance().solos.get(0);
+                Player orochimaru = RolesUtils.getOrochimaru();
 
-                GamePlayer orochimaruGP = GamePlayer.gamePlayers.get(orochimaru);
+                GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
 
-                if(orochimaru != null && orochimaruGP.isOrochimaru())
+                if(orochimaru != null && orochimaruGp.isSasuke())
                 {
                     ((Orochimaru) Main.getInstance().roles.get(orochimaru)).sasukeDie();
                 }

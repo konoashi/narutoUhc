@@ -103,29 +103,6 @@ public class Sasuke extends Role
         }
     }
 
-    public Player getOrochimaru()
-    {
-        // SI ON A PAS ENCORE GET OROCHIMARU
-        if(this.orochimaru == null)
-        {
-            // GET TOUT LES JOUEURS
-            for(Player pl : Main.getInstance().getServer().getOnlinePlayers())
-            {
-                GamePlayer gp = GamePlayer.gamePlayers.get(pl);
-
-                if(gp.isOrochimaru())
-                {
-                    // SET LA VARIABLE LOCALE
-                    this.orochimaru = pl;
-                }
-            }
-
-        }
-
-        // ENVOIS LE RESULTAT
-        return this.orochimaru;
-    }
-
     public void orochimaruDie()
     {
         this.p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 30, 1, true, false));

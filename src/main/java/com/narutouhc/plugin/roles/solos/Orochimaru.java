@@ -18,29 +18,6 @@ public class Orochimaru extends Role
         this.p.setMaxHealth(20 + 10);
     }
 
-    public Player getSasuke()
-    {
-        // SI ON A PAS ENCORE GET SASUKE
-        if(this.sasuke == null)
-        {
-            // ON GET TOUT LES JOUEURS
-            for(Player pl : Main.getInstance().getServer().getOnlinePlayers())
-            {
-                GamePlayer gp = GamePlayer.gamePlayers.get(pl);
-
-                if(gp.isSasuke())
-                {
-                    // ON SET LA VARIABLE LOCALE
-                    this.sasuke = pl;
-                }
-            }
-
-        }
-        
-        // ON RENVOIE LE RESULTAT
-        return this.sasuke;
-    }
-
     public void sasukeDie()
     {
         this.p.setMaxHealth(8 * 2);
