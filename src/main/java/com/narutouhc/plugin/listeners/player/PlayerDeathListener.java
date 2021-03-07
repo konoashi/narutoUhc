@@ -61,7 +61,9 @@ public class PlayerDeathListener implements Listener
                 }
 
             }
-            
+
+            e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
+
         }
         else
         {
@@ -71,10 +73,11 @@ public class PlayerDeathListener implements Listener
             {
                 kakuzu.respawnInv = p.getInventory().getContents();
                 e.getDrops().clear();
+            } else {
+                e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
             }
         }
 
-        e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
     }
     
     @EventHandler
