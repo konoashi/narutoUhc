@@ -1,11 +1,5 @@
 package com.narutouhc.plugin;
 
-import com.narutouhc.plugin.commands.CommandSetRole;
-import com.narutouhc.plugin.commands.ConstrucTabComplete;
-import com.narutouhc.plugin.listeners.ListenerManager;
-import com.narutouhc.plugin.recipes.RecipesManager;
-import com.narutouhc.plugin.roles.Role;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +10,20 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.narutouhc.plugin.commands.CommandSetRole;
+import com.narutouhc.plugin.commands.CommandStart;
+import com.narutouhc.plugin.commands.ConstrucTabComplete;
+import com.narutouhc.plugin.listeners.ListenerManager;
+import com.narutouhc.plugin.recipes.RecipesManager;
+import com.narutouhc.plugin.roles.Role;
+import com.narutouhc.plugin.runnable.PluginRunnable;
+import com.narutouhc.plugin.utils.GameStatus;
+
 public class Main extends JavaPlugin
 {
     // Instance du plugin
     private static Main instance;
+    public PluginRunnable pluginRunnable;
 
     // Teams
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
@@ -43,7 +47,10 @@ public class Main extends JavaPlugin
         new RecipesManager().registerRecipes();
         setCommands();
         setGamePlayer();
-        
+        GameStatus.setSatus(GameStatus.WAITING);
+        this.pluginRunnable = new PluginRunnable();
+        this.pluginRunnable.runTaskTimer(this, 0, 20);
+
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
 
     }
@@ -60,18 +67,19 @@ public class Main extends JavaPlugin
     {
         return instance;
     }
-    
+
     public void setCommands()
     {
         addCommand("role", new CommandSetRole());
-    }
+        addCommand("start", new CommandStart());
+   }
 
     private void addCommand(String name, CommandExecutor e)
     {
         getCommand(name).setExecutor(e);
         getCommand(name).setTabCompleter(new ConstrucTabComplete());
     }
-    
+
     private void setGamePlayer()
     {
         for(Player p : Bukkit.getOnlinePlayers())
@@ -80,7 +88,7 @@ public class Main extends JavaPlugin
             {
                 new GamePlayer(p);
             }
-            
+
             p.setMaxHealth(20);
             p.setHealth(20);
         }

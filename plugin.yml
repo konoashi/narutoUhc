@@ -6,3 +6,6 @@ commands:
   role:
     description: Permet de déterminer son rôle
     permission: narutouhc.role
+  start:
+    description: Permet lancer la partie
+    permission: narutouhc.start
