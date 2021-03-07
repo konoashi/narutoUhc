@@ -435,9 +435,14 @@ public class RolesUtils
             cmp = "§eun déserteur du vilage";
         }
 
-        p.sendMessage("§9========= Vous êtes " + cmp + " §9=========");
-        p.sendMessage(Strings.repeat(" ", (9+(cmp.length())+11)/2) + "§5Voici votre rôle : §d" + gp.getRole().name());
-        p.sendMessage("§9" + Strings.repeat("=", ("========= Vous êtes " + cmp + " =========").length()-8));
+        p.sendMessage("§9========================================\n");
+        String roleLine = "§5Voici votre rôle : §d" + gp.getRole().name();
+        String cmpLine = "§9Vous êtes " + cmp;
+        
+        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - cmpLine.length() - 4)) + cmpLine);
+        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - roleLine.length() - 4)) + roleLine + "\n");
+        
+        p.sendMessage("§9========================================");
 
         return role;
     }
