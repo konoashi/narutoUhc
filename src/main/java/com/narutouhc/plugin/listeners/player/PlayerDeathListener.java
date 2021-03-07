@@ -2,11 +2,13 @@ package com.narutouhc.plugin.listeners.player;
 
 import com.narutouhc.plugin.utils.RolesUtils;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
@@ -55,7 +57,7 @@ public class PlayerDeathListener implements Listener
                 Player orochimaru = RolesUtils.getOrochimaru();
 
                 GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
-                
+
                 if(orochimaru != null && orochimaruGp.isOrochimaru())
                 {
                     ((Orochimaru)Main.getInstance().roles.get(orochimaru)).sasukeDie();
@@ -63,6 +65,17 @@ public class PlayerDeathListener implements Listener
 
             }
 
+            ItemStack s = null;
+
+            for(ItemStack stack : e.getDrops())
+            {
+                if(stack.getType() == Material.NETHER_STAR)
+                {
+                    s = stack;
+                }
+            }
+            
+            e.getDrops().remove(s);
             e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
 
         }
