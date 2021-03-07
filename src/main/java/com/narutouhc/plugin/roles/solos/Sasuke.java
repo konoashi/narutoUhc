@@ -2,8 +2,6 @@ package com.narutouhc.plugin.roles.solos;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
@@ -12,7 +10,8 @@ import com.narutouhc.plugin.roles.Role;
 public class Sasuke extends Role
 {
     private boolean ticks;
-
+    public boolean hasWeakness = false;
+    
     public Sasuke(Player player)
     {
         super(player);
@@ -109,6 +108,6 @@ public class Sasuke extends Role
 
     public void orochimaruDie()
     {
-        this.p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 30, 1, true, false));
+        this.hasWeakness = true;
     }
 }

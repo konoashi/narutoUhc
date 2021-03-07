@@ -26,5 +26,10 @@ public class Orochimaru extends Role
     public void sasukeDie()
     {
         this.p.setMaxHealth(8 * 2);
+        
+        if(this.p.getHealth() > 20)
+        {
+            this.p.setHealth(20);
+        }
     }
 }
