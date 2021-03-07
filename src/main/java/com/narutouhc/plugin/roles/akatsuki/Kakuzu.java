@@ -19,6 +19,13 @@ public class Kakuzu extends Role
         this.p.setMaxHealth(20 + 4);
         this.p.setHealth(20 + 4);
         Main.getInstance().akatsukis.add(player);
+        
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
     }
 
     @Override

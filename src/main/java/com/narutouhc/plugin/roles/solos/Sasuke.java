@@ -21,6 +21,13 @@ public class Sasuke extends Role
         this.setDefaultCooldown(2 * 60);
         this.ticks = false;
         this.p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 30, 1, true, false));
+        
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
     }
 
     @Override

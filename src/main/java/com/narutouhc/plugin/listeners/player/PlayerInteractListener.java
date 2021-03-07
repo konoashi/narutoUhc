@@ -17,7 +17,7 @@ public class PlayerInteractListener implements Listener
     {
         if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
         {
-            if(e.getItem().getType() == Material.EGG)
+            if(e.getItem() != null && e.getItem().getType() == Material.EGG)
             {
                 if(e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cOeuf explosif"))
                 {
@@ -33,7 +33,7 @@ public class PlayerInteractListener implements Listener
                     }
                 }
             }
-            else if(e.getItem().getType() == Material.NETHER_STAR)
+            else if(e.getItem() != null && e.getItem().getType() == Material.NETHER_STAR)
             {
                 Player p = e.getPlayer();
                 

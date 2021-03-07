@@ -14,6 +14,13 @@ public class Orochimaru extends Role
         this.type = EnumRole.OROCHIMARU;
         Main.getInstance().solos.add(player);
         this.p.setMaxHealth(20 + 10);
+        
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
     }
 
     public void sasukeDie()

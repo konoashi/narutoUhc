@@ -19,6 +19,13 @@ public class Choji extends Role
         super(player);
         this.type = EnumRole.CHOJI;
         Main.getInstance().konohas.add(player);
+        
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
     }
 
     public void openGui()

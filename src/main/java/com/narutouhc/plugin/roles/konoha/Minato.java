@@ -26,6 +26,13 @@ public class Minato extends Role
         this.type = EnumRole.MINATO;
         this.p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 30, 2, true, false));
         Main.getInstance().konohas.add(p);
+        
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
     }
 
     public void teleport(Player p)

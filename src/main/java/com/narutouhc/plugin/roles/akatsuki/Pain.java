@@ -20,6 +20,13 @@ public class Pain extends Role
 		this.ticks = false;
 		this.setDefaultCooldown(7 * 60);
 		Main.getInstance().akatsukis.add(player);
+		
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
 	}
 
 	@Override

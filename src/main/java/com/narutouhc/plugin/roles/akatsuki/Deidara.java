@@ -11,5 +11,12 @@ public class Deidara extends Role
 		super(p);
 		this.type = EnumRole.DEIDARA;
 		Main.getInstance().akatsukis.add(p);
+		
+        if(Main.getInstance().roles.containsKey(p))
+        {
+            Main.getInstance().roles.remove(p);
+        }
+        
+        Main.getInstance().roles.put(p, this);
 	}
 }
