@@ -1,6 +1,7 @@
 package com.narutouhc.plugin;
 
 import com.narutouhc.plugin.listeners.ListenerManager;
+import com.narutouhc.plugin.recipes.RecipesManager;
 import com.narutouhc.plugin.roles.Role;
 
 import java.util.ArrayList;
@@ -37,7 +38,10 @@ public class Main extends JavaPlugin
     {
         new ListenerManager(this).registerListeners();
 
+        new RecipesManager().registerRecipes();
+
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
+
     }
 
     // Appelé quand le plugin est désactivé
