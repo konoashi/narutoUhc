@@ -13,14 +13,13 @@ public class Sasuke extends Role
 {
     private boolean ticks;
 
-    public Sasuke(Player player, boolean b)
+    public Sasuke(Player player)
     {
         super(player);
         this.type = EnumRole.SASUKE;
         Main.getInstance().solos.add(player);
-        this.setDefaultCooldown(2 * 60);
+        this.setDefaultCooldown(5 * 60);
         this.ticks = false;
-        this.p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 30, 1, true, false));
         
         if(Main.getInstance().roles.containsKey(p))
         {

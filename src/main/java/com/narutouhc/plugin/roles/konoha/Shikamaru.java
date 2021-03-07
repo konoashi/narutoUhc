@@ -38,6 +38,7 @@ public class Shikamaru extends Role
                 if(this.timer >= 1)
                 {
                     target.teleport(initial);
+                    this.timer --;
                 }
                 else
                     this.cancel();

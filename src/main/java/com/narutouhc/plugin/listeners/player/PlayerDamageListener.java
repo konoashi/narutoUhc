@@ -25,7 +25,7 @@ public class PlayerDamageListener implements Listener
 
                 GamePlayer gp = GamePlayer.gamePlayers.get(d);
 
-                if(gp.isShikamaru())
+                if(gp.isShikamaru() && (Player)e.getEntity() != d)
                 {
                     ((Shikamaru)gp.getPower()).freezePlayer((Player)e.getEntity());
                 }

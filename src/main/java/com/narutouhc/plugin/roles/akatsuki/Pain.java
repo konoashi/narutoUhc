@@ -40,7 +40,7 @@ public class Pain extends Role
 				{
 					Player pl = (Player) e;
 
-					pl.setVelocity(this.p.getLocation().toVector());
+					pl.setVelocity(this.p.getLocation().toVector().subtract(pl.getLocation().toVector()).multiply(0.3));
 				}
 			}
 

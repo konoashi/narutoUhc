@@ -2,3 +2,7 @@ name: NarutoUHC
 version: 0.0.1
 main: com.narutouhc.plugin.Main
 author: [Illyes, DrasticLp]
+commands:
+  role:
+    description: Permet de déterminer son rôle
+    permission: narutouhc.role

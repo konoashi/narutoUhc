@@ -27,7 +27,7 @@ public class ThrowableHitListener implements Listener
 				{
 					if(egg.getCustomName().equalsIgnoreCase("§cOeuf explosif"))
 					{
-						egg.getWorld().createExplosion(egg.getLocation(), 4);
+						egg.getWorld().createExplosion(egg.getLocation(), 1);
 					}
 				}
 			}

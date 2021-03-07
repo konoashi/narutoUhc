@@ -8,7 +8,7 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Orochimaru extends Role
 {
-    public Orochimaru(Player player, boolean b)
+    public Orochimaru(Player player)
     {
         super(player);
         this.type = EnumRole.OROCHIMARU;

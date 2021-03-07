@@ -15,7 +15,7 @@ public class Itachi extends Role
 {
 	private boolean ticks;
 
-	public Itachi(Player player, boolean b)
+	public Itachi(Player player)
 	{
 		super(player);
 		this.ticks = false;

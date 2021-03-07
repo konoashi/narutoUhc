@@ -12,7 +12,7 @@ public class Kakuzu extends Role
     public boolean hasRespawned = false;
     public ItemStack[] respawnInv;
     
-    public Kakuzu(Player player, boolean b)
+    public Kakuzu(Player player)
     {
         super(player);
         this.type = EnumRole.KAKUZU;
@@ -33,5 +33,6 @@ public class Kakuzu extends Role
     {
         this.hasRespawned = true;
         this.p.setMaxHealth(20 - 4);
+        this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez de §cRessuciter !");
     }
 }

@@ -46,18 +46,19 @@ public class PlayerDeathListener implements Listener
 
                 if(sasuke != null && sasukeGp.isSasuke())
                 {
-                    ((Sasuke) Main.getInstance().roles.get(sasuke)).orochimaruDie();
+                    ((Sasuke)Main.getInstance().roles.get(sasuke)).orochimaruDie();
                 }
 
-            } else if(gp.isSasuke())
+            }
+            else if(gp.isSasuke())
             {
                 Player orochimaru = RolesUtils.getOrochimaru();
 
                 GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
-
-                if(orochimaru != null && orochimaruGp.isSasuke())
+                
+                if(orochimaru != null && orochimaruGp.isOrochimaru())
                 {
-                    ((Orochimaru) Main.getInstance().roles.get(orochimaru)).sasukeDie();
+                    ((Orochimaru)Main.getInstance().roles.get(orochimaru)).sasukeDie();
                 }
 
             }
@@ -68,25 +69,27 @@ public class PlayerDeathListener implements Listener
         else
         {
             Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
-            
+
             if(!kakuzu.hasRespawned)
             {
                 kakuzu.respawnInv = p.getInventory().getContents();
                 e.getDrops().clear();
-            } else {
+            }
+            else
+            {
                 e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
             }
         }
 
     }
-    
+
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e)
     {
         Player p = e.getPlayer();
-        
+
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
-        
+
         if(!gp.isKakuzu())
         {
             p.setGameMode(GameMode.SPECTATOR);

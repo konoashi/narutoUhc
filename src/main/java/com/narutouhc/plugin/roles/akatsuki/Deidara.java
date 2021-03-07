@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class Deidara extends Role
 {
-	public Deidara(Player p){
+    public Deidara(Player p){
 		super(p);
 		this.type = EnumRole.DEIDARA;
 		Main.getInstance().akatsukis.add(p);
