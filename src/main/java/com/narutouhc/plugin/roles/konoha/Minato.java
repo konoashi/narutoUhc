@@ -2,6 +2,8 @@ package com.narutouhc.plugin.roles.konoha;
 
 import java.util.List;
 
+import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -16,7 +18,9 @@ public class Minato extends Role
     public Minato(Player p)
     {
         super(p);
+        this.type = EnumRole.MINATO;
         this.p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 30, 2, true, false));
+        Main.getInstance().konohas.add(p);
     }
 
     public void teleport(Player p)
