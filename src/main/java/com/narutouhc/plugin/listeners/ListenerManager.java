@@ -1,5 +1,6 @@
 package com.narutouhc.plugin.listeners;
 
+import com.narutouhc.plugin.listeners.player.PlayerDeathListener;
 import com.narutouhc.plugin.listeners.player.PlayerJoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -20,6 +21,7 @@ public class ListenerManager
     public void registerListeners()
     {
         pm.registerEvents(new PlayerJoinListener(), this.plugin);
+        pm.registerEvents(new PlayerDeathListener(), this.plugin);
     }
 
 }

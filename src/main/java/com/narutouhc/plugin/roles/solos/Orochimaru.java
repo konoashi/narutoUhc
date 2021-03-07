@@ -23,18 +23,24 @@ public class Orochimaru extends Role
 
 	public Player getSasuke()
 	{
-		if(!hasGot){
+		// SI ON A PAS ENCORE GET SASUKE
+		if(!hasGot)
+		{
 			hasGot= true;
+
+			// ON GET TOUT LES JOUEURS
 			for(Player p : Main.getInstance().getServer().getOnlinePlayers())
 			{
 				GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
 				if(gp.isSasuke()){
+					// ON SET LA VARIABLE LOCALE
 					sasuke = p;
 				}
 			}
 
 		}
+		// ON RENVOIS LE RESULTAT
 
 		return sasuke;
 	}

@@ -62,22 +62,19 @@ public class PlayerDeathListener implements Listener
 
             }
             
-            e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort.\nIl était §5" + gp.getRole().name());
         }
         else
         {
             Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
             
-            if(kakuzu.hasRespawned)
-            {
-                e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort.\nIl était §5" + gp.getRole().name());
-            }
-            else
+            if(!kakuzu.hasRespawned)
             {
                 kakuzu.respawnInv = p.getInventory().getContents();
                 e.getDrops().clear();
             }
         }
+
+        e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
     }
     
     @EventHandler

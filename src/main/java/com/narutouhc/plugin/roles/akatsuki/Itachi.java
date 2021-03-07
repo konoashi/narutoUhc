@@ -36,6 +36,7 @@ public class Itachi extends Role
 
 					if(!Main.getInstance().akatsukis.contains(pl))
 					{
+						// MET EN FEU LE JOUEURS PD 5s
 						pl.setFireTicks(20 * 5);
 					}
 
