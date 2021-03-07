@@ -1,19 +1,17 @@
 package com.narutouhc.plugin.roles.solos;
 
-import com.narutouhc.plugin.GamePlayer;
-import com.narutouhc.plugin.Main;
-import com.narutouhc.plugin.roles.EnumRole;
-import com.narutouhc.plugin.roles.Role;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
+import com.narutouhc.plugin.roles.Role;
+
 public class Sasuke extends Role
 {
     private boolean ticks;
-
-    private Player orochimaru;
 
     public Sasuke(Player player, boolean b)
     {
