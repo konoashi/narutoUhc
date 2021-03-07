@@ -22,7 +22,7 @@ public class Main extends JavaPlugin
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
 
     // Roles
-    public Map<Player, Role> roles = new HashMap<Player, Role>(); 
+    public Map<Player, Role> roles = new HashMap<Player, Role>();
 
     // Appelé quand le plugin se charge
     @Override
@@ -37,9 +37,9 @@ public class Main extends JavaPlugin
     public void onEnable()
     {
         new ListenerManager(this).registerListeners();
-
         new RecipesManager().registerRecipes();
-
+        setGamePlayer();
+        
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
 
     }
@@ -55,6 +55,17 @@ public class Main extends JavaPlugin
     public static Main getInstance()
     {
         return instance;
+    }
+
+    private void setGamePlayer()
+    {
+        for(Player p : Bukkit.getOnlinePlayers())
+        {
+            if(GamePlayer.gamePlayers.get(p) == null)
+            {
+                new GamePlayer(p);
+            }
+        }
     }
 
     // Prefixe des messages du plugin
