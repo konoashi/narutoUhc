@@ -10,7 +10,7 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Shikamaru extends Role
 {
-    private boolean available = true;
+    public boolean available = true;
 
     public Shikamaru(Player player)
     {
