@@ -27,7 +27,6 @@ public class Choji extends Role
     @Override
     public void useAbility()
     {
-        this.used = true;
 
         Inventory inv = Bukkit.createInventory(null, Main.getInstance().getServer().getMaxPlayers() > 9 ? 18 : 9, "Super pouvoir");
 
@@ -42,7 +41,7 @@ public class Choji extends Role
             inv.addItem(item);
         }
 
-        p.openInventory(inv);
+        this.p.openInventory(inv);
 
     }
 

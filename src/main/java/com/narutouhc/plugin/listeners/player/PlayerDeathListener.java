@@ -1,5 +1,8 @@
 package com.narutouhc.plugin.listeners.player;
 
+import com.narutouhc.plugin.roles.Role;
+import com.narutouhc.plugin.roles.solos.Orochimaru;
+import com.narutouhc.plugin.roles.solos.Sasuke;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,6 +36,30 @@ public class PlayerDeathListener implements Listener
             else if(Main.getInstance().solos.contains(p))
             {
                 Main.getInstance().solos.remove(p);
+            }
+
+            if(gp.isOrochimaru())
+            {
+                Player sasukePl = Main.getInstance().solos.get(0);
+
+                GamePlayer sasukeGP = GamePlayer.gamePlayers.get(sasukePl);
+
+                if(sasukeGP.isSasuke())
+                {
+                    ((Orochimaru) Main.getInstance().roles.get(sasukePl)).sasukeDie();
+                }
+
+            } else if(gp.isSasuke())
+            {
+                Player orochimaruPl = Main.getInstance().solos.get(0);
+
+                GamePlayer orochimaruGP = GamePlayer.gamePlayers.get(orochimaruPl);
+
+                if(orochimaruGP.isOrochimaru())
+                {
+                    ((Orochimaru) Main.getInstance().roles.get(orochimaruPl)).sasukeDie();
+                }
+
             }
             
             e.setDeathMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort.\nIl était §5" + gp.getRole().name());
@@ -74,6 +101,7 @@ public class PlayerDeathListener implements Listener
             }
             else
             {
+                kakuzu.useAbility();
                 p.getInventory().setContents(kakuzu.respawnInv);
             }
         }
