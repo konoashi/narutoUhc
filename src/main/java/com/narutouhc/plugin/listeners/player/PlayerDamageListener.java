@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
@@ -19,42 +20,62 @@ public class PlayerDamageListener implements Listener
     {
         if(e.getEntity() instanceof Player)
         {
-            if(e.getDamager() instanceof Arrow)
+            if(Main.getInstance().pluginRunnable.ep >= 2)
             {
-                Arrow a = (Arrow)e.getDamager();
-
-                if(a.getShooter() instanceof Player)
+                if(e.getDamager() instanceof Arrow)
                 {
-                    Player d = (Player)a.getShooter();
+                    Arrow a = (Arrow)e.getDamager();
 
-                    GamePlayer gp = GamePlayer.gamePlayers.get(d);
-
-                    if(gp.isShikamaru() && (Player)e.getEntity() != d && ((Shikamaru)gp.getPower()).isAvailable())
+                    if(a.getShooter() instanceof Player)
                     {
-                        ((Shikamaru)gp.getPower()).freezePlayer((Player)e.getEntity());
-                    }
-                }
-            }
-            else if(e.getDamager() instanceof Player)
-            {
-                Player player = (Player)e.getDamager();
-                Player damaged = (Player)e.getEntity();
+                        Player d = (Player)a.getShooter();
 
-                GamePlayer gp = GamePlayer.gamePlayers.get(player);
+                        GamePlayer gp = GamePlayer.gamePlayers.get(d);
 
-                if(gp.isMinato())
-                {
-                    Minato minato = (Minato)gp.getPower();
-                    System.out.println(minato.getTargets().size());
-                    if(!minato.getTargets().containsKey(damaged)){
-                        if(minato.getTargets().size() < 2)
+                        if(gp.isShikamaru() && (Player)e.getEntity() != d && ((Shikamaru)gp.getPower()).isAvailable())
                         {
-                            minato.getTargets().put(damaged, false);
-                            player.sendMessage(Main.getInstance().getPrefix() + "§eVous avez mis une balise sur §6" + damaged.getDisplayName());
+                            ((Shikamaru)gp.getPower()).freezePlayer((Player)e.getEntity());
                         }
                     }
                 }
+                else if(e.getDamager() instanceof Player)
+                {
+                    Player player = (Player)e.getDamager();
+                    Player damaged = (Player)e.getEntity();
 
+                    GamePlayer gp = GamePlayer.gamePlayers.get(player);
+
+                    if(gp.isMinato())
+                    {
+                        Minato minato = (Minato)gp.getPower();
+                        System.out.println(minato.getTargets().size());
+                        if(!minato.getTargets().containsKey(damaged))
+                        {
+                            if(minato.getTargets().size() < 2)
+                            {
+                                minato.getTargets().put(damaged, false);
+                                player.sendMessage(Main.getInstance().getPrefix() + "§eVous avez mis une balise sur §6" + damaged.getDisplayName());
+                            }
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent e)
+    {
+        if(e.getEntity() instanceof Player)
+        {
+            if(Main.getInstance().pluginRunnable.ep == 1 && Main.getInstance().pluginRunnable.gameTimer > (20 * 60) - 30)
+            {
+                e.setCancelled(true);
             }
         }
     }

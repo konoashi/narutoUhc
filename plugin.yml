@@ -9,3 +9,6 @@ commands:
   start:
     description: Permet lancer la partie
     permission: narutouhc.start
+  me:
+    description: Permet de connaitre des informations sur son rôle
+    permission: narutouhc.me

@@ -3,6 +3,8 @@ package com.narutouhc.plugin.runnable;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.narutouhc.plugin.Main;
@@ -11,11 +13,12 @@ import com.narutouhc.plugin.utils.RolesUtils;
 
 public class PluginRunnable extends BukkitRunnable
 {
-    private int startTimer = 16;
-    private int gameTimer = 20 * 60;
+    public int startTimer = 16;
+    public int gameTimer = 20 * 60;
     public boolean starting = false;
     public boolean started = false;
-
+    public int ep = 1;
+    
     @Override
     public void run()
     {
@@ -57,15 +60,38 @@ public class PluginRunnable extends BukkitRunnable
                     p.getInventory().clear();
                 }
 
-                RolesUtils.setRoles();
-
                 this.started = true;
                 this.starting = false;
             }
         }
         else if(GameStatus.isStatus(GameStatus.GAME) && !starting)
         {
-
+            if(this.ep == 1 && this.gameTimer == (20 * 60) - 30)
+            {
+                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
+            }
+            
+            if(this.gameTimer >= 1)
+            {
+                this.gameTimer --;
+            }
+            else
+            {
+                this.gameTimer = 20 * 60;
+                this.ep ++;
+                
+                if(this.ep == 2)
+                {
+                    RolesUtils.setRoles();
+                    
+                    for(Player p : Bukkit.getOnlinePlayers())
+                    {
+                        p.sendMessage(Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
+                        p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 10f, 1f);
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
+                    }
+                }
+            }
         }
     }
 

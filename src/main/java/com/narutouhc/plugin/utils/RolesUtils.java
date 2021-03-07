@@ -385,6 +385,8 @@ public class RolesUtils
                 role = new Itachi(p);
                 gp.setPower(role);
 
+                ((Itachi)gp.getPower()).addLifeAbility();
+                
                 itachi = p;
 
 
@@ -438,10 +440,12 @@ public class RolesUtils
         p.sendMessage("§9========================================");
         String roleLine = "§5Voici votre rôle : §d" + gp.getRole().name();
         String cmpLine = "§9Vous êtes " + cmp;
-        p.sendMessage(" ");
+        String infoLine = "§e/me §9pour en savoir plus";
+    
         p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (cmpLine.length() / 2) + 4)) + cmpLine);
-        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (roleLine.length() / 2) + 6)) + roleLine);
-        p.sendMessage(" ");
+        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (roleLine.length() / 2) + 4)) + roleLine);
+        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (infoLine.length() / 2) + 4)) + infoLine);
+
         p.sendMessage("§9========================================");
 
         return role;
