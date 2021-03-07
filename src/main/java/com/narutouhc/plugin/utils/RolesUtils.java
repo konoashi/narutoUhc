@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -239,8 +240,6 @@ public class RolesUtils
         for(Player p : players)
         {
             getRandomRole(p);
-            
-            p.sendMessage("§2Vous êtes" + GamePlayer.gamePlayers.get(p).getRole().name());
         }
     }
 
@@ -264,6 +263,7 @@ public class RolesUtils
                 gp.setPower(role);
 
                 naruto = p;
+
             }
             else
                 return getRandomRole(p);
@@ -278,6 +278,7 @@ public class RolesUtils
                 gp.setPower(role);
 
                 sakura = p;
+
             }
             else
                 return getRandomRole(p);
@@ -292,6 +293,7 @@ public class RolesUtils
                 gp.setPower(role);
 
                 shikamaru = p;
+
             }
             else
                 return getRandomRole(p);
@@ -306,6 +308,7 @@ public class RolesUtils
                 gp.setPower(role);
 
                 choji = p;
+
             }
             else
                 return getRandomRole(p);
@@ -320,6 +323,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 minato = p;
+
+
             }
             else
                 return getRandomRole(p);
@@ -334,6 +339,7 @@ public class RolesUtils
                 gp.setPower(role);
 
                 sasuke = p;
+
             }
             else
                 return getRandomRole(p);
@@ -348,6 +354,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 orochimaru = p;
+
+
             }
             else
                 return getRandomRole(p);
@@ -362,6 +370,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 kakuzu = p;
+
+
             }
             else
                 return getRandomRole(p);
@@ -376,6 +386,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 itachi = p;
+
+
             }
             else
                 return getRandomRole(p);
@@ -390,6 +402,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 deidara = p;
+
+
             }
             else
                 return getRandomRole(p);
@@ -404,10 +418,26 @@ public class RolesUtils
                 gp.setPower(role);
 
                 pain = p;
+
+
             }
             else
                 return getRandomRole(p);
         }
+
+        String cmp = "";
+
+        if(Main.getInstance().konohas.contains(p)){
+            cmp = "§aun ninja de Konoha";
+        } else if(Main.getInstance().akatsukis.contains(p)){
+            cmp = "§cun membre de l'Akatsuki";
+        } else {
+            cmp = "§eun déserteur du vilage";
+        }
+
+        p.sendMessage("§9========= Vous êtes " + cmp + " §9=========");
+        p.sendMessage(Strings.repeat(" ", (9+(cmp.length())+11)/2) + "§5Voici votre rôle : §d" + gp.getRole().name());
+        p.sendMessage("§9" + Strings.repeat("=", ("========= Vous êtes " + cmp + " =========").length()-8));
 
         return role;
     }
