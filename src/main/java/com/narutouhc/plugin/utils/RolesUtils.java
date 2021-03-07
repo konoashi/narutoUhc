@@ -438,10 +438,10 @@ public class RolesUtils
         p.sendMessage("§9========================================");
         String roleLine = "§5Voici votre rôle : §d" + gp.getRole().name();
         String cmpLine = "§9Vous êtes " + cmp;
-        
+        p.sendMessage(" ");
         p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (cmpLine.length() / 2) + 4)) + cmpLine);
-        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (roleLine.length() / 2) + 4)) + roleLine);
-        
+        p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (roleLine.length() / 2) + 6)) + roleLine);
+        p.sendMessage(" ");
         p.sendMessage("§9========================================");
 
         return role;
