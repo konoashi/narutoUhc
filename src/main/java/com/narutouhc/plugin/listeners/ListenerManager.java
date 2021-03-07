@@ -1,6 +1,7 @@
 package com.narutouhc.plugin.listeners;
 
 import com.narutouhc.plugin.listeners.player.PlayerCraftListener;
+import com.narutouhc.plugin.listeners.player.PlayerDamageListener;
 import com.narutouhc.plugin.listeners.player.PlayerDeathListener;
 import com.narutouhc.plugin.listeners.player.PlayerInteractListener;
 import com.narutouhc.plugin.listeners.player.PlayerJoinListener;
@@ -28,5 +29,7 @@ public class ListenerManager
         pm.registerEvents(new PlayerCraftListener(), this.plugin);
         pm.registerEvents(new PlayerInteractListener(), this.plugin);
         pm.registerEvents(new ThrowableHitListener(), this.plugin);
+        pm.registerEvents(new ThrowableHitListener(), this.plugin);
+        pm.registerEvents(new PlayerDamageListener(), this.plugin);
    }
 }

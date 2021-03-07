@@ -38,14 +38,14 @@ public class Minato extends Role
         }
     }
 
-    public void openGui()
+    @Override
+    public void useAbility()
     {
-
-        Inventory inv = Bukkit.createInventory(null, 2, "Se téléporter");
+        Inventory inv = Bukkit.createInventory(null, 9, "Se téléporter");
 
         for(Player p : balises)
         {
-            ItemStack item = new ItemStack(Material.SKULL_ITEM, balises.size(), (short)3);
+            ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
             SkullMeta skull = (SkullMeta)item.getItemMeta();
             skull.setOwner(p.getName());
             skull.setDisplayName("§6" + p.getName());
@@ -55,6 +55,5 @@ public class Minato extends Role
         }
 
         this.p.openInventory(inv);
-
     }
 }

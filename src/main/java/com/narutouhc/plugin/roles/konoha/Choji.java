@@ -23,7 +23,6 @@ public class Choji extends Role
 
     public void openGui()
     {
-
         Inventory inv = Bukkit.createInventory(null, Main.getInstance().getServer().getMaxPlayers() > 9 ? 18 : 9, "Super pouvoir");
 
         for(Player p : Main.getInstance().getServer().getOnlinePlayers())
@@ -38,9 +37,21 @@ public class Choji extends Role
         }
 
         this.p.openInventory(inv);
-
     }
 
+    @Override
+    public void useAbility()
+    {
+        if(!this.isUsed())
+        {
+            this.openGui();
+        }
+        else
+        {
+            this.p.sendMessage(Main.getInstance().getPrefix() + "§cVous avez déjà utilisé votre pouvoir");
+        }
+    }
+    
     public boolean isUsed()
     {
         return used;
