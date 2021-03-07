@@ -51,8 +51,8 @@ public class Shikamaru extends Role
             Player pl = this.p;
 
             pl.sendMessage(Main.getInstance().getPrefix() + "§cVous avez utilisé votre pouvoir, il sera rechargé dans §61 §cminute");
-        
-            
+
+            this.setCurrentCooldown(this.getDefaultCooldown());
             this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 20l);
         }
     }
