@@ -21,8 +21,7 @@ public class Choji extends Role
         Main.getInstance().konohas.add(player);
     }
 
-    @Override
-    public void useAbility()
+    public void openGui()
     {
 
         Inventory inv = Bukkit.createInventory(null, Main.getInstance().getServer().getMaxPlayers() > 9 ? 18 : 9, "Super pouvoir");
