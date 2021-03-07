@@ -10,8 +10,6 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Shikamaru extends Role
 {
-    public boolean available = true;
-
     public Shikamaru(Player player)
     {
         super(player);
@@ -23,12 +21,13 @@ public class Shikamaru extends Role
             Main.getInstance().roles.remove(p);
         }
 
+        this.setDefaultCooldown(60);
         Main.getInstance().roles.put(p, this);
     }
 
     public void freezePlayer(Player target)
     {
-        if(this.available)
+        if(this.isAvailable())
         {
             Location initial = target.getLocation().clone();
 
@@ -48,31 +47,14 @@ public class Shikamaru extends Role
                         this.cancel();
                 }
             }.runTaskTimer(Main.getInstance(), 0, 1l);
-            
-            Player pl = this.p;
-            
-            pl.sendMessage(Main.getInstance().getPrefix() + "§cVous avez utilisé votre pouvoir, il sera rechargé dans §61 §cminute");
-            
-            new BukkitRunnable()
-            {
-                int timer = 60;
 
-                @Override
-                public void run()
-                {
-                    if(this.timer >= 1)
-                    {
-                        this.timer --;
-                    }
-                    else
-                    {
-                        pl.sendMessage(Main.getInstance().getPrefix() + "§aVotre pouvoir est §6prêt");
-                        this.cancel();
-                    }
-                }
-            }.runTaskTimer(Main.getInstance(), 0, 20l);
+            Player pl = this.p;
+
+            pl.sendMessage(Main.getInstance().getPrefix() + "§cVous avez utilisé votre pouvoir, il sera rechargé dans §61 §cminute");
+        
             
-            this.available = true;
+            this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 20l);
         }
     }
+
 }

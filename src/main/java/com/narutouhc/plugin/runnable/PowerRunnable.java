@@ -2,6 +2,7 @@ package com.narutouhc.plugin.runnable;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.Role;
 
 public class PowerRunnable extends BukkitRunnable
@@ -22,6 +23,7 @@ public class PowerRunnable extends BukkitRunnable
         }
         else
         {
+            this.role.p.sendMessage(Main.getInstance().getPrefix() + "§aVotre pouvoir est désormais rechargé");
             this.cancel();
         }
     }
