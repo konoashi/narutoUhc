@@ -45,10 +45,13 @@ public class PlayerDamageListener implements Listener
                 if(gp.isMinato())
                 {
                     Minato minato = (Minato)gp.getPower();
-                    if(minato.getTargets().size() < 2)
-                    {
-                        minato.getTargets().put(damaged, false);
-                        player.sendMessage(Main.getInstance().getPrefix() + "§eVous avez mis une balise sur §6" + damaged.getDisplayName());
+                    System.out.println(minato.getTargets().size());
+                    if(!minato.getTargets().containsKey(damaged)){
+                        if(minato.getTargets().size() < 2)
+                        {
+                            minato.getTargets().put(damaged, false);
+                            player.sendMessage(Main.getInstance().getPrefix() + "§eVous avez mis une balise sur §6" + damaged.getDisplayName());
+                        }
                     }
                 }
 

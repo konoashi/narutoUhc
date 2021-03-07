@@ -27,6 +27,8 @@ public class PlayerGuiInteractListener implements Listener
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
             ItemStack item = e.getCurrentItem();
+            
+            if(item == null) return;
 
             if(gp.isChoji())
             {

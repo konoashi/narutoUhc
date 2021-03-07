@@ -1,5 +1,6 @@
 package com.narutouhc.plugin.roles.konoha;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -18,7 +19,7 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Minato extends Role
 {
-    private Map<Player, Boolean> balises;
+    private Map<Player, Boolean> balises = new HashMap<Player, Boolean>();
 
     public Minato(Player p)
     {
@@ -42,12 +43,14 @@ public class Minato extends Role
             if(!this.balises.get(pl))
             {
                 Location pLoc = pl.getLocation().clone();
+
+                Location before = this.p.getLocation().clone();
+
                 this.p.teleport(pLoc);
 
-                this.p.getWorld().strikeLightning(pLoc);
+                this.p.getWorld().strikeLightning(before);
 
-                this.balises.remove(pl);
-                this.balises.put(pl, true);
+                this.balises.replace(pl, true);
             }
         }
     }
