@@ -9,6 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.narutouhc.plugin.GamePlayer;
+import com.narutouhc.plugin.roles.EnumRole;
 
 public class PlayerInteractListener implements Listener
 {
@@ -39,7 +40,7 @@ public class PlayerInteractListener implements Listener
                 
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
                 
-                if(!gp.isShikamaru() && !gp.isOrochimaru() && !gp.isKakuzu() && !gp.isDeidara())
+                if(gp.getRole() != EnumRole.NONE && !gp.isShikamaru() && !gp.isOrochimaru() && !gp.isKakuzu() && !gp.isDeidara())
                 {
                     gp.getPower().useAbility();
                 }
