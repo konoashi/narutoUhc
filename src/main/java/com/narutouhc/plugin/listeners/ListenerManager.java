@@ -28,5 +28,6 @@ public class ListenerManager
         pm.registerEvents(new ThrowableHitListener(), this.plugin);
         pm.registerEvents(new PlayerDamageListener(), this.plugin);
         pm.registerEvents(new PlayerGuiInteractListener(), this.plugin);
+        pm.registerEvents(new PlayerLootListener(), this.plugin);
    }
 }

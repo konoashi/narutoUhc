@@ -9,6 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.narutouhc.plugin.GamePlayer;
+import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
 
 public class PlayerInteractListener implements Listener
@@ -44,6 +45,8 @@ public class PlayerInteractListener implements Listener
                 {
                     gp.getPower().useAbility();
                 }
+                else
+                    p.sendMessage(Main.getInstance().getPrefix() + "§cVous ne pouvez pas utiliser cet item");
             }
         }
     }

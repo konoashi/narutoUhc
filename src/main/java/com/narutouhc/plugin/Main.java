@@ -53,7 +53,7 @@ public class Main extends JavaPlugin
         GameStatus.setSatus(GameStatus.WAITING);
         this.pluginRunnable = new PluginRunnable();
         this.pluginRunnable.runTaskTimer(this, 0, 20);
-
+        Bukkit.getWorld("world").setGameRuleValue("naturalRegeneration", "false");
         setWorldBorder();
         
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");

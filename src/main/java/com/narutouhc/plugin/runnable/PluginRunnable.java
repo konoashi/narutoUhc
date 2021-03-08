@@ -3,8 +3,11 @@ package com.narutouhc.plugin.runnable;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -65,6 +68,13 @@ public class PluginRunnable extends BukkitRunnable
                 {
                     p.getInventory().clear();
                     p.getActivePotionEffects().clear();
+                    
+                    ItemStack star = new ItemStack(Material.NETHER_STAR);
+                    ItemMeta metaStar = star.getItemMeta();
+                    metaStar.setDisplayName("§6Pouvoir");
+                    star.setItemMeta(metaStar);
+                    
+                    p.getInventory().addItem(star);
                     
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
                     {
@@ -165,28 +175,28 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
             }
         }
         else if(gp.isMinato())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             }
         }
         else if(gp.isSasuke())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
             }
 
             if(((Sasuke)gp.getPower()).hasWeakness)
             {
                 if(!p.hasPotionEffect(PotionEffectType.WEAKNESS))
                 {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1, true, false));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, true, false));
                 }
             }
         }
@@ -194,7 +204,7 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             }
         }
     }
