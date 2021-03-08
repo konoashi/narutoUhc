@@ -12,3 +12,9 @@ commands:
   me:
     description: Permet de connaitre des informations sur son rôle
     permission: narutouhc.me
+  fs:
+    description: Force le lancement de la partie
+    permission: narutouhc.fs
+  ep:
+    description: Change l'épisode
+    permission: narutouhc.ep

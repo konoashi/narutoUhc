@@ -58,12 +58,13 @@ public class PluginRunnable extends BukkitRunnable
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§6La partie commence");
                 Bukkit.getWorld("world").setTime(0);
 
-                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§2Vous êtes invincible pour 30s");
+                Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§2Vous êtes invincible pour 30s");
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§9Début du PvP à l'épisode 2");
 
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
                     p.getInventory().clear();
+                    p.getActivePotionEffects().clear();
                     
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
                     {
@@ -81,7 +82,7 @@ public class PluginRunnable extends BukkitRunnable
             
             if(this.ep == 1 && this.gameTimer == (20 * 60) - 30)
             {
-                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
+                Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
             }
 
             if(ep >= 2)
@@ -101,13 +102,15 @@ public class PluginRunnable extends BukkitRunnable
                 this.gameTimer = 20 * 60;
                 this.ep++;
 
+                Bukkit.broadcastMessage("\n====================\n§bDébut de l'épisode §6" + this.ep + "\n§f====================");
+                
                 if(this.ep == 2)
                 {
                     RolesUtils.setRoles();
 
                     for(Player p : Bukkit.getOnlinePlayers())
                     {
-                        p.sendMessage(Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
+                        p.sendMessage("\n" + Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
                         p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 10f, 1f);
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
                     }
@@ -132,8 +135,6 @@ public class PluginRunnable extends BukkitRunnable
                 {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
                 }
-
-                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "====================\n§bDébut de l'épisode §6" + this.ep + "\n§f====================");
             }
             
             for(Player p : Bukkit.getOnlinePlayers())
@@ -164,28 +165,28 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             }
         }
         else if(gp.isMinato())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, true, false));
             }
         }
         else if(gp.isSasuke())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             }
 
             if(((Sasuke)gp.getPower()).hasWeakness)
             {
                 if(!p.hasPotionEffect(PotionEffectType.WEAKNESS))
                 {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, true, false));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1, true, false));
                 }
             }
         }
@@ -193,7 +194,7 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, true, false));
             }
         }
     }

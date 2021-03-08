@@ -10,6 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.narutouhc.plugin.commands.CommandEpisode;
+import com.narutouhc.plugin.commands.CommandFs;
 import com.narutouhc.plugin.commands.CommandMe;
 import com.narutouhc.plugin.commands.CommandSetRole;
 import com.narutouhc.plugin.commands.CommandStart;
@@ -76,6 +78,8 @@ public class Main extends JavaPlugin
         addCommand("role", new CommandSetRole());
         addCommand("start", new CommandStart());
         addCommand("me", new CommandMe());
+        addCommand("ep", new CommandEpisode());
+        addCommand("fs", new CommandFs());
   }
 
     private void addCommand(String name, CommandExecutor e)

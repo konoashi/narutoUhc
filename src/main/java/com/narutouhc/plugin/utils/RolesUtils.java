@@ -437,7 +437,7 @@ public class RolesUtils
             cmp = "§eun déserteur du vilage";
         }
 
-        p.sendMessage("§9========================================");
+        p.sendMessage("\n§9========================================");
         String roleLine = "§5Voici votre rôle : §d" + gp.getRole().name();
         String cmpLine = "§9Vous êtes " + cmp;
         String infoLine = "§e/me §9pour en savoir plus";
