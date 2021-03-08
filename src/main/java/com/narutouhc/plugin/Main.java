@@ -25,7 +25,7 @@ public class Main extends JavaPlugin
     // Instance du plugin
     private static Main instance;
     public PluginRunnable pluginRunnable;
-
+    
     // Teams
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
 
@@ -52,6 +52,8 @@ public class Main extends JavaPlugin
         this.pluginRunnable = new PluginRunnable();
         this.pluginRunnable.runTaskTimer(this, 0, 20);
 
+        setWorldBorder();
+        
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
 
     }
@@ -96,6 +98,12 @@ public class Main extends JavaPlugin
         }
     }
 
+    private void setWorldBorder()
+    {
+        Bukkit.getWorld("world").getWorldBorder().setCenter(0, 0);;
+        Bukkit.getWorld("world").getWorldBorder().setSize(750);
+    }
+    
     // Prefixe des messages du plugin
     public String getPrefix()
     {

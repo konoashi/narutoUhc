@@ -15,6 +15,7 @@ public class ScoreboardManager
     {
         this.player = player;
         this.scoreboardSign = new FastBoard(player);
+        this.scoreboardSign.update();
         scoreboardGame.put(player, this.scoreboardSign);
     }
 }

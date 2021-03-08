@@ -16,6 +16,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import com.narutouhc.plugin.GamePlayer;
+import com.narutouhc.plugin.Main;
+
 /**
  * Simple Bukkit ScoreBoard API with 1.7 to 1.16 support.
  * Everything is at packet level so you don't need to use it in the main server thread.
@@ -663,25 +666,31 @@ public class FastBoard
         }
     }
 
-    public void loadScoreboard()
+    public void update()
     {
-        this.updateTitle(ChatColor.YELLOW + " " + ChatColor.GOLD + ChatColor.BOLD + "Event PvP");
+        this.updateTitle("" + ChatColor.GOLD + ChatColor.BOLD + "NARUTO UHC");
 
-        this.updateLine(6, ChatColor.GOLD + "By DrasticLp");
-        this.updateLine(5, "§8-----------------------");
+        this.updateLine(0, "§8----------------");
+        this.updateLine(1, "");
+        this.updateLine(2, "§bEpisode: §c" + Main.getInstance().pluginRunnable.ep);
+        int pCount = 0;
         
-        int pcount = 0;
-
-        for(Player pl : Bukkit.getOnlinePlayers())
+        for(Player p : Bukkit.getOnlinePlayers())
         {
-            if(pl.getGameMode() == GameMode.SURVIVAL)
-                pcount++;
-        }               
+            if(p.getGameMode() == GameMode.SURVIVAL)
+                pCount ++;
+        }
+        
+        this.updateLine(3, "§c" + pCount + " §4Joueurs");
+        this.updateLine(4, "");
+        this.updateLine(5, "§6Timer: §e" + Main.getInstance().pluginRunnable.getFormattedTime());
+        
+        GamePlayer gp = GamePlayer.gamePlayers.get(this.player);
+        
+        this.updateLine(6, "§6Rôle: §e" + gp.getRole().name());
+        this.updateLine(7, "");
+        this.updateLine(8, "§2Bordure: §a" + (int)Bukkit.getWorld("world").getWorldBorder().getSize());
 
-        this.updateLine(4, "§6Joueurs: §e" + pcount + "§6/§e" + 100);
-        this.updateLine(3, "");
-        this.updateLine(2, "");
-        this.updateLine(1, "§6Status: §aAttente");
-        this.updateLine(0, "§8-----------------------");
+        this.updateLine(9, "§8----------------");
     }
 }

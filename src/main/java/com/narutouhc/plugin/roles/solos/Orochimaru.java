@@ -31,5 +31,7 @@ public class Orochimaru extends Role
         {
             this.p.setHealth(20);
         }
+        
+        this.p.sendMessage(Main.getInstance().getPrefix() + "§eSasuke §cest mort ! Vous avez donc perdu §b4 coeurs permanents §c!");
     }
 }

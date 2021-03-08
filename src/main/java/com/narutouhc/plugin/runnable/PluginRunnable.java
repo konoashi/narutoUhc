@@ -1,5 +1,7 @@
 package com.narutouhc.plugin.runnable;
 
+import java.util.concurrent.TimeUnit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -9,6 +11,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.solos.Sasuke;
+import com.narutouhc.plugin.scoreboard.ScoreboardManager;
 import com.narutouhc.plugin.utils.GameStatus;
 import com.narutouhc.plugin.utils.RolesUtils;
 
@@ -19,7 +23,8 @@ public class PluginRunnable extends BukkitRunnable
     public boolean starting = false;
     public boolean started = false;
     public int ep = 1;
-    
+    public int mainTimer = 0;
+
     @Override
     public void run()
     {
@@ -59,6 +64,11 @@ public class PluginRunnable extends BukkitRunnable
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
                     p.getInventory().clear();
+                    
+                    if(!ScoreboardManager.scoreboardGame.containsKey(p))
+                    {
+                        new ScoreboardManager(p);
+                    }
                 }
 
                 this.started = true;
@@ -67,11 +77,13 @@ public class PluginRunnable extends BukkitRunnable
         }
         else if(GameStatus.isStatus(GameStatus.GAME) && !starting)
         {
+            mainTimer ++;
+            
             if(this.ep == 1 && this.gameTimer == (20 * 60) - 30)
             {
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
             }
-            
+
             if(ep >= 2)
             {
                 for(Player p : Bukkit.getOnlinePlayers())
@@ -79,20 +91,20 @@ public class PluginRunnable extends BukkitRunnable
                     addEffects(p);
                 }
             }
-            
+
             if(this.gameTimer >= 1)
             {
-                this.gameTimer --;
+                this.gameTimer--;
             }
             else
             {
                 this.gameTimer = 20 * 60;
-                this.ep ++;
-                
+                this.ep++;
+
                 if(this.ep == 2)
                 {
                     RolesUtils.setRoles();
-                    
+
                     for(Player p : Bukkit.getOnlinePlayers())
                     {
                         p.sendMessage(Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
@@ -101,12 +113,32 @@ public class PluginRunnable extends BukkitRunnable
                     }
                 }
                 
+                if(this.ep == 4)
+                {
+                    Bukkit.getWorld("world").getWorldBorder().setSize(500, 60 * 2);
+                }
+
+                if(this.ep == 7)
+                {
+                    Bukkit.getWorld("world").getWorldBorder().setSize(300, 60 * 2);
+                }
+                
+                if(this.ep == 10)
+                {
+                    Bukkit.getWorld("world").getWorldBorder().setSize(150, 60 * 2);
+                }
+                
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
                 }
-                
+
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + "====================\n§bDébut de l'épisode §6" + this.ep + "\n§f====================");
+            }
+            
+            for(Player p : Bukkit.getOnlinePlayers())
+            {
+                ScoreboardManager.scoreboardGame.get(p).update();
             }
         }
     }
@@ -123,11 +155,11 @@ public class PluginRunnable extends BukkitRunnable
     {
         return this.startTimer == 15 || this.startTimer == 10 || this.startTimer <= 5 && this.startTimer != 0;
     }
-    
+
     private void addEffects(Player p)
     {
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
-        
+
         if(gp.isNaruto())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
@@ -148,6 +180,14 @@ public class PluginRunnable extends BukkitRunnable
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
             }
+
+            if(((Sasuke)gp.getPower()).hasWeakness)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.WEAKNESS))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, true, false));
+                }
+            }
         }
         else if(gp.isItachi())
         {
@@ -155,6 +195,29 @@ public class PluginRunnable extends BukkitRunnable
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
             }
+        }
+    }
+    
+    public String getFormattedTime()
+    {
+        String s = String.format("%02d:%02d:%02d",
+                TimeUnit.SECONDS.toHours(this.mainTimer),
+                TimeUnit.SECONDS.toMinutes(this.mainTimer) - 
+                TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(this.mainTimer)),
+                this.mainTimer - 
+                TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(this.mainTimer)));
+        
+        String[] args = s.split(":");
+        
+        int hours = Integer.parseInt(args[0]);
+
+        if(hours != 0)
+        { 
+            return s;
+        }
+        else
+        {
+            return s.substring(3);
         }
     }
 }

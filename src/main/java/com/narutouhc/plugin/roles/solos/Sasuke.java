@@ -109,5 +109,6 @@ public class Sasuke extends Role
     public void orochimaruDie()
     {
         this.hasWeakness = true;
+        this.p.sendMessage(Main.getInstance().getPrefix() + "§eOrochimaru §cest mort ! Vous aurez maintenant §dFaiblesse 1 §c!");
     }
 }
