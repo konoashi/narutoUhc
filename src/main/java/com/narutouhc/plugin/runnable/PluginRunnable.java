@@ -1,10 +1,13 @@
 package com.narutouhc.plugin.runnable;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -68,13 +71,15 @@ public class PluginRunnable extends BukkitRunnable
                 {
                     p.getInventory().clear();
                     p.getActivePotionEffects().clear();
-                    
+
                     ItemStack star = new ItemStack(Material.NETHER_STAR);
                     ItemMeta metaStar = star.getItemMeta();
                     metaStar.setDisplayName("§6Pouvoir");
                     star.setItemMeta(metaStar);
-                    
+
                     p.getInventory().addItem(star);
+
+                    tpPlayer(p, 500, 750);
                     
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
                     {
@@ -88,8 +93,8 @@ public class PluginRunnable extends BukkitRunnable
         }
         else if(GameStatus.isStatus(GameStatus.GAME) && !starting)
         {
-            mainTimer ++;
-            
+            mainTimer++;
+
             if(this.ep == 1 && this.gameTimer == (20 * 60) - 30)
             {
                 Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
@@ -113,7 +118,7 @@ public class PluginRunnable extends BukkitRunnable
                 this.ep++;
 
                 Bukkit.broadcastMessage("\n====================\n§bDébut de l'épisode §6" + this.ep + "\n§f====================");
-                
+
                 if(this.ep == 2)
                 {
                     RolesUtils.setRoles();
@@ -125,7 +130,7 @@ public class PluginRunnable extends BukkitRunnable
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
                     }
                 }
-                
+
                 if(this.ep == 4)
                 {
                     Bukkit.getWorld("world").getWorldBorder().setSize(500, 60 * 2);
@@ -135,18 +140,18 @@ public class PluginRunnable extends BukkitRunnable
                 {
                     Bukkit.getWorld("world").getWorldBorder().setSize(300, 60 * 2);
                 }
-                
+
                 if(this.ep == 10)
                 {
                     Bukkit.getWorld("world").getWorldBorder().setSize(150, 60 * 2);
                 }
-                
+
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
                 }
             }
-            
+
             for(Player p : Bukkit.getOnlinePlayers())
             {
                 ScoreboardManager.scoreboardGame.get(p).update();
@@ -208,27 +213,50 @@ public class PluginRunnable extends BukkitRunnable
             }
         }
     }
-    
+
     public String getFormattedTime()
     {
-        String s = String.format("%02d:%02d:%02d",
-                TimeUnit.SECONDS.toHours(this.mainTimer),
-                TimeUnit.SECONDS.toMinutes(this.mainTimer) - 
-                TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(this.mainTimer)),
-                this.mainTimer - 
-                TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(this.mainTimer)));
-        
+        String s = String.format("%02d:%02d:%02d", TimeUnit.SECONDS.toHours(this.mainTimer), TimeUnit.SECONDS.toMinutes(this.mainTimer) - TimeUnit.HOURS.toMinutes(TimeUnit.SECONDS.toHours(this.mainTimer)), this.mainTimer - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(this.mainTimer)));
+
         String[] args = s.split(":");
-        
+
         int hours = Integer.parseInt(args[0]);
 
         if(hours != 0)
-        { 
+        {
             return s;
         }
         else
         {
             return s.substring(3);
         }
+    }
+
+    private void tpPlayer(Player p, int min, int max)
+    {
+        Random r = new Random();
+
+        int x = r.nextInt(max - min) + min;
+        int y = 150;
+        int z = r.nextInt(max - min) + min;
+
+        Location loc = new Location(Main.getInstance().getServer().getWorlds().get(0), x, y, z);
+
+        if(loc.getWorld().getChunkAt(x, z).isLoaded())
+        {
+            loc.getWorld().getChunkAt(x, z).load();
+        }
+
+        Block block = loc.getWorld().getBlockAt(loc);
+
+        if(block.getType() == null || block.getType().equals(Material.AIR))
+        {
+            tpPlayer(p, min, max);
+        }
+        else
+        {
+            p.teleport(loc);
+        }
+
     }
 }
