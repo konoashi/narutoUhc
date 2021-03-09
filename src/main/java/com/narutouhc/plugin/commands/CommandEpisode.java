@@ -25,21 +25,22 @@ public class CommandEpisode implements CommandExecutor
                 int ep = Integer.parseInt(args[0]);
 
                 Bukkit.broadcastMessage("\n====================\n§bDébut de l'épisode §6" + ep + "\n§f====================");
-                
+
                 Main.getInstance().pluginRunnable.gameTimer = 20 * 60;
-                Main.getInstance().pluginRunnable.ep = ep;
                 Main.getInstance().pluginRunnable.mainTimer = (ep - 1) * 20 * 60;
-                if(ep == 2)
+
+                if(Main.getInstance().pluginRunnable.ep < 2 && ep >= 2)
                 {
                     RolesUtils.setRoles();
-
                     for(Player p : Bukkit.getOnlinePlayers())
                     {
                         p.sendMessage("\n" + Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
-                        Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
                         p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 10f, 1f);
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
                     }
+
+                    Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
+
                 }
 
                 if(ep == 4)
@@ -61,6 +62,8 @@ public class CommandEpisode implements CommandExecutor
                 {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
                 }
+
+                Main.getInstance().pluginRunnable.ep = ep;
             }
         }
 
