@@ -29,5 +29,8 @@ public class ListenerManager
         pm.registerEvents(new PlayerDamageListener(), this.plugin);
         pm.registerEvents(new PlayerGuiInteractListener(), this.plugin);
         pm.registerEvents(new PlayerLootListener(), this.plugin);
-   }
+        pm.registerEvents(new PlayerGuiExitListener(), this.plugin);
+        pm.registerEvents(new PlayerBreakListener(), this.plugin);
+        pm.registerEvents(new PlayerChatListener(), this.plugin);
+ }
 }

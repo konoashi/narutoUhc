@@ -18,7 +18,7 @@ public class PlayerDamageListener implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
     {
-        if(e.getEntity() instanceof Player)
+        if(e.getEntity() instanceof Player && e.getDamager() instanceof Player)
         {
             if(Main.getInstance().pluginRunnable.ep >= 2)
             {
@@ -48,7 +48,6 @@ public class PlayerDamageListener implements Listener
                     if(gp.isMinato())
                     {
                         Minato minato = (Minato)gp.getPower();
-                        System.out.println(minato.getTargets().size());
                         if(!minato.getTargets().containsKey(damaged))
                         {
                             if(minato.getTargets().size() < 2)

@@ -10,7 +10,6 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -72,15 +71,14 @@ public class PluginRunnable extends BukkitRunnable
                     p.getInventory().clear();
                     p.getActivePotionEffects().clear();
 
-                    ItemStack star = new ItemStack(Material.NETHER_STAR);
-                    ItemMeta metaStar = star.getItemMeta();
-                    metaStar.setDisplayName("§6Pouvoir");
-                    star.setItemMeta(metaStar);
+                    for(ItemStack s : Main.getInstance().startInv)
+                    {
+                        if(s != null)
+                            p.getInventory().addItem(s);
+                    }
 
-                    p.getInventory().addItem(star);
+                    tpPlayer(p, 240, 370);
 
-                    tpPlayer(p, 500, 750);
-                    
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
                     {
                         new ScoreboardManager(p);
@@ -239,23 +237,18 @@ public class PluginRunnable extends BukkitRunnable
         int x = r.nextInt(max - min) + min;
         int y = 150;
         int z = r.nextInt(max - min) + min;
-
+        
         Location loc = new Location(Main.getInstance().getServer().getWorlds().get(0), x, y, z);
-
-        if(loc.getWorld().getChunkAt(x, z).isLoaded())
-        {
-            loc.getWorld().getChunkAt(x, z).load();
-        }
 
         Block block = loc.getWorld().getBlockAt(loc);
 
-        if(block.getType() == null || block.getType().equals(Material.AIR))
+        if(block.getType() != null && block.getType().equals(Material.AIR))
         {
-            tpPlayer(p, min, max);
+            p.teleport(loc);
         }
         else
         {
-            p.teleport(loc);
+            tpPlayer(p, min, max);
         }
 
     }

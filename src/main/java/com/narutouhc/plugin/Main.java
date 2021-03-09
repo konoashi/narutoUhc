@@ -6,12 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.narutouhc.plugin.commands.CommandEpisode;
 import com.narutouhc.plugin.commands.CommandFs;
+import com.narutouhc.plugin.commands.CommandInfo;
+import com.narutouhc.plugin.commands.CommandInv;
 import com.narutouhc.plugin.commands.CommandMe;
 import com.narutouhc.plugin.commands.CommandSetRole;
 import com.narutouhc.plugin.commands.CommandStart;
@@ -27,7 +33,12 @@ public class Main extends JavaPlugin
     // Instance du plugin
     private static Main instance;
     public PluginRunnable pluginRunnable;
-    
+    public List<ItemStack> startInv = new ArrayList<ItemStack>();
+
+    public Map<Player, Integer> diamonds = new HashMap<Player, Integer>();
+
+    public HashMap<Player, PermissionAttachment> perms = new HashMap<Player, PermissionAttachment>();
+
     // Teams
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
 
@@ -55,7 +66,8 @@ public class Main extends JavaPlugin
         this.pluginRunnable.runTaskTimer(this, 0, 20);
         Bukkit.getWorld("world").setGameRuleValue("naturalRegeneration", "false");
         setWorldBorder();
-        
+        setDefaultItems();
+
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
 
     }
@@ -80,7 +92,9 @@ public class Main extends JavaPlugin
         addCommand("me", new CommandMe());
         addCommand("ep", new CommandEpisode());
         addCommand("fs", new CommandFs());
-  }
+        addCommand("inv", new CommandInv());
+        addCommand("info", new CommandInfo());
+    }
 
     private void addCommand(String name, CommandExecutor e)
     {
@@ -97,9 +111,32 @@ public class Main extends JavaPlugin
                 new GamePlayer(p);
             }
 
+            if(!this.diamonds.containsKey(p))
+            {
+                this.diamonds.put(p, 0);
+            }
+
+            if(!this.perms.containsKey(p))
+            {
+                PermissionAttachment attachment = p.addAttachment(Main.getInstance());
+                attachment.setPermission("narutouhc.me", true);
+                attachment.setPermission("narutouhc.info", true);
+                this.perms.put(p, attachment);
+            }
+
             p.setMaxHealth(20);
             p.setHealth(20);
         }
+    }
+
+    private void setDefaultItems()
+    {
+        ItemStack star = new ItemStack(Material.NETHER_STAR);
+        ItemMeta metaStar = star.getItemMeta();
+        metaStar.setDisplayName("§6Pouvoir");
+        star.setItemMeta(metaStar);
+
+        this.startInv.add(star);
     }
 
     private void setWorldBorder()
@@ -107,7 +144,7 @@ public class Main extends JavaPlugin
         Bukkit.getWorld("world").getWorldBorder().setCenter(0, 0);;
         Bukkit.getWorld("world").getWorldBorder().setSize(750);
     }
-    
+
     // Prefixe des messages du plugin
     public String getPrefix()
     {

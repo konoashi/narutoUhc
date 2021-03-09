@@ -18,3 +18,9 @@ commands:
   ep:
     description: Change l'épisode
     permission: narutouhc.ep
+  inv:
+    description: Permet de changer l'inventaire de départ
+    permission: narutouhc.inv
+  info:
+    description: Permet d'envoyer un message anonyme
+    permission: narutouhc.info

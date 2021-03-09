@@ -36,6 +36,7 @@ public class CommandEpisode implements CommandExecutor
                     for(Player p : Bukkit.getOnlinePlayers())
                     {
                         p.sendMessage("\n" + Main.getInstance().getPrefix() + "§9Le PvP est maintenant activé");
+                        Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
                         p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 10f, 1f);
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 5));
                     }
@@ -59,11 +60,6 @@ public class CommandEpisode implements CommandExecutor
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 10f, 1f);
-                }
-                
-                if(ep > 1)
-                {
-                    Bukkit.broadcastMessage("\n" + Main.getInstance().getPrefix() + "§cVous êtes devenu vulnérable aux dégats");
                 }
             }
         }
