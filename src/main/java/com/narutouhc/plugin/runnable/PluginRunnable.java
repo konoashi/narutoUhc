@@ -4,12 +4,18 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.GameMode;
+import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -155,6 +161,14 @@ public class PluginRunnable extends BukkitRunnable
                 ScoreboardManager.scoreboardGame.get(p).update();
             }
         }
+        else if(GameStatus.isStatus(GameStatus.STOP))
+        {
+            Firework firework = Bukkit.getWorld("world_the_end").spawn(new Location(Bukkit.getWorld("world"), 0, 80, 0), Firework.class);
+            FireworkMeta data = (FireworkMeta)firework.getFireworkMeta();
+            data.addEffects(FireworkEffect.builder().withColor(Color.PURPLE).withColor(Color.WHITE).with(Type.STAR).withFlicker().build());
+            data.setPower(1);
+            firework.setFireworkMeta(data);
+        }
     }
 
     private void setLevel()
@@ -232,12 +246,14 @@ public class PluginRunnable extends BukkitRunnable
 
     private void tpPlayer(Player p, int min, int max)
     {
+        p.setGameMode(GameMode.SURVIVAL);
+        
         Random r = new Random();
 
         int x = r.nextInt(max - min) + min;
         int y = 150;
         int z = r.nextInt(max - min) + min;
-        
+
         Location loc = new Location(Main.getInstance().getServer().getWorlds().get(0), x, y, z);
 
         Block block = loc.getWorld().getBlockAt(loc);

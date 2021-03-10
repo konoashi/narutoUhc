@@ -109,7 +109,7 @@ public enum EnumRole
         {
             return "§e========= §6Deidara §e=========\n" +
                     "§6Effets : §cAucun\n" +
-                    "§6Pouvoir : - §cVous créer des §cOeufs explosifs§c.\n" +
+                    "§6Pouvoir : - §cVous pouvez créer des §cOeufs explosifs§c.\n" +
                     "§6Victoire : §cAvec l'Akatsuki\n" +
                     "§e==========================";
         }
