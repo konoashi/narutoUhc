@@ -22,10 +22,10 @@ public class CommandInv implements CommandExecutor
 
             Inventory inv = Bukkit.createInventory(null, 9 * 3, "Inventaire par défaut");
 
-            for(ItemStack s : Main.getInstance().startInv)
+            for(ItemStack s : Main.getInstance().startInv.keySet())
             {
                 if(s != null)
-                    inv.addItem(s);
+                    inv.setItem(Main.getInstance().startInv.get(s), s);
             }
 
             p.openInventory(inv);

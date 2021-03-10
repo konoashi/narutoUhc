@@ -20,7 +20,7 @@ public class PlayerGuiInteractListener implements Listener
     {
         Inventory inv = e.getClickedInventory();
 
-        if(inv.getTitle().equalsIgnoreCase("Super pouvoir"))
+        if(inv.getTitle() != null && inv.getTitle().equalsIgnoreCase("Super pouvoir"))
         {
             Player p = (Player)e.getWhoClicked();
 

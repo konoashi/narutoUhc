@@ -33,7 +33,7 @@ public class Main extends JavaPlugin
     // Instance du plugin
     private static Main instance;
     public PluginRunnable pluginRunnable;
-    public List<ItemStack> startInv = new ArrayList<ItemStack>();
+    public Map<ItemStack, Integer> startInv = new HashMap<ItemStack, Integer>();
 
     public Map<Player, Integer> diamonds = new HashMap<Player, Integer>();
 
@@ -136,7 +136,7 @@ public class Main extends JavaPlugin
         metaStar.setDisplayName("§6Pouvoir");
         star.setItemMeta(metaStar);
 
-        this.startInv.add(star);
+        this.startInv.put(star, 0);
     }
 
     private void setWorldBorder()

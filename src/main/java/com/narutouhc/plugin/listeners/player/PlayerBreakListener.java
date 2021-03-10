@@ -9,54 +9,59 @@ import org.bukkit.inventory.ItemStack;
 
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.utils.EnumOre;
+import com.narutouhc.plugin.utils.GameStatus;
 
 public class PlayerBreakListener implements Listener
 {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e)
     {
-        if(e.getBlock().getType() == Material.GOLD_ORE || e.getBlock().getType() == Material.IRON_ORE)
+        if(GameStatus.isStatus(GameStatus.GAME))
         {
-            e.setCancelled(true);
-            EnumOre ore = null;
-
-            if(e.getBlock().getType() == Material.GOLD_ORE)
-                ore = EnumOre.GOLD;
-            else
-                ore = EnumOre.IRON;
-
-            Location loc = e.getBlock().getLocation().clone();
-
-            e.getBlock().setType(Material.AIR);
-
-            e.setExpToDrop(EnumOre.getXpFromBlock(ore));
-            loc.getWorld().dropItemNaturally(loc, new ItemStack(EnumOre.getResultFromBlock(ore)));
-        }
-        else if(e.getBlock().getType() == Material.GRAVEL)
-        {
-            e.setCancelled(true);
-            
-            Location loc = e.getBlock().getLocation().clone();
-            e.getBlock().setType(Material.AIR);
-            
-            loc.getWorld().dropItemNaturally(loc, new ItemStack(Material.ARROW));
-        }
-        else if(e.getBlock().getType() == Material.DIAMOND_ORE)
-        {
-            if(Main.getInstance().diamonds.get(e.getPlayer()) < 17)
-            {
-                Main.getInstance().diamonds.replace(e.getPlayer(), Main.getInstance().diamonds.get(e.getPlayer()) + 1);
-            }
-            else
+            if(e.getBlock().getType() == Material.GOLD_ORE || e.getBlock().getType() == Material.IRON_ORE)
             {
                 e.setCancelled(true);
-                
+                EnumOre ore = null;
+
+                if(e.getBlock().getType() == Material.GOLD_ORE)
+                    ore = EnumOre.GOLD;
+                else
+                    ore = EnumOre.IRON;
+
                 Location loc = e.getBlock().getLocation().clone();
 
                 e.getBlock().setType(Material.AIR);
 
-                loc.getWorld().dropItemNaturally(loc, new ItemStack(EnumOre.getResultFromBlock(EnumOre.GOLD)));
+                e.setExpToDrop(EnumOre.getXpFromBlock(ore));
+                loc.getWorld().dropItemNaturally(loc, new ItemStack(EnumOre.getResultFromBlock(ore)));
+            }
+            else if(e.getBlock().getType() == Material.GRAVEL)
+            {
+                e.setCancelled(true);
+
+                Location loc = e.getBlock().getLocation().clone();
+                e.getBlock().setType(Material.AIR);
+
+                loc.getWorld().dropItemNaturally(loc, new ItemStack(Material.ARROW));
+            }
+            else if(e.getBlock().getType() == Material.DIAMOND_ORE)
+            {
+                if(Main.getInstance().diamonds.get(e.getPlayer()) < 17)
+                {
+                    Main.getInstance().diamonds.replace(e.getPlayer(), Main.getInstance().diamonds.get(e.getPlayer()) + 1);
+                }
+                else
+                {
+                    e.setCancelled(true);
+
+                    Location loc = e.getBlock().getLocation().clone();
+
+                    e.getBlock().setType(Material.AIR);
+
+                    loc.getWorld().dropItemNaturally(loc, new ItemStack(EnumOre.getResultFromBlock(EnumOre.GOLD)));
+                }
             }
         }
+        else e.setCancelled(true);
     }
 }

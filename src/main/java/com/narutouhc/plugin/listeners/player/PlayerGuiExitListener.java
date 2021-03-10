@@ -1,5 +1,7 @@
 package com.narutouhc.plugin.listeners.player;
 
+import java.util.Arrays;
+
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +35,7 @@ public class PlayerGuiExitListener implements Listener
                 
                 for(ItemStack s : e.getInventory())
                 {
-                    Main.getInstance().startInv.add(s);
+                    Main.getInstance().startInv.put(s, Arrays.asList(e.getInventory().getContents()).indexOf(s));
                 }
                 
                 e.getPlayer().sendMessage(Main.getInstance().getPrefix() + "§aVous avez bien actualisé l'inventaire par défaut");

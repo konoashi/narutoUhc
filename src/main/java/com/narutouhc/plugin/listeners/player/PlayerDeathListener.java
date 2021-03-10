@@ -87,6 +87,7 @@ public class PlayerDeathListener implements Listener
 
                 e.getDrops().remove(s);
                 e.setDeathMessage("\n");
+                p.setGameMode(GameMode.SPECTATOR);
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
                 checkForWin();
             }
@@ -107,6 +108,7 @@ public class PlayerDeathListener implements Listener
                     }
 
                     e.setDeathMessage("\n");
+                    p.setGameMode(GameMode.SPECTATOR);
                     Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
                     checkForWin();
                 }
@@ -122,20 +124,23 @@ public class PlayerDeathListener implements Listener
         sizeAkatsuki = Main.getInstance().akatsukis.size();
         sizeSolo = Main.getInstance().solos.size();
 
-        if(sizeAkatsuki == 0 && sizeKonoha == 0)
+        if(Main.getInstance().pluginRunnable.ep >= 2)
         {
-            GameStatus.setSatus(GameStatus.STOP);
-            EnumWin.setWinner(EnumWin.SOLO);
-        }
-        else if(sizeAkatsuki == 0 && sizeSolo == 0)
-        {
-            GameStatus.setSatus(GameStatus.STOP);
-            EnumWin.setWinner(EnumWin.KONOHA);
-        }
-        else if(sizeKonoha == 0 && sizeSolo == 0)
-        {
-            GameStatus.setSatus(GameStatus.STOP);
-            EnumWin.setWinner(EnumWin.AKATSUKI);
+            if(sizeAkatsuki == 0 && sizeKonoha == 0)
+            {
+                GameStatus.setSatus(GameStatus.STOP);
+                EnumWin.setWinner(EnumWin.SOLO);
+            }
+            else if(sizeAkatsuki == 0 && sizeSolo == 0)
+            {
+                GameStatus.setSatus(GameStatus.STOP);
+                EnumWin.setWinner(EnumWin.KONOHA);
+            }
+            else if(sizeKonoha == 0 && sizeSolo == 0)
+            {
+                GameStatus.setSatus(GameStatus.STOP);
+                EnumWin.setWinner(EnumWin.AKATSUKI);
+            }
         }
 
         if(!EnumWin.isWinner(EnumWin.NONE))
@@ -179,7 +184,7 @@ public class PlayerDeathListener implements Listener
                 }
                 else
                 {
-                    message += "§r§5" + p.getDisplayName() + " : §d§o§m" + gp.getRole().name();
+                    message += "§r§5" + p.getDisplayName() + " : §d§o§m" + gp.getRole().name() + "\n";
                 }
 
                 p.teleport(new Location(p.getWorld(), 0, 150, 0));
@@ -197,17 +202,13 @@ public class PlayerDeathListener implements Listener
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
         if(!gp.isKakuzu())
-        {
-            p.setGameMode(GameMode.SPECTATOR);
-        }
+        {}
         else
         {
             Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
 
             if(kakuzu.hasRespawned)
-            {
-                p.setGameMode(GameMode.SPECTATOR);
-            }
+            {}
             else
             {
                 kakuzu.useAbility();

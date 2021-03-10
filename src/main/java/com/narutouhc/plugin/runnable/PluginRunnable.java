@@ -77,10 +77,10 @@ public class PluginRunnable extends BukkitRunnable
                     p.getInventory().clear();
                     p.getActivePotionEffects().clear();
 
-                    for(ItemStack s : Main.getInstance().startInv)
+                    for(ItemStack s : Main.getInstance().startInv.keySet())
                     {
                         if(s != null)
-                            p.getInventory().addItem(s);
+                            p.getInventory().setItem(Main.getInstance().startInv.get(s), s);
                     }
 
                     tpPlayer(p, 240, 370);
