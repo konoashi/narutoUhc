@@ -114,7 +114,7 @@ public class Itachi extends Role
 	public void addLifeAbility()
 	{
 	    Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
-	    Objective o = sb.registerNewObjective("❤️", "health");
+	    Objective o = sb.registerNewObjective("§6❤§r", "health");
 	    o.setDisplaySlot(DisplaySlot.BELOW_NAME);
 	    this.p.setScoreboard(sb);
 	}

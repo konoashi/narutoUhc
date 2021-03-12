@@ -32,14 +32,15 @@ public class PlayerGuiExitListener implements Listener
             else
             {
                 Main.getInstance().startInv.clear();
-                
+
                 for(ItemStack s : e.getInventory())
                 {
-                    Main.getInstance().startInv.put(s, Arrays.asList(e.getInventory().getContents()).indexOf(s));
+                    if(s.getType() != null && s.getType() != Material.BARRIER)
+                        Main.getInstance().startInv.put(s, Arrays.asList(e.getInventory().getContents()).indexOf(s));
                 }
-                
+
                 e.getPlayer().sendMessage(Main.getInstance().getPrefix() + "§aVous avez bien actualisé l'inventaire par défaut");
-            }            
+            }
         }
     }
 }

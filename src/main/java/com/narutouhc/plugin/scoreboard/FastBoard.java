@@ -689,7 +689,7 @@ public class FastBoard
         
         this.updateLine(6, "§6Rôle: §e" + gp.getRole().name());
         this.updateLine(7, "");
-        this.updateLine(8, "§2Bordure: §a" + (int)Bukkit.getWorld("world").getWorldBorder().getSize());
+        this.updateLine(8, "§2Bordure: §a" + (int)(Bukkit.getWorld("world").getWorldBorder().getSize() / 2));
 
         this.updateLine(9, "§8----------------");
     }

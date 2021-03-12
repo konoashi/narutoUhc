@@ -28,6 +28,20 @@ public class ConstrucTabComplete implements TabCompleter
                 
                 return list;
             }
+            else if(command.getName().equalsIgnoreCase("config"))
+            {
+                if(args.length == 1)
+                {
+                    return Arrays.asList("inv");
+                }
+                else if(args.length == 2)
+                {
+                    if(args[0].equalsIgnoreCase("inv"))
+                    {
+                        return Arrays.asList("default", "uhc");
+                    }
+                }
+            }
         }
         
         return null;

@@ -24,3 +24,6 @@ commands:
   info:
     description: Permet d'envoyer un message anonyme
     permission: narutouhc.info
+  config:
+    description: Hoo
+    permission: narutouhc.config

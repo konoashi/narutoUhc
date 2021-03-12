@@ -1,6 +1,7 @@
 package com.narutouhc.plugin.roles;
 
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
 
 import com.narutouhc.plugin.runnable.PowerRunnable;
 
@@ -17,6 +18,12 @@ public class Role
     public Role(Player player)
     {
         this.p = player;
+
+        if(p.getScoreboard() != null)
+        {
+            this.p.getScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
+        }
+
         this.powerRunnable = new PowerRunnable(this);
     }
 

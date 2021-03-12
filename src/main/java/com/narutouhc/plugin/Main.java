@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.narutouhc.plugin.commands.CommandConfig;
 import com.narutouhc.plugin.commands.CommandEpisode;
 import com.narutouhc.plugin.commands.CommandFs;
 import com.narutouhc.plugin.commands.CommandInfo;
@@ -27,6 +26,7 @@ import com.narutouhc.plugin.recipes.RecipesManager;
 import com.narutouhc.plugin.roles.Role;
 import com.narutouhc.plugin.runnable.PluginRunnable;
 import com.narutouhc.plugin.utils.GameStatus;
+import com.narutouhc.plugin.utils.StuffUtil;
 
 public class Main extends JavaPlugin
 {
@@ -66,7 +66,8 @@ public class Main extends JavaPlugin
         this.pluginRunnable.runTaskTimer(this, 0, 20);
         Bukkit.getWorld("world").setGameRuleValue("naturalRegeneration", "false");
         setWorldBorder();
-        setDefaultItems();
+        StuffUtil.setDefaultItems();
+        setDefaultConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(getPrefix() + "§aPlugin activé avec succès");
 
@@ -94,6 +95,7 @@ public class Main extends JavaPlugin
         addCommand("fs", new CommandFs());
         addCommand("inv", new CommandInv());
         addCommand("info", new CommandInfo());
+        addCommand("config", new CommandConfig());
     }
 
     private void addCommand(String name, CommandExecutor e)
@@ -129,20 +131,22 @@ public class Main extends JavaPlugin
         }
     }
 
-    private void setDefaultItems()
+    private void setDefaultConfig()
     {
-        ItemStack star = new ItemStack(Material.NETHER_STAR);
-        ItemMeta metaStar = star.getItemMeta();
-        metaStar.setDisplayName("§6Pouvoir");
-        star.setItemMeta(metaStar);
+        saveDefaultConfig();
 
-        this.startInv.put(star, 0);
+        if(getConfig().getString("inv").equalsIgnoreCase("uhc"))
+        {
+            StuffUtil.setDefautltUhcStuff();
+        }
+        else
+            StuffUtil.setDefaultItems();
     }
 
     private void setWorldBorder()
     {
         Bukkit.getWorld("world").getWorldBorder().setCenter(0, 0);;
-        Bukkit.getWorld("world").getWorldBorder().setSize(750);
+        Bukkit.getWorld("world").getWorldBorder().setSize(750 * 2);
     }
 
     // Prefixe des messages du plugin

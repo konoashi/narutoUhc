@@ -6,15 +6,14 @@ import java.util.concurrent.TimeUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.GameMode;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -26,6 +25,7 @@ import com.narutouhc.plugin.roles.solos.Sasuke;
 import com.narutouhc.plugin.scoreboard.ScoreboardManager;
 import com.narutouhc.plugin.utils.GameStatus;
 import com.narutouhc.plugin.utils.RolesUtils;
+import com.narutouhc.plugin.utils.StuffUtil;
 
 public class PluginRunnable extends BukkitRunnable
 {
@@ -74,15 +74,7 @@ public class PluginRunnable extends BukkitRunnable
 
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
-                    p.getInventory().clear();
-                    p.getActivePotionEffects().clear();
-
-                    for(ItemStack s : Main.getInstance().startInv.keySet())
-                    {
-                        if(s != null)
-                            p.getInventory().setItem(Main.getInstance().startInv.get(s), s);
-                    }
-
+                    StuffUtil.setInv(p);
                     tpPlayer(p, 240, 370);
 
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
@@ -137,17 +129,17 @@ public class PluginRunnable extends BukkitRunnable
 
                 if(this.ep == 4)
                 {
-                    Bukkit.getWorld("world").getWorldBorder().setSize(500, 60 * 2);
+                    Bukkit.getWorld("world").getWorldBorder().setSize(500 * 2, 60 * 2);
                 }
 
                 if(this.ep == 7)
                 {
-                    Bukkit.getWorld("world").getWorldBorder().setSize(300, 60 * 2);
+                    Bukkit.getWorld("world").getWorldBorder().setSize(300 * 2, 60 * 2);
                 }
 
                 if(this.ep == 10)
                 {
-                    Bukkit.getWorld("world").getWorldBorder().setSize(150, 60 * 2);
+                    Bukkit.getWorld("world").getWorldBorder().setSize(150 * 2, 60 * 2);
                 }
 
                 for(Player p : Bukkit.getOnlinePlayers())
@@ -192,28 +184,28 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
             }
         }
         else if(gp.isMinato())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
             }
         }
         else if(gp.isSasuke())
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
             }
 
             if(((Sasuke)gp.getPower()).hasWeakness)
             {
                 if(!p.hasPotionEffect(PotionEffectType.WEAKNESS))
                 {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, true, false));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 0, false, false));
                 }
             }
         }
@@ -221,7 +213,7 @@ public class PluginRunnable extends BukkitRunnable
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, true, false));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
             }
         }
     }

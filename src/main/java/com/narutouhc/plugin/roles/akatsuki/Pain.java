@@ -26,6 +26,8 @@ public class Pain extends Role
             Main.getInstance().roles.remove(p);
         }
         
+        this.p.setMaxHealth(20 + 6);
+        
         Main.getInstance().roles.put(p, this);
 	}
 
@@ -45,7 +47,13 @@ public class Pain extends Role
 			}
 
 			this.setCurrentCooldown(this.getDefaultCooldown());
-			this.p.setMaxHealth(this.p.getMaxHealth() - 6);
+			this.p.setMaxHealth(this.p.getMaxHealth() - 2);
+			
+			if(this.p.getHealth() > this.p.getMaxHealth())
+			{
+			    this.p.setHealth(this.p.getMaxHealth());
+			}
+			
 			this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez d'utiliser votre §6POUVOIR");
 
 			if (ticks)

@@ -1,6 +1,7 @@
 package com.narutouhc.plugin.listeners.player;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,6 +49,11 @@ public class PlayerGuiInteractListener implements Listener
                 e.setCancelled(true);
             }
 
+        }
+        else if(inv.getTitle() != null && inv.getTitle().equalsIgnoreCase("Inventaire par défaut"))
+        {
+            if(e.getCurrentItem() != null && e.getCurrentItem().getType() == Material.BARRIER)
+                e.setCancelled(true);
         }
 
     }
