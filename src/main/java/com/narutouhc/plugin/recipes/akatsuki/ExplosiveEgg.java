@@ -7,25 +7,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ExplosiveEgg
 {
-	private static ItemStack egg = new ItemStack(Material.EGG);
+    private static ItemStack egg = new ItemStack(Material.EGG);
 
-	private static ItemMeta meta = egg.getItemMeta();
+    private static ItemMeta meta = egg.getItemMeta();
 
-	public static ShapedRecipe recipe;
+    public static ShapedRecipe recipe;
 
-	public static void register() {
-		meta.setDisplayName("§cOeuf explosif");
-		egg.setItemMeta(meta);
-		recipe = new ShapedRecipe(egg);
+    public static void register()
+    {
+        meta.setDisplayName("§cOeuf explosif");
+        egg.setItemMeta(meta);
+        recipe = new ShapedRecipe(egg);
 
-		recipe.shape(
-				" # ",
-				"#$#",
-				" # "
-		);
+        recipe.shape(" # ", "#$#", " # ");
 
-		recipe.setIngredient('$', Material.EGG);
-		recipe.setIngredient('#', Material.SULPHUR);
-	}
+        recipe.setIngredient('$', Material.EGG);
+        recipe.setIngredient('#', Material.SULPHUR);
+    }
 
 }

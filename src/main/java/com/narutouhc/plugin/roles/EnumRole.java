@@ -15,6 +15,8 @@ public enum EnumRole
     ITACHI,
     DEIDARA,
     PAIN,
+    ZETSU,
+    VILLAGEOIS,
     NONE;
     
     public static String getDescription(EnumRole role)
@@ -125,6 +127,22 @@ public enum EnumRole
                     "§6Kakuzu : §c" + RolesUtils.getKakuzu().getDisplayName() + "\n" +
                     "§6Deidara : §c" + RolesUtils.getDeidara().getDisplayName() + "\n" +
                    "§e=======================";
+        }
+        else if(role == ZETSU)
+        {
+            return "§e========= §6Zetsu §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cAucun§c.\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§e==========================";
+        }
+        else if(role == VILLAGEOIS)
+        {
+            return "§e========= §6Villageois §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cAucun§c.\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e==========================";
         }
         
         return null;

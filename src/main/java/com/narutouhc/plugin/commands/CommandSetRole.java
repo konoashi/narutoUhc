@@ -15,9 +15,11 @@ import com.narutouhc.plugin.roles.akatsuki.Deidara;
 import com.narutouhc.plugin.roles.akatsuki.Itachi;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
 import com.narutouhc.plugin.roles.akatsuki.Pain;
+import com.narutouhc.plugin.roles.akatsuki.Zetsu;
 import com.narutouhc.plugin.roles.konoha.Choji;
 import com.narutouhc.plugin.roles.konoha.Minato;
 import com.narutouhc.plugin.roles.konoha.Naruto;
+import com.narutouhc.plugin.roles.konoha.Ninja;
 import com.narutouhc.plugin.roles.konoha.Sakura;
 import com.narutouhc.plugin.roles.konoha.Shikamaru;
 import com.narutouhc.plugin.roles.solos.Orochimaru;
@@ -34,7 +36,7 @@ public class CommandSetRole implements CommandExecutor
             Player p = (Player)sender;
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-            List<String> allowed = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "pain");
+            List<String> allowed = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "pain", "zetsu");
 
             if(allowed.contains(args[0]))
             {
@@ -93,6 +95,21 @@ public class CommandSetRole implements CommandExecutor
                 {
                     gp.setRole(EnumRole.PAIN);
                     gp.setPower(new Pain(p));
+                }
+                else if(args[0].equalsIgnoreCase("pain"))
+                {
+                    gp.setRole(EnumRole.PAIN);
+                    gp.setPower(new Pain(p));
+                }
+                else if(args[0].equalsIgnoreCase("ninja"))
+                {
+                    gp.setRole(EnumRole.VILLAGEOIS);
+                    gp.setPower(new Ninja(p));
+                }
+                else if(args[0].equalsIgnoreCase("zetsu"))
+                {
+                    gp.setRole(EnumRole.ZETSU);
+                    gp.setPower(new Zetsu(p));
                 }
                 
                 sender.sendMessage(Main.getInstance().getPrefix() + "§aVous venez de mettre votre rôle à §6" + args[0].toUpperCase());

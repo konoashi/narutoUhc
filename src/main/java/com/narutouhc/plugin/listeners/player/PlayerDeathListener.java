@@ -213,6 +213,7 @@ public class PlayerDeathListener implements Listener
             {
                 kakuzu.useAbility();
                 p.getInventory().setContents(kakuzu.respawnInv);
+                Main.getInstance().pluginRunnable.tpPlayer(p, 240, 370);
             }
         }
     }

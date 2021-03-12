@@ -62,6 +62,6 @@ public class PlayerBreakListener implements Listener
                 }
             }
         }
-        else e.setCancelled(true);
+        else if(!e.getPlayer().isOp()) e.setCancelled(true);
     }
 }

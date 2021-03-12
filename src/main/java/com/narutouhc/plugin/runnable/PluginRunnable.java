@@ -244,7 +244,7 @@ public class PluginRunnable extends BukkitRunnable
         }
     }
 
-    private void tpPlayer(Player p, int min, int max)
+    public void tpPlayer(Player p, int min, int max)
     {
         p.setGameMode(GameMode.SURVIVAL);
         

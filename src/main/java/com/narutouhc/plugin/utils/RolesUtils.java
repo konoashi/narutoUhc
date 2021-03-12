@@ -17,9 +17,11 @@ import com.narutouhc.plugin.roles.akatsuki.Deidara;
 import com.narutouhc.plugin.roles.akatsuki.Itachi;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
 import com.narutouhc.plugin.roles.akatsuki.Pain;
+import com.narutouhc.plugin.roles.akatsuki.Zetsu;
 import com.narutouhc.plugin.roles.konoha.Choji;
 import com.narutouhc.plugin.roles.konoha.Minato;
 import com.narutouhc.plugin.roles.konoha.Naruto;
+import com.narutouhc.plugin.roles.konoha.Ninja;
 import com.narutouhc.plugin.roles.konoha.Sakura;
 import com.narutouhc.plugin.roles.konoha.Shikamaru;
 import com.narutouhc.plugin.roles.solos.Orochimaru;
@@ -27,7 +29,7 @@ import com.narutouhc.plugin.roles.solos.Sasuke;
 
 public class RolesUtils
 {
-    private static Player naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
+    private static Player zetsu, ninja, naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
 
     public static Player getNaruto()
     {
@@ -46,6 +48,40 @@ public class RolesUtils
         return naruto;
     }
 
+    public static Player getNinja()
+    {
+        if(ninja == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isNinja())
+                {
+                    ninja = p;
+                }
+            }
+        }
+
+        return ninja;
+    }
+    
+    public static Player getZetsu()
+    {
+        if(zetsu == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isZetsu())
+                {
+                    zetsu = p;
+                }
+            }
+        }
+
+        return zetsu;
+    }
+    
     public static Player getSakura()
     {
         if(sakura == null)
@@ -426,7 +462,39 @@ public class RolesUtils
             else
                 return getRandomRole(p);
         }
+        else if(i == 10)
+        {
+            if(zetsu == null)
+            {
+                gp.setRole(EnumRole.ZETSU);
 
+                role = new Zetsu(p);
+                gp.setPower(role);
+
+                zetsu = p;
+
+
+            }
+            else
+                return getRandomRole(p);
+        }        
+        else if(i == 10)
+        {
+            if(ninja == null)
+            {
+                gp.setRole(EnumRole.VILLAGEOIS);
+
+                role = new Ninja(p);
+                gp.setPower(role);
+
+                ninja = p;
+
+
+            }
+            else
+                return getRandomRole(p);
+        }  
+        
         String cmp = "";
 
         if(Main.getInstance().konohas.contains(p)){

@@ -3,7 +3,6 @@ package com.narutouhc.plugin.listeners.player;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -15,10 +14,10 @@ import com.narutouhc.plugin.roles.konoha.Shikamaru;
 
 public class PlayerDamageListener implements Listener
 {
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
     {
-        if(e.getEntity() instanceof Player && e.getDamager() instanceof Player)
+        if(e.getEntity() instanceof Player)
         {
             if(Main.getInstance().pluginRunnable.ep >= 2)
             {

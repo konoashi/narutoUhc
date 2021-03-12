@@ -41,12 +41,12 @@ public class PlayerInteractListener implements Listener
                 
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
                 
-                if(gp.getRole() != EnumRole.NONE && !gp.isShikamaru() && !gp.isOrochimaru() && !gp.isKakuzu() && !gp.isDeidara())
+                if(gp.getRole() != EnumRole.NONE && !gp.isShikamaru() && !gp.isOrochimaru() && !gp.isKakuzu() && !gp.isDeidara() && !gp.isNinja() && !gp.isZetsu())
                 {
                     gp.getPower().useAbility();
                 }
                 else
-                    p.sendMessage(Main.getInstance().getPrefix() + "§cVous ne pouvez pas utiliser cet item");
+                    p.sendMessage(Main.getInstance().getPrefix() + "§cVous ne pouvez pas utiliser de pouvoir");
             }
         }
     }

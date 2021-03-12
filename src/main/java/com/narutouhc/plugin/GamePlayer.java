@@ -80,6 +80,16 @@ public class GamePlayer
         return this.role == EnumRole.PAIN;
     }
 
+    public boolean isZetsu()
+    {
+        return this.role == EnumRole.ZETSU;
+    }
+
+    public boolean isNinja()
+    {
+        return this.role == EnumRole.VILLAGEOIS;
+    }
+    
     /* Conditions publiques permettant de préciser le rôle du joueur */
 
     public void resetRoles()
@@ -96,12 +106,12 @@ public class GamePlayer
     {
         this.power = r;
     }
-    
+
     public EnumRole getRole()
     {
         return this.role;
     }
-    
+
     public Role getPower()
     {
         return this.power;
