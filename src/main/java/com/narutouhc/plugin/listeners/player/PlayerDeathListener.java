@@ -35,83 +35,90 @@ public class PlayerDeathListener implements Listener
 
         if(GameStatus.isStatus(GameStatus.GAME))
         {
-            if(!gp.isKakuzu())
+            if(!e.getDeathMessage().equalsIgnoreCase(p.getName() + " died"))
             {
-                if(Main.getInstance().konohas.contains(p))
+                if(!gp.isKakuzu())
                 {
-                    Main.getInstance().konohas.remove(p);
-                }
-                else if(Main.getInstance().akatsukis.contains(p))
-                {
-                    Main.getInstance().akatsukis.remove(p);
-                }
-                else if(Main.getInstance().solos.contains(p))
-                {
-                    Main.getInstance().solos.remove(p);
-                }
-
-                if(gp.isOrochimaru())
-                {
-                    Player sasuke = RolesUtils.getSasuke();
-
-                    GamePlayer sasukeGp = GamePlayer.gamePlayers.get(sasuke);
-
-                    if(sasuke != null && sasukeGp.isSasuke())
+                    if(Main.getInstance().konohas.contains(p))
                     {
-                        ((Sasuke)Main.getInstance().roles.get(sasuke)).orochimaruDie();
+                        Main.getInstance().konohas.remove(p);
                     }
-
-                }
-                else if(gp.isSasuke())
-                {
-                    Player orochimaru = RolesUtils.getOrochimaru();
-
-                    GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
-
-                    if(orochimaru != null && orochimaruGp.isOrochimaru())
-                    {
-                        ((Orochimaru)Main.getInstance().roles.get(orochimaru)).sasukeDie();
-                    }
-
-                }
-
-                ItemStack s = null;
-
-                for(ItemStack stack : e.getDrops())
-                {
-                    if(stack.getType() == Material.NETHER_STAR)
-                    {
-                        s = stack;
-                    }
-                }
-
-                e.getDrops().remove(s);
-                e.setDeathMessage("\n");
-                p.setGameMode(GameMode.SPECTATOR);
-                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
-                checkForWin();
-            }
-            else
-            {
-                Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
-
-                if(!kakuzu.hasRespawned)
-                {
-                    kakuzu.respawnInv = p.getInventory().getContents();
-                    e.getDrops().clear();
-                }
-                else
-                {
-                    if(Main.getInstance().akatsukis.contains(p))
+                    else if(Main.getInstance().akatsukis.contains(p))
                     {
                         Main.getInstance().akatsukis.remove(p);
                     }
+                    else if(Main.getInstance().solos.contains(p))
+                    {
+                        Main.getInstance().solos.remove(p);
+                    }
 
+                    if(gp.isOrochimaru())
+                    {
+                        Player sasuke = RolesUtils.getSasuke();
+
+                        GamePlayer sasukeGp = GamePlayer.gamePlayers.get(sasuke);
+
+                        if(sasuke != null && sasukeGp.isSasuke())
+                        {
+                            ((Sasuke)Main.getInstance().roles.get(sasuke)).orochimaruDie();
+                        }
+
+                    }
+                    else if(gp.isSasuke())
+                    {
+                        Player orochimaru = RolesUtils.getOrochimaru();
+
+                        GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
+
+                        if(orochimaru != null && orochimaruGp.isOrochimaru())
+                        {
+                            ((Orochimaru)Main.getInstance().roles.get(orochimaru)).sasukeDie();
+                        }
+
+                    }
+
+                    ItemStack s = null;
+
+                    for(ItemStack stack : e.getDrops())
+                    {
+                        if(stack.getType() == Material.NETHER_STAR)
+                        {
+                            s = stack;
+                        }
+                    }
+
+                    e.getDrops().remove(s);
                     e.setDeathMessage("\n");
-                    p.setGameMode(GameMode.SPECTATOR);
                     Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
                     checkForWin();
                 }
+                else
+                {
+                    Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
+
+                    if(!kakuzu.hasRespawned)
+                    {
+                        kakuzu.respawnInv = p.getInventory().getContents();
+                        e.getDrops().clear();
+                    }
+                    else
+                    {
+                        if(Main.getInstance().akatsukis.contains(p))
+                        {
+                            Main.getInstance().akatsukis.remove(p);
+                        }
+
+                        e.setDeathMessage("\n");
+                        Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
+                        checkForWin();
+                    }
+                }
+            }
+            else
+            {
+                checkForWin();
+                e.setDeathMessage("\n");
+                Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
             }
         }
     }
@@ -202,18 +209,23 @@ public class PlayerDeathListener implements Listener
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
         if(!gp.isKakuzu())
-        {}
+        {
+            p.setGameMode(GameMode.SPECTATOR);
+        }
         else
         {
             Kakuzu kakuzu = (Kakuzu)Main.getInstance().roles.get(p);
 
             if(kakuzu.hasRespawned)
-            {}
+            {
+                p.setGameMode(GameMode.SPECTATOR);
+            }
             else
             {
                 kakuzu.useAbility();
                 p.getInventory().setContents(kakuzu.respawnInv);
                 Main.getInstance().pluginRunnable.tpPlayer(p, 240, 370);
+                p.setGameMode(GameMode.SPECTATOR);
             }
         }
     }
