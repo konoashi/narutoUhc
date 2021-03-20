@@ -44,6 +44,11 @@ public class GamePlayer
     {
         return this.role == EnumRole.CHOJI;
     }
+    
+    public boolean isGai()
+    {
+        return this.role == EnumRole.GAI;
+    }
 
     public boolean isMinato()
     {

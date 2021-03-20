@@ -11,7 +11,7 @@ public class Role
     private int defaultCooldown = 20 * 60 * 5;
     private int currentCooldown = 0;
 
-    private PowerRunnable powerRunnable;
+    protected PowerRunnable powerRunnable;
 
     public EnumRole type = EnumRole.NONE;
 

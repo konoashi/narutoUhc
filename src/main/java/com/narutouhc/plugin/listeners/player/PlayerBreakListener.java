@@ -46,8 +46,12 @@ public class PlayerBreakListener implements Listener
             }
             else if(e.getBlock().getType() == Material.DIAMOND_ORE)
             {
-                if(Main.getInstance().diamonds.get(e.getPlayer()) < 17)
+                if(Main.getInstance().diamonds.get(e.getPlayer()) < Main.getInstance().getConfig().getInt("diamondlimit"))
                 {
+                    if(Main.getInstance().diamonds.get(e.getPlayer()) == Main.getInstance().getConfig().getInt("diamondlimit") - 1)
+                    {
+                        e.getPlayer().sendMessage(Main.getInstance().getPrefix() + "§c/§e!§c\\ Vous venez de dépasser votre §blimite de diamants");
+                    }
                     Main.getInstance().diamonds.replace(e.getPlayer(), Main.getInstance().diamonds.get(e.getPlayer()) + 1);
                 }
                 else
@@ -62,6 +66,7 @@ public class PlayerBreakListener implements Listener
                 }
             }
         }
-        else if(!e.getPlayer().isOp()) e.setCancelled(true);
+        else if(!e.getPlayer().isOp())
+            e.setCancelled(true);
     }
 }

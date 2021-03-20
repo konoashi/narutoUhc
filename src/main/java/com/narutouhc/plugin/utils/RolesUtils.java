@@ -7,7 +7,10 @@ import java.util.Random;
 
 import com.google.common.base.Strings;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
@@ -19,6 +22,7 @@ import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
 import com.narutouhc.plugin.roles.akatsuki.Pain;
 import com.narutouhc.plugin.roles.akatsuki.Zetsu;
 import com.narutouhc.plugin.roles.konoha.Choji;
+import com.narutouhc.plugin.roles.konoha.Gai;
 import com.narutouhc.plugin.roles.konoha.Minato;
 import com.narutouhc.plugin.roles.konoha.Naruto;
 import com.narutouhc.plugin.roles.konoha.Ninja;
@@ -29,7 +33,7 @@ import com.narutouhc.plugin.roles.solos.Sasuke;
 
 public class RolesUtils
 {
-    private static Player zetsu, ninja, naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
+    private static Player gai, zetsu, ninja, naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
 
     public static Player getNaruto()
     {
@@ -262,6 +266,23 @@ public class RolesUtils
         return pain;
     }
 
+    public static Player getGai()
+    {
+        if(gai == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isGai())
+                {
+                    gai = p;
+                }
+            }
+        }
+
+        return gai;
+    }
+    
     public static void setRoles()
     {
         List<Player> players = new ArrayList<Player>();
@@ -283,7 +304,7 @@ public class RolesUtils
     {
         Random r = new Random();
 
-        int i = r.nextInt(11);
+        int i = r.nextInt(14);
 
         Role role = null;
 
@@ -441,7 +462,13 @@ public class RolesUtils
 
                 deidara = p;
 
-
+                ItemStack egg = new ItemStack(Material.EGG);
+                ItemMeta meta = egg.getItemMeta();
+                
+                meta.setDisplayName("§cOeuf explosif");
+                egg.setItemMeta(meta);
+                
+                p.getInventory().addItem(egg);
             }
             else
                 return getRandomRole(p);
@@ -462,7 +489,7 @@ public class RolesUtils
             else
                 return getRandomRole(p);
         }
-        else if(i == 10)
+        else if(i == 11)
         {
             if(zetsu == null)
             {
@@ -478,7 +505,7 @@ public class RolesUtils
             else
                 return getRandomRole(p);
         }        
-        else if(i == 10)
+        else if(i == 12)
         {
             if(ninja == null)
             {
@@ -488,12 +515,24 @@ public class RolesUtils
                 gp.setPower(role);
 
                 ninja = p;
-
-
             }
             else
                 return getRandomRole(p);
         }  
+        else if(i == 13)
+        {
+            if(gai == null)
+            {
+                gp.setRole(EnumRole.GAI);
+
+                role = new Gai(p);
+                gp.setPower(role);
+
+                gai = p;
+            }
+            else
+                return getRandomRole(p);
+        } 
         
         String cmp = "";
 

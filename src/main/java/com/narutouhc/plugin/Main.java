@@ -19,6 +19,7 @@ import com.narutouhc.plugin.commands.CommandInfo;
 import com.narutouhc.plugin.commands.CommandInv;
 import com.narutouhc.plugin.commands.CommandMe;
 import com.narutouhc.plugin.commands.CommandSetRole;
+import com.narutouhc.plugin.commands.CommandSpec;
 import com.narutouhc.plugin.commands.CommandStart;
 import com.narutouhc.plugin.commands.ConstrucTabComplete;
 import com.narutouhc.plugin.listeners.ListenerManager;
@@ -35,10 +36,14 @@ public class Main extends JavaPlugin
     public PluginRunnable pluginRunnable;
     public Map<ItemStack, Integer> startInv = new HashMap<ItemStack, Integer>();
 
+    public List<Player> spectating = new ArrayList<Player>();
+    public List<Player> players = new ArrayList<Player>();
+
     public Map<Player, Integer> diamonds = new HashMap<Player, Integer>();
 
     public HashMap<Player, PermissionAttachment> perms = new HashMap<Player, PermissionAttachment>();
-
+    public List<Player> whitelist = new ArrayList<Player>();
+    
     // Teams
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
 
@@ -96,6 +101,7 @@ public class Main extends JavaPlugin
         addCommand("inv", new CommandInv());
         addCommand("info", new CommandInfo());
         addCommand("config", new CommandConfig());
+        addCommand("spec", new CommandSpec());
     }
 
     private void addCommand(String name, CommandExecutor e)
@@ -123,6 +129,7 @@ public class Main extends JavaPlugin
                 PermissionAttachment attachment = p.addAttachment(Main.getInstance());
                 attachment.setPermission("narutouhc.me", true);
                 attachment.setPermission("narutouhc.info", true);
+                attachment.setPermission("narutouhc.spec", true);
                 this.perms.put(p, attachment);
             }
 

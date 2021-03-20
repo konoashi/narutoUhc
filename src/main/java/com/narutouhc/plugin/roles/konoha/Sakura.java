@@ -27,6 +27,8 @@ public class Sakura extends Role
         }
         
         Main.getInstance().roles.put(p, this);
+        
+        this.powerRunnable.runTaskTimer(Main.getInstance(), 0, 20);
     }
 
     @Override
@@ -50,14 +52,7 @@ public class Sakura extends Role
             this.setCurrentCooldown(this.getDefaultCooldown());
             this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez d'utiliser votre §6POUVOIR");
 
-            if(ticks)
-            {
-                this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 1L);
-            }
-            else
-            {
-                this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 20L);
-            }
+            this.getPowerRunnable().start = true;
         }
         else
         {

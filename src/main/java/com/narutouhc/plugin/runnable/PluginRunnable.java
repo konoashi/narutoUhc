@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.konoha.Gai;
 import com.narutouhc.plugin.roles.solos.Sasuke;
 import com.narutouhc.plugin.scoreboard.ScoreboardManager;
 import com.narutouhc.plugin.utils.GameStatus;
@@ -74,8 +75,24 @@ public class PluginRunnable extends BukkitRunnable
 
                 for(Player p : Bukkit.getOnlinePlayers())
                 {
-                    StuffUtil.setInv(p);
-                    tpPlayer(p, 240, 370);
+                    if(!Main.getInstance().getConfig().getBoolean("whitelist"))
+                    {
+                        if(!Main.getInstance().spectating.contains(p))
+                        {
+                            StuffUtil.setInv(p);
+                            tpPlayer(p, 240, 370);
+                            Main.getInstance().players.add(p);
+                        }
+                    }
+                    else
+                    {
+                        if(!Main.getInstance().spectating.contains(p) && Main.getInstance().whitelist.contains(p))
+                        {
+                            StuffUtil.setInv(p);
+                            tpPlayer(p, 240, 370);
+                            Main.getInstance().players.add(p);
+                        }
+                    }
 
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
                     {
@@ -216,6 +233,67 @@ public class PluginRunnable extends BukkitRunnable
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
             }
         }
+        else if(gp.isGai())
+        {
+            Gai gai = (Gai)gp.getPower();
+
+            if(gai.state == 1)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.SPEED))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
+                }
+            }
+            if(gai.state >= 2 && gai.state < 6)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.SPEED))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
+                }
+            }
+            if(gai.state >= 3 && gai.state < 8)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
+                }
+            }
+            if(gai.state == 4)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.JUMP))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 0, false, false));
+                }
+            }
+            if(gai.state >= 5)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.JUMP))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1, false, false));
+                }
+            }
+            if(gai.state >= 6)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.SPEED))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2, false, false));
+                }
+            }
+            if(gai.state >= 7)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0, false, false));
+                }
+            }
+            if(gai.state >= 8)
+            {
+                if(!p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+                {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 1, false, false));
+                }
+            }
+        }
     }
 
     public String getFormattedTime()
@@ -239,7 +317,7 @@ public class PluginRunnable extends BukkitRunnable
     public void tpPlayer(Player p, int min, int max)
     {
         p.setGameMode(GameMode.SURVIVAL);
-        
+
         Random r = new Random();
 
         int x = r.nextInt(max - min) + min;

@@ -1,1 +1,3 @@
 inv: 'default'
+diamondlimit: 17
+whitelist: false

@@ -90,7 +90,6 @@ public class PlayerDeathListener implements Listener
                     e.getDrops().remove(s);
                     e.setDeathMessage("\n");
                     Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
-                    checkForWin();
                 }
                 else
                 {
@@ -100,6 +99,7 @@ public class PlayerDeathListener implements Listener
                     {
                         kakuzu.respawnInv = p.getInventory().getContents();
                         e.getDrops().clear();
+                        e.setKeepInventory(true);
                     }
                     else
                     {
@@ -110,16 +110,16 @@ public class PlayerDeathListener implements Listener
 
                         e.setDeathMessage("\n");
                         Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
-                        checkForWin();
                     }
                 }
             }
             else
             {
-                checkForWin();
                 e.setDeathMessage("\n");
                 Bukkit.broadcastMessage(Main.getInstance().getPrefix() + p.getDisplayName() + " §cest mort ! Il était §6" + gp.getRole().name());
             }
+
+            checkForWin();
         }
     }
 
@@ -172,8 +172,11 @@ public class PlayerDeathListener implements Listener
 
                 if(pl.getGameMode() == GameMode.SURVIVAL)
                 {
-                    pl.setGameMode(GameMode.SPECTATOR);
-                    playerAlive.add(pl);
+                    if(Main.getInstance().akatsukis.contains(pl) || Main.getInstance().solos.contains(pl) || Main.getInstance().konohas.contains(pl))
+                    {
+                        pl.setGameMode(GameMode.SPECTATOR);
+                        playerAlive.add(pl);
+                    }
                 }
 
                 pl.playSound(pl.getLocation(), Sound.ENDERDRAGON_GROWL, 10f, 1f);
@@ -185,13 +188,16 @@ public class PlayerDeathListener implements Listener
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(playerAlive.contains(p))
+                if(!Main.getInstance().spectating.contains(p))
                 {
-                    message += "§r§5" + p.getDisplayName() + " : §d§o" + gp.getRole().name() + "\n";
-                }
-                else
-                {
-                    message += "§r§5" + p.getDisplayName() + " : §d§o§m" + gp.getRole().name() + "\n";
+                    if(playerAlive.contains(p))
+                    {
+                        message += "§r§5" + p.getDisplayName() + " : §d§o" + gp.getRole().name() + "\n";
+                    }
+                    else
+                    {
+                        message += "§r§5" + p.getDisplayName() + " : §d§o§m" + gp.getRole().name() + "\n";
+                    }
                 }
 
                 p.teleport(new Location(p.getWorld(), 0, 150, 0));

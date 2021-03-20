@@ -27,8 +27,10 @@ public class Pain extends Role
         }
         
         this.p.setMaxHealth(20 + 6);
-        
+                
         Main.getInstance().roles.put(p, this);
+        
+        this.powerRunnable.runTaskTimer(Main.getInstance(), 0, 20);
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class Pain extends Role
 				{
 					Player pl = (Player) e;
 
-					pl.setVelocity(this.p.getLocation().toVector().subtract(pl.getLocation().toVector()).multiply(0.3));
+					pl.setVelocity(this.p.getLocation().toVector().subtract(pl.getLocation().toVector()).multiply(0.6));
 				}
 			}
 
@@ -56,13 +58,7 @@ public class Pain extends Role
 			
 			this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez d'utiliser votre §6POUVOIR");
 
-			if (ticks)
-			{
-				this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 1L);
-			} else
-			{
-				this.getPowerRunnable().runTaskTimer(Main.getInstance(), 0, 20L);
-			}
+			this.powerRunnable.start = true;
 		} else
 		{
 			int remaining = 0;

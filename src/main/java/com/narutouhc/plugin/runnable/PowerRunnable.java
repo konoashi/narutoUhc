@@ -8,6 +8,7 @@ import com.narutouhc.plugin.roles.Role;
 public class PowerRunnable extends BukkitRunnable
 {
     private Role role;
+    public boolean start = false;
 
     public PowerRunnable(Role r)
     {
@@ -17,14 +18,17 @@ public class PowerRunnable extends BukkitRunnable
     @Override
     public void run()
     {
-        if(this.role.getCurrentCooldown() >= 1)
+        if(this.start)
         {
-            this.role.shrinkCooldown(1);
-        }
-        else
-        {
-            this.role.p.sendMessage(Main.getInstance().getPrefix() + "§aVotre pouvoir est désormais rechargé");
-            this.cancel();
+            if(this.role.getCurrentCooldown() >= 1)
+            {
+                this.role.shrinkCooldown(1);
+            }
+            else
+            {
+                this.role.p.sendMessage(Main.getInstance().getPrefix() + "§aVotre pouvoir est désormais rechargé");
+                this.start = false;
+            }
         }
     }
 

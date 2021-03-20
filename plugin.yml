@@ -25,5 +25,8 @@ commands:
     description: Permet d'envoyer un message anonyme
     permission: narutouhc.info
   config:
-    description: Hoo
+    description: Permet de configurer le plugin
     permission: narutouhc.config
+  spec:
+    description: Permet de se mettre spectateur de la partie
+    permission: narutouhc.spec

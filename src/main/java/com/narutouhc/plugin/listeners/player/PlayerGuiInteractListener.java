@@ -21,6 +21,9 @@ public class PlayerGuiInteractListener implements Listener
     {
         Inventory inv = e.getClickedInventory();
 
+        if(inv == null)
+            return;
+
         if(inv.getTitle() != null && inv.getTitle().equalsIgnoreCase("Super pouvoir"))
         {
             Player p = (Player)e.getWhoClicked();
@@ -28,8 +31,9 @@ public class PlayerGuiInteractListener implements Listener
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
             ItemStack item = e.getCurrentItem();
-            
-            if(item == null) return;
+
+            if(item == null)
+                return;
 
             if(gp.isChoji())
             {
@@ -37,6 +41,7 @@ public class PlayerGuiInteractListener implements Listener
                 Player target = Bukkit.getPlayer(skull.getOwner());
                 ((Choji)gp.getPower()).damagePlayer(target);
 
+                p.closeInventory();
                 e.setCancelled(true);
             }
             else if(gp.isMinato())
@@ -45,6 +50,7 @@ public class PlayerGuiInteractListener implements Listener
                 Player target = Bukkit.getPlayer(skull.getOwner());
 
                 ((Minato)gp.getPower()).teleport(target);
+                p.closeInventory();
 
                 e.setCancelled(true);
             }

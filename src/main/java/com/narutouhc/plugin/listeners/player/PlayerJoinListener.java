@@ -45,6 +45,7 @@ public class PlayerJoinListener implements Listener
             PermissionAttachment attachment = p.addAttachment(Main.getInstance());
             attachment.setPermission("narutouhc.me", true);
             attachment.setPermission("narutouhc.info", true);
+            attachment.setPermission("narutouhc.spec", true);
             Main.getInstance().perms.put(p, attachment);
         }
 
@@ -53,13 +54,22 @@ public class PlayerJoinListener implements Listener
             Main.getInstance().diamonds.put(p, 0);
         }
 
+        if(!GameStatus.isStatus(GameStatus.WAITING))
+        {
+            if(!Main.getInstance().players.contains(p))
+            {
+                Main.getInstance().spectating.add(p);
+            }
+        }
+
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e)
     {
-        if(e.getPlayer().getGameMode() == GameMode.SURVIVAL)
-            e.getPlayer().setHealth(0);
+        if(GameStatus.isStatus(GameStatus.GAME))
+            if(e.getPlayer().getGameMode() == GameMode.SURVIVAL)
+                e.getPlayer().setHealth(0);
         e.setQuitMessage(Main.getInstance().getPrefix() + e.getPlayer().getDisplayName() + "§e vient de se déconnecter");
     }
 }

@@ -20,19 +20,19 @@ public class ConstrucTabComplete implements TabCompleter
             if(command.getName().equalsIgnoreCase("role"))
             {
                 List<String> list = new ArrayList<String>();
-                
+
                 if(args.length == 1)
                 {
-                    list = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "pain", "zetsu", "ninja");
+                    list = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "gai", "pain", "zetsu", "ninja");
                 }
-                
+
                 return list;
             }
             else if(command.getName().equalsIgnoreCase("config"))
             {
                 if(args.length == 1)
                 {
-                    return Arrays.asList("inv");
+                    return Arrays.asList("inv", "diamondlimit", "whitelist");
                 }
                 else if(args.length == 2)
                 {
@@ -40,10 +40,18 @@ public class ConstrucTabComplete implements TabCompleter
                     {
                         return Arrays.asList("default", "uhc");
                     }
+                    else if(args[0].equalsIgnoreCase("diamondlimit"))
+                    {
+                        return Arrays.asList("default", "false");
+                    }
+                    else if(args[0].equalsIgnoreCase("whitelist"))
+                    {
+                        return Arrays.asList("true", "false");
+                    }
                 }
             }
         }
-        
+
         return null;
     }
 

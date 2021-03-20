@@ -15,6 +15,7 @@ public enum EnumRole
     ITACHI,
     DEIDARA,
     PAIN,
+    GAI,
     ZETSU,
     VILLAGEOIS,
     NONE;
@@ -60,32 +61,38 @@ public enum EnumRole
         }
         else if(role == MINATO)
         {
+            String narutoName = RolesUtils.getNaruto() != null ? RolesUtils.getNaruto().getDisplayName() : "§cPas dans la partie";
+            
             return "§e========= §6Minato §e=========\n" +
                     "§6Effets : §cVitesse 2\n" +
                     "§6Nombres d'utilisations : §cDeux fois dans la partie.\n" +
                     "§6Pouvoir : §cPeut se téléporter à une des ses balises posées sur un joueur.\n" +
                     "§6Victoire : §cAvec Konoha\n" +
-                    "§6Naruto : §c" + RolesUtils.getNaruto().getDisplayName() + "\n" +
+                    "§6Naruto : §c" + narutoName + "\n" +
                     "§e=========================";
         }
         else if(role == SASUKE)
         {
+            String itachiName = RolesUtils.getItachi() != null ? RolesUtils.getItachi().getDisplayName() : "§cPas dans la partie";
+            
             return "§e========= §6Sasuke §e=========\n" +
                     "§6Effets : §cVitesse 1 et Faiblesse 1 (si Orochimaru meurt)\n" +
                     "§6Cooldown : §c5 minutes.\n" +
                     "§6Pouvoir : §cEnvoie un éclair sur chaque ennemi.\n" +
                     "§6Rayon : §c5 blocs\n" +
                     "§6Victoire : §cAvec Orochimaru\n" +
-                    "§6Itachi : §c" + RolesUtils.getItachi().getDisplayName() + "\n" +
+                    "§6Itachi : §c" + itachiName + "\n" +
                     "§e=========================";
         }
         else if(role == OROCHIMARU)
         {
+            String sasukeName = RolesUtils.getSasuke() != null ? RolesUtils.getSasuke().getDisplayName() : "§cPas dans la partie";
+            
             return "§e========= §6Orochimaru §e=========\n" +
                     "§6Effets : §cAucun\n" +
                     "§6Pouvoir : §cVous avez 15 coeurs (8 si Sasuke meurt).\n" +
                     "§6Victoire : §cAvec Sasuke\n" +
-                    "§6Sasuke: §c" + RolesUtils.getSasuke().getDisplayName() + "\n" +
+                    "§6Sasuke: §c" + sasukeName + "\n" +
                     "§e=============================";
         }
         else if(role == KAKUZU)
@@ -117,15 +124,19 @@ public enum EnumRole
         }
         else if(role == PAIN)
         {
+            String itachiName = RolesUtils.getItachi() != null ? RolesUtils.getItachi().getDisplayName() : "§cPas dans la partie";
+            String kakuzuName = RolesUtils.getKakuzu() != null ? RolesUtils.getKakuzu().getDisplayName() : "§cPas dans la partie";
+            String deidaraName = RolesUtils.getDeidara() != null ? RolesUtils.getDeidara().getDisplayName() : "§cPas dans la partie";
+
             return "§e========= §6Pain §e=========\n" +
                     "§6Effets : §cAucun\n" +
                     "§6Cooldown : §c2 minutes.\n" +
                     "§6Pouvoir : - §cVous pouvez attirer les joueurs vers vous mais perdez 3 coeurs définitivement à chaque utilisation.\n" +
                     "§6Rayon : §c20 blocs\n" +
                     "§6Victoire : §cAvec l'Akatsuki\n" +
-                    "§6Itachi : §c" + RolesUtils.getItachi().getDisplayName() + "\n" +
-                    "§6Kakuzu : §c" + RolesUtils.getKakuzu().getDisplayName() + "\n" +
-                    "§6Deidara : §c" + RolesUtils.getDeidara().getDisplayName() + "\n" +
+                    "§6Itachi : §c" + itachiName + "\n" +
+                    "§6Kakuzu : §c" + kakuzuName + "\n" +
+                    "§6Deidara : §c" + deidaraName + "\n" +
                    "§e=======================";
         }
         else if(role == ZETSU)
@@ -144,7 +155,16 @@ public enum EnumRole
                     "§6Victoire : §cAvec Konoha\n" +
                     "§e==========================";
         }
+        else if(role == GAI)
+        {
+            return "§e========= §6Gai §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cVous pouvez débloquer 8 modes différent vous donnant des effets.\n" +
+                    "            Néanmoins, vous mourrez après 1 minute au 8ème stade" +
+                    "§6Victoire : §cAvec Konoha\n" +
+                    "§e==========================";
+        }
         
-        return null;
+        return "";
     }
 }

@@ -674,20 +674,28 @@ public class FastBoard
         this.updateLine(1, "");
         this.updateLine(2, "§bEpisode: §c" + Main.getInstance().pluginRunnable.ep);
         int pCount = 0;
-        
+
         for(Player p : Bukkit.getOnlinePlayers())
         {
-            if(p.getGameMode() == GameMode.SURVIVAL)
-                pCount ++;
+            if(!Main.getInstance().spectating.contains(p))
+                if(p.getGameMode() == GameMode.SURVIVAL)
+                    pCount++;
         }
-        
+
         this.updateLine(3, "§c" + pCount + " §4Joueurs");
         this.updateLine(4, "");
         this.updateLine(5, "§6Timer: §e" + Main.getInstance().pluginRunnable.getFormattedTime());
-        
+
         GamePlayer gp = GamePlayer.gamePlayers.get(this.player);
-        
-        this.updateLine(6, "§6Rôle: §e" + gp.getRole().name());
+
+        if(Main.getInstance().spectating.contains(this.player))
+        {
+            this.updateLine(6, "§6Rôle: §eSPECTATEUR");
+        }
+        else
+        {
+            this.updateLine(6, "§6Rôle: §e" + gp.getRole().name());
+        }
         this.updateLine(7, "");
         this.updateLine(8, "§2Bordure: §a" + (int)(Bukkit.getWorld("world").getWorldBorder().getSize() / 2));
 
