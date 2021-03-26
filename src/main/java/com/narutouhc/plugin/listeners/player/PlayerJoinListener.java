@@ -69,7 +69,26 @@ public class PlayerJoinListener implements Listener
     {
         if(GameStatus.isStatus(GameStatus.GAME))
             if(e.getPlayer().getGameMode() == GameMode.SURVIVAL)
-                e.getPlayer().setHealth(0);
+            {
+                e.getPlayer().damage(20);
+                
+                if(Main.getInstance().konohas.contains(e.getPlayer()))
+                {
+                    Main.getInstance().konohas.remove(e.getPlayer());
+                }
+                else if(Main.getInstance().akatsukis.contains(e.getPlayer()))
+                {
+                    Main.getInstance().akatsukis.remove(e.getPlayer());
+                }
+                else if(Main.getInstance().solos.contains(e.getPlayer()))
+                {
+                    Main.getInstance().solos.remove(e.getPlayer());
+                }
+                
+                e.getPlayer().setGameMode(GameMode.SPECTATOR);
+                
+                PlayerDeathListener.checkForWin();
+            }
         e.setQuitMessage(Main.getInstance().getPrefix() + e.getPlayer().getDisplayName() + "§e vient de se déconnecter");
     }
 }

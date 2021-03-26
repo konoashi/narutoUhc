@@ -30,3 +30,12 @@ commands:
   spec:
     description: Permet de se mettre spectateur de la partie
     permission: narutouhc.spec
+  allow:
+    description: Permet d'ajouter un joueur dans la whitelist
+    permission: narutouhc.allow
+  blacklist:
+    description: Permet d'enlever un joueur de la whitelist
+    permission: narutouhc.blacklist
+  getrole:
+    description: Permet de connaître le rôle d'un joueur
+    permission: narutouhc.getrole

@@ -12,6 +12,7 @@ import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.akatsuki.Deidara;
+import com.narutouhc.plugin.roles.akatsuki.Hidan;
 import com.narutouhc.plugin.roles.akatsuki.Itachi;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
 import com.narutouhc.plugin.roles.akatsuki.Pain;
@@ -37,7 +38,7 @@ public class CommandSetRole implements CommandExecutor
             Player p = (Player)sender;
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-            List<String> allowed = Arrays.asList("gai", "naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "pain", "zetsu");
+            List<String> allowed = Arrays.asList("hidan", "gai", "naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "pain", "zetsu");
 
             if(allowed.contains(args[0]))
             {
@@ -116,6 +117,11 @@ public class CommandSetRole implements CommandExecutor
                 {
                     gp.setRole(EnumRole.GAI);
                     gp.setPower(new Gai(p));
+                }
+                else if(args[0].equalsIgnoreCase("hidan"))
+                {
+                    gp.setRole(EnumRole.HIDAN);
+                    gp.setPower(new Hidan(p));
                 }
                 
                 sender.sendMessage(Main.getInstance().getPrefix() + "§aVous venez de mettre votre rôle à §6" + args[0].toUpperCase());

@@ -14,10 +14,14 @@ public enum EnumRole
     KAKUZU,
     ITACHI,
     DEIDARA,
+    HIDAN,
     PAIN,
     GAI,
     ZETSU,
+    CHIKUSHODO,
+    NINGENDO,
     VILLAGEOIS,
+    JIRAYA,
     NONE;
     
     public static String getDescription(EnumRole role)
@@ -125,9 +129,7 @@ public enum EnumRole
         else if(role == PAIN)
         {
             String itachiName = RolesUtils.getItachi() != null ? RolesUtils.getItachi().getDisplayName() : "§cPas dans la partie";
-            String kakuzuName = RolesUtils.getKakuzu() != null ? RolesUtils.getKakuzu().getDisplayName() : "§cPas dans la partie";
-            String deidaraName = RolesUtils.getDeidara() != null ? RolesUtils.getDeidara().getDisplayName() : "§cPas dans la partie";
-
+            
             return "§e========= §6Pain §e=========\n" +
                     "§6Effets : §cAucun\n" +
                     "§6Cooldown : §c2 minutes.\n" +
@@ -135,9 +137,7 @@ public enum EnumRole
                     "§6Rayon : §c20 blocs\n" +
                     "§6Victoire : §cAvec l'Akatsuki\n" +
                     "§6Itachi : §c" + itachiName + "\n" +
-                    "§6Kakuzu : §c" + kakuzuName + "\n" +
-                    "§6Deidara : §c" + deidaraName + "\n" +
-                   "§e=======================";
+                    "§e=======================";
         }
         else if(role == ZETSU)
         {
@@ -151,7 +151,8 @@ public enum EnumRole
         {
             return "§e========= §6Villageois §e=========\n" +
                     "§6Effets : §cAucun\n" +
-                    "§6Pouvoir : - §cAucun§c.\n" +
+                    "§6Pouvoir : - §cVous pouvez avoir Invisibilité pendant 2m.\n" +
+                    "§6Cooldown: §c10 minutes.\n" +
                     "§6Victoire : §cAvec Konoha\n" +
                     "§e==========================";
         }
@@ -164,6 +165,44 @@ public enum EnumRole
                     "§6Victoire : §cAvec Konoha\n" +
                     "§e==========================";
         }
+        else if(role == HIDAN)
+        {
+            return "§e========= §6Hidan §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cVous pouvez sélectionner un joueur dans la partie.\n" +
+                    "            Si celui-ci esssaie de vous attaquer, il prendra les dégats à votre place" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§e==========================";
+        }
+        else if(role == CHIKUSHODO)
+        {
+            return "§e========= §6Chikushodo §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cVous pouvez téléporter tous les corps de pain et vous vers une localisation aléatoire.\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§6Cooldown: §c20 minutes.\n" +
+                    "§e==========================";
+        }
+        else if(role == CHIKUSHODO)
+        {
+            return "§e========= §6Ningendo §e=========\n" +
+                    "§6Effets : §cAucun\n" +
+                    "§6Pouvoir : - §cVous pouvez, 2 fois dans la partie, inspecter le rôle d'un joueur.\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§6Cooldown: §c20 minutes.\n" +
+                    "§e==========================";
+        }        
+        else if(role == JIRAYA)
+        {
+            String orochimaruName = RolesUtils.getOrochimaru() != null ? RolesUtils.getOrochimaru().getDisplayName() : "§cPas dans la partie";
+            
+            return "§e========= §6Jiraya §e=========\n" +
+                    "§6Effets : §cVitesse 1 et Résistance 1\n" +
+                    "§6Pouvoir : - §cSi vous êtes proche de Naruto, vous aurez Force 1.\n" +
+                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§6Orochimaru : §c" + orochimaruName + "\n" +
+                    "§e==========================";
+        } 
         
         return "";
     }

@@ -21,7 +21,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.konoha.Gai;
+import com.narutouhc.plugin.roles.konoha.Jiraya;
+import com.narutouhc.plugin.roles.solos.Orochimaru;
 import com.narutouhc.plugin.roles.solos.Sasuke;
 import com.narutouhc.plugin.scoreboard.ScoreboardManager;
 import com.narutouhc.plugin.utils.GameStatus;
@@ -80,7 +83,7 @@ public class PluginRunnable extends BukkitRunnable
                         if(!Main.getInstance().spectating.contains(p))
                         {
                             StuffUtil.setInv(p);
-                            tpPlayer(p, 240, 370);
+                            tpPlayer(p, 370);
                             Main.getInstance().players.add(p);
                         }
                     }
@@ -89,9 +92,11 @@ public class PluginRunnable extends BukkitRunnable
                         if(!Main.getInstance().spectating.contains(p) && Main.getInstance().whitelist.contains(p))
                         {
                             StuffUtil.setInv(p);
-                            tpPlayer(p, 240, 370);
+                            tpPlayer(p, 370);
                             Main.getInstance().players.add(p);
                         }
+                        else
+                            p.setGameMode(GameMode.SPECTATOR);
                     }
 
                     if(!ScoreboardManager.scoreboardGame.containsKey(p))
@@ -104,9 +109,9 @@ public class PluginRunnable extends BukkitRunnable
                 this.starting = false;
             }
         }
-        else if(GameStatus.isStatus(GameStatus.GAME) && !starting)
+        else if(GameStatus.isStatus(GameStatus.GAME) && !this.starting)
         {
-            mainTimer++;
+            this.mainTimer++;
 
             if(this.ep == 1 && this.gameTimer == (20 * 60) - 30)
             {
@@ -197,27 +202,32 @@ public class PluginRunnable extends BukkitRunnable
     {
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-        if(gp.isNaruto())
+        if(gp.isRole(EnumRole.NARUTO))
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
             }
         }
-        else if(gp.isMinato())
+        else if(gp.isRole(EnumRole.MINATO))
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
             }
         }
-        else if(gp.isSasuke())
+        else if(gp.isRole(EnumRole.SASUKE))
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
             }
 
+            if(!((Sasuke)gp.getPower()).hasWeakness && !p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, false));
+            }
+            
             if(((Sasuke)gp.getPower()).hasWeakness)
             {
                 if(!p.hasPotionEffect(PotionEffectType.WEAKNESS))
@@ -226,14 +236,23 @@ public class PluginRunnable extends BukkitRunnable
                 }
             }
         }
-        else if(gp.isItachi())
+        else if(gp.isRole(EnumRole.ITACHI))
         {
             if(!p.hasPotionEffect(PotionEffectType.SPEED))
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1, false, false));
             }
         }
-        else if(gp.isGai())
+        else if(gp.isRole(EnumRole.OROCHIMARU))
+        {
+            Orochimaru orochimaru = (Orochimaru)gp.getPower();
+            
+            if(orochimaru.isSasukeDead && !p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 1, false, false));
+            }
+        }
+        else if(gp.isRole(EnumRole.GAI))
         {
             Gai gai = (Gai)gp.getPower();
 
@@ -294,6 +313,24 @@ public class PluginRunnable extends BukkitRunnable
                 }
             }
         }
+        else if(gp.isRole(EnumRole.JIRAYA))
+        {
+            if(!p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0, false, false));
+            }
+            if(!p.hasPotionEffect(PotionEffectType.SPEED))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false));
+            }
+            
+            Jiraya jiraya = (Jiraya)gp.getPower();
+            
+            if(jiraya.isNearNaruto && !p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE))
+            {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5 * 20, 0, false, false));
+            }
+        }
     }
 
     public String getFormattedTime()
@@ -314,16 +351,26 @@ public class PluginRunnable extends BukkitRunnable
         }
     }
 
-    public void tpPlayer(Player p, int min, int max)
+    public void tpPlayer(Player p, int bound)
     {
         p.setGameMode(GameMode.SURVIVAL);
 
         Random r = new Random();
 
-        int x = r.nextInt(max - min) + min;
+        int x = r.nextInt(bound) + 1;
         int y = 150;
-        int z = r.nextInt(max - min) + min;
+        int z = r.nextInt(bound) + 1;
 
+        if(r.nextInt(2) == 0)
+        {
+            x -= x * 2;
+        }
+        
+        if(r.nextInt(2) == 1)
+        {
+            z -= z * 2;
+        }
+        
         Location loc = new Location(Main.getInstance().getServer().getWorlds().get(0), x, y, z);
 
         Block block = loc.getWorld().getBlockAt(loc);
@@ -334,7 +381,7 @@ public class PluginRunnable extends BukkitRunnable
         }
         else
         {
-            tpPlayer(p, min, max);
+            tpPlayer(p, bound);
         }
 
     }

@@ -16,8 +16,8 @@ public class Kakuzu extends Role
     {
         super(player);
         this.type = EnumRole.KAKUZU;
-        this.p.setMaxHealth(20 + 4);
-        this.p.setHealth(20 + 4);
+        this.p.setMaxHealth(20 + 8);
+        this.p.setHealth(20 + 8);
         Main.getInstance().akatsukis.add(player);
         
         if(Main.getInstance().roles.containsKey(p))
@@ -32,7 +32,7 @@ public class Kakuzu extends Role
     public void useAbility()
     {
         this.hasRespawned = true;
-        this.p.setMaxHealth(20 - 4);
+        this.p.setMaxHealth(20);
         this.p.sendMessage(Main.getInstance().getPrefix() + "§aVous venez de §cRessuciter !");
     }
 }

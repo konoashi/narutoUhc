@@ -16,13 +16,17 @@ import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.Role;
+import com.narutouhc.plugin.roles.akatsuki.Chikushodo;
 import com.narutouhc.plugin.roles.akatsuki.Deidara;
+import com.narutouhc.plugin.roles.akatsuki.Hidan;
 import com.narutouhc.plugin.roles.akatsuki.Itachi;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
+import com.narutouhc.plugin.roles.akatsuki.Ningendo;
 import com.narutouhc.plugin.roles.akatsuki.Pain;
 import com.narutouhc.plugin.roles.akatsuki.Zetsu;
 import com.narutouhc.plugin.roles.konoha.Choji;
 import com.narutouhc.plugin.roles.konoha.Gai;
+import com.narutouhc.plugin.roles.konoha.Jiraya;
 import com.narutouhc.plugin.roles.konoha.Minato;
 import com.narutouhc.plugin.roles.konoha.Naruto;
 import com.narutouhc.plugin.roles.konoha.Ninja;
@@ -33,7 +37,7 @@ import com.narutouhc.plugin.roles.solos.Sasuke;
 
 public class RolesUtils
 {
-    private static Player gai, zetsu, ninja, naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
+    private static Player jiraya, ningendo, chikushodo, gai, hidan, zetsu, ninja, naruto, sakura, shikamaru, choji, minato, sasuke, orochimaru, kakuzu, itachi, deidara, pain;
 
     public static Player getNaruto()
     {
@@ -42,7 +46,7 @@ public class RolesUtils
             for(Player p : Main.getInstance().getServer().getOnlinePlayers())
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
-                if(gp.isNaruto())
+                if(gp.isRole(EnumRole.NARUTO))
                 {
                     naruto = p;
                 }
@@ -52,6 +56,74 @@ public class RolesUtils
         return naruto;
     }
 
+    public static Player getJiraya()
+    {
+        if(jiraya == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isRole(EnumRole.JIRAYA))
+                {
+                    jiraya = p;
+                }
+            }
+        }
+
+        return jiraya;
+    }
+    
+    public static Player getHidan()
+    {
+        if(hidan == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isRole(EnumRole.HIDAN))
+                {
+                    naruto = p;
+                }
+            }
+        }
+
+        return hidan;
+    }
+
+    public static Player getChikushodo()
+    {
+        if(chikushodo == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isRole(EnumRole.CHIKUSHODO))
+                {
+                    chikushodo = p;
+                }
+            }
+        }
+
+        return chikushodo;
+    }
+
+    public static Player getNingendo()
+    {
+        if(ningendo == null)
+        {
+            for(Player p : Main.getInstance().getServer().getOnlinePlayers())
+            {
+                GamePlayer gp = GamePlayer.gamePlayers.get(p);
+                if(gp.isRole(EnumRole.NINGENDO))
+                {
+                    ningendo = p;
+                }
+            }
+        }
+
+        return ningendo;
+    }
+
     public static Player getNinja()
     {
         if(ninja == null)
@@ -59,7 +131,7 @@ public class RolesUtils
             for(Player p : Main.getInstance().getServer().getOnlinePlayers())
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
-                if(gp.isNinja())
+                if(gp.isRole(EnumRole.VILLAGEOIS))
                 {
                     ninja = p;
                 }
@@ -68,7 +140,7 @@ public class RolesUtils
 
         return ninja;
     }
-    
+
     public static Player getZetsu()
     {
         if(zetsu == null)
@@ -76,7 +148,7 @@ public class RolesUtils
             for(Player p : Main.getInstance().getServer().getOnlinePlayers())
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
-                if(gp.isZetsu())
+                if(gp.isRole(EnumRole.ZETSU))
                 {
                     zetsu = p;
                 }
@@ -85,7 +157,7 @@ public class RolesUtils
 
         return zetsu;
     }
-    
+
     public static Player getSakura()
     {
         if(sakura == null)
@@ -94,7 +166,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.iSakura())
+                if(gp.isRole(EnumRole.SAKURA))
                 {
                     sakura = p;
                 }
@@ -112,7 +184,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isShikamaru())
+                if(gp.isRole(EnumRole.SHIKAMARU))
                 {
                     shikamaru = p;
                 }
@@ -130,7 +202,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isChoji())
+                if(gp.isRole(EnumRole.CHOJI))
                 {
                     choji = p;
                 }
@@ -148,7 +220,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isMinato())
+                if(gp.isRole(EnumRole.MINATO))
                 {
                     minato = p;
                 }
@@ -166,7 +238,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isSasuke())
+                if(gp.isRole(EnumRole.SASUKE))
                 {
                     sasuke = p;
                 }
@@ -184,7 +256,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isOrochimaru())
+                if(gp.isRole(EnumRole.OROCHIMARU))
                 {
                     orochimaru = p;
                 }
@@ -202,7 +274,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isKakuzu())
+                if(gp.isRole(EnumRole.KAKUZU))
                 {
                     kakuzu = p;
                 }
@@ -220,7 +292,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isItachi())
+                if(gp.isRole(EnumRole.ITACHI))
                 {
                     itachi = p;
                 }
@@ -238,7 +310,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isDeidara())
+                if(gp.isRole(EnumRole.DEIDARA))
                 {
                     deidara = p;
                 }
@@ -256,7 +328,7 @@ public class RolesUtils
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.isPain())
+                if(gp.isRole(EnumRole.PAIN))
                 {
                     pain = p;
                 }
@@ -273,7 +345,7 @@ public class RolesUtils
             for(Player p : Main.getInstance().getServer().getOnlinePlayers())
             {
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
-                if(gp.isGai())
+                if(gp.isRole(EnumRole.GAI))
                 {
                     gai = p;
                 }
@@ -282,18 +354,27 @@ public class RolesUtils
 
         return gai;
     }
-    
+
     public static void setRoles()
     {
         List<Player> players = new ArrayList<Player>();
-        
+
         for(Player p : Bukkit.getOnlinePlayers())
         {
-            players.add(p);
+            if(Main.getInstance().getConfig().getBoolean("whitelist"))
+            {
+                if(Main.getInstance().whitelist.contains(p))
+                    players.add(p);
+            }
+            else
+            {
+                if(!Main.getInstance().spectating.contains(p))
+                    players.add(p);
+            }
         }
-        
+
         Collections.shuffle(players);
-        
+
         for(Player p : players)
         {
             getRandomRole(p);
@@ -304,7 +385,7 @@ public class RolesUtils
     {
         Random r = new Random();
 
-        int i = r.nextInt(14);
+        int i = r.nextInt(18);
 
         Role role = null;
 
@@ -381,7 +462,6 @@ public class RolesUtils
 
                 minato = p;
 
-
             }
             else
                 return getRandomRole(p);
@@ -412,7 +492,6 @@ public class RolesUtils
 
                 orochimaru = p;
 
-
             }
             else
                 return getRandomRole(p);
@@ -428,7 +507,6 @@ public class RolesUtils
 
                 kakuzu = p;
 
-
             }
             else
                 return getRandomRole(p);
@@ -443,9 +521,8 @@ public class RolesUtils
                 gp.setPower(role);
 
                 ((Itachi)gp.getPower()).addLifeAbility();
-                
-                itachi = p;
 
+                itachi = p;
 
             }
             else
@@ -462,12 +539,12 @@ public class RolesUtils
 
                 deidara = p;
 
-                ItemStack egg = new ItemStack(Material.EGG);
+                ItemStack egg = new ItemStack(Material.EGG, 16);
                 ItemMeta meta = egg.getItemMeta();
-                
+
                 meta.setDisplayName("§cOeuf explosif");
                 egg.setItemMeta(meta);
-                
+
                 p.getInventory().addItem(egg);
             }
             else
@@ -484,7 +561,6 @@ public class RolesUtils
 
                 pain = p;
 
-
             }
             else
                 return getRandomRole(p);
@@ -500,11 +576,10 @@ public class RolesUtils
 
                 zetsu = p;
 
-
             }
             else
                 return getRandomRole(p);
-        }        
+        }
         else if(i == 12)
         {
             if(ninja == null)
@@ -518,7 +593,7 @@ public class RolesUtils
             }
             else
                 return getRandomRole(p);
-        }  
+        }
         else if(i == 13)
         {
             if(gai == null)
@@ -532,15 +607,76 @@ public class RolesUtils
             }
             else
                 return getRandomRole(p);
-        } 
+        }
+        else if(i == 14)
+        {
+            if(hidan == null)
+            {
+                gp.setRole(EnumRole.HIDAN);
+
+                role = new Hidan(p);
+                gp.setPower(role);
+
+                hidan = p;
+            }
+            else
+                return getRandomRole(p);
+        }
+        else if(i == 15)
+        {
+            if(chikushodo == null)
+            {
+                gp.setRole(EnumRole.CHIKUSHODO);
+
+                role = new Chikushodo(p);
+                gp.setPower(role);
+
+                hidan = p;
+            }
+            else
+                return getRandomRole(p);
+        }
+        else if(i == 16)
+        {
+            if(ningendo == null)
+            {
+                gp.setRole(EnumRole.NINGENDO);
+
+                role = new Ningendo(p);
+                gp.setPower(role);
+
+                ningendo = p;
+            }
+            else
+                return getRandomRole(p);
+        }        
+        else if(i == 17)
+        {
+            if(jiraya == null)
+            {
+                gp.setRole(EnumRole.JIRAYA);
+
+                role = new Jiraya(p);
+                gp.setPower(role);
+
+                jiraya = p;
+            }
+            else
+                return getRandomRole(p);
+        }         
         
         String cmp = "";
 
-        if(Main.getInstance().konohas.contains(p)){
+        if(Main.getInstance().konohas.contains(p))
+        {
             cmp = "§aun ninja de Konoha";
-        } else if(Main.getInstance().akatsukis.contains(p)){
+        }
+        else if(Main.getInstance().akatsukis.contains(p))
+        {
             cmp = "§cun membre de l'Akatsuki";
-        } else {
+        }
+        else
+        {
             cmp = "§eun déserteur du vilage";
         }
 
@@ -548,7 +684,7 @@ public class RolesUtils
         String roleLine = "§5Voici votre rôle : §d" + gp.getRole().name();
         String cmpLine = "§9Vous êtes " + cmp;
         String infoLine = "§e/me §9pour en savoir plus";
-    
+
         p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (cmpLine.length() / 2) + 4)) + cmpLine);
         p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (roleLine.length() / 2) + 4)) + roleLine);
         p.sendMessage(Strings.repeat(" ", (("========================================".length() / 2) - (infoLine.length() / 2) + 4)) + infoLine);

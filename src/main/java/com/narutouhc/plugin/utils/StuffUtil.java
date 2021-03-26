@@ -39,7 +39,7 @@ public class StuffUtil
         boots.setItemMeta(metaBoots);
         Main.getInstance().startInv.put(boots, 30);
 
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         ItemMeta metaSword = sword.getItemMeta();
         metaSword.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
         sword.setItemMeta(metaSword);

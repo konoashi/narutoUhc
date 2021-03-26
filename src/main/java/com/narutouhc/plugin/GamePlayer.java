@@ -25,74 +25,9 @@ public class GamePlayer
 
     /* Conditions publiques permettant de déterminer le rôle du joueur */
 
-    public boolean isNaruto()
+    public boolean isRole(EnumRole roleIn)
     {
-        return this.role == EnumRole.NARUTO;
-    }
-
-    public boolean iSakura()
-    {
-        return this.role == EnumRole.SAKURA;
-    }
-
-    public boolean isShikamaru()
-    {
-        return this.role == EnumRole.SHIKAMARU;
-    }
-
-    public boolean isChoji()
-    {
-        return this.role == EnumRole.CHOJI;
-    }
-    
-    public boolean isGai()
-    {
-        return this.role == EnumRole.GAI;
-    }
-
-    public boolean isMinato()
-    {
-        return this.role == EnumRole.MINATO;
-    }
-
-    public boolean isSasuke()
-    {
-        return this.role == EnumRole.SASUKE;
-    }
-
-    public boolean isOrochimaru()
-    {
-        return this.role == EnumRole.OROCHIMARU;
-    }
-
-    public boolean isKakuzu()
-    {
-        return this.role == EnumRole.KAKUZU;
-    }
-
-    public boolean isItachi()
-    {
-        return this.role == EnumRole.ITACHI;
-    }
-
-    public boolean isDeidara()
-    {
-        return this.role == EnumRole.DEIDARA;
-    }
-
-    public boolean isPain()
-    {
-        return this.role == EnumRole.PAIN;
-    }
-
-    public boolean isZetsu()
-    {
-        return this.role == EnumRole.ZETSU;
-    }
-
-    public boolean isNinja()
-    {
-        return this.role == EnumRole.VILLAGEOIS;
+        return this.role == roleIn;
     }
     
     /* Conditions publiques permettant de préciser le rôle du joueur */

@@ -8,6 +8,8 @@ import com.narutouhc.plugin.roles.Role;
 
 public class Orochimaru extends Role
 {
+    public boolean isSasukeDead = false;
+    
     public Orochimaru(Player player)
     {
         super(player);
@@ -32,6 +34,7 @@ public class Orochimaru extends Role
             this.p.setHealth(20);
         }
         
+        this.isSasukeDead = true;
         this.p.sendMessage(Main.getInstance().getPrefix() + "§eSasuke §cest mort ! Vous avez donc perdu §b4 coeurs permanents §c!");
     }
 }

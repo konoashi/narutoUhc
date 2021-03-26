@@ -9,8 +9,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
+import com.narutouhc.plugin.roles.akatsuki.Hidan;
 import com.narutouhc.plugin.roles.konoha.Minato;
 import com.narutouhc.plugin.roles.konoha.Shikamaru;
+import com.narutouhc.plugin.utils.RolesUtils;
 
 public class PlayerDamageListener implements Listener
 {
@@ -31,7 +34,18 @@ public class PlayerDamageListener implements Listener
 
                         GamePlayer gp = GamePlayer.gamePlayers.get(d);
 
-                        if(gp.isShikamaru() && (Player)e.getEntity() != d && ((Shikamaru)gp.getPower()).isAvailable())
+                        if(RolesUtils.getHidan() != null)
+                        {
+                            Player hidanTarget = ((Hidan)GamePlayer.gamePlayers.get(RolesUtils.getHidan()).getPower()).target;
+
+                            if(((Player)e.getEntity()) == RolesUtils.getHidan() && hidanTarget == d)
+                            {
+                                d.damage(e.getDamage() / 2);
+                                e.setCancelled(true);
+                            }
+                        }
+
+                        if(gp.isRole(EnumRole.SHIKAMARU) && (Player)e.getEntity() != d && ((Shikamaru)gp.getPower()).isAvailable())
                         {
                             ((Shikamaru)gp.getPower()).freezePlayer((Player)e.getEntity());
                         }
@@ -44,7 +58,18 @@ public class PlayerDamageListener implements Listener
 
                     GamePlayer gp = GamePlayer.gamePlayers.get(player);
 
-                    if(gp.isMinato())
+                    if(RolesUtils.getHidan() != null)
+                    {
+                        Player hidanTarget = ((Hidan)GamePlayer.gamePlayers.get(RolesUtils.getHidan()).getPower()).target;
+
+                        if(((Player)e.getEntity()) == RolesUtils.getHidan() && hidanTarget == player)
+                        {
+                            player.damage(e.getDamage() / 2);
+                            e.setCancelled(true);
+                        }
+                    }
+                    
+                    if(gp.isRole(EnumRole.MINATO))
                     {
                         Minato minato = (Minato)gp.getPower();
                         if(!minato.getTargets().containsKey(damaged))

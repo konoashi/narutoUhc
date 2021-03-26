@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 import com.narutouhc.plugin.GamePlayer;
+import com.narutouhc.plugin.roles.EnumRole;
 
 public class ThrowableHitListener implements Listener
 {
@@ -23,9 +24,9 @@ public class ThrowableHitListener implements Listener
 
 				GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-				if(gp.isDeidara())
+				if(gp.isRole(EnumRole.DEIDARA))
 				{
-					if(egg.getCustomName().equalsIgnoreCase("§cOeuf explosif"))
+					if(egg.getCustomName() != null && egg.getCustomName().equalsIgnoreCase("§cOeuf explosif"))
 					{
 						egg.getWorld().createExplosion(egg.getLocation(), 1);
 					}

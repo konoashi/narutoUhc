@@ -10,7 +10,8 @@ public class Role
     public Player p;
     private int defaultCooldown = 20 * 60 * 5;
     private int currentCooldown = 0;
-
+    public boolean isPainBody = false;
+    
     protected PowerRunnable powerRunnable;
 
     public EnumRole type = EnumRole.NONE;

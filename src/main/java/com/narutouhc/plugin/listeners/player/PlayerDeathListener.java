@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.Main;
+import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.akatsuki.Kakuzu;
 import com.narutouhc.plugin.roles.solos.Orochimaru;
 import com.narutouhc.plugin.roles.solos.Sasuke;
@@ -33,11 +34,13 @@ public class PlayerDeathListener implements Listener
 
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
+        e.setDeathMessage("\n");
+
         if(GameStatus.isStatus(GameStatus.GAME))
         {
             if(!e.getDeathMessage().equalsIgnoreCase(p.getName() + " died"))
             {
-                if(!gp.isKakuzu())
+                if(!gp.isRole(EnumRole.KAKUZU))
                 {
                     if(Main.getInstance().konohas.contains(p))
                     {
@@ -52,25 +55,25 @@ public class PlayerDeathListener implements Listener
                         Main.getInstance().solos.remove(p);
                     }
 
-                    if(gp.isOrochimaru())
+                    if(gp.isRole(EnumRole.OROCHIMARU))
                     {
                         Player sasuke = RolesUtils.getSasuke();
 
                         GamePlayer sasukeGp = GamePlayer.gamePlayers.get(sasuke);
 
-                        if(sasuke != null && sasukeGp.isSasuke())
+                        if(sasuke != null && sasukeGp.isRole(EnumRole.SASUKE))
                         {
                             ((Sasuke)Main.getInstance().roles.get(sasuke)).orochimaruDie();
                         }
 
                     }
-                    else if(gp.isSasuke())
+                    else if(gp.isRole(EnumRole.SASUKE))
                     {
                         Player orochimaru = RolesUtils.getOrochimaru();
 
                         GamePlayer orochimaruGp = GamePlayer.gamePlayers.get(orochimaru);
 
-                        if(orochimaru != null && orochimaruGp.isOrochimaru())
+                        if(orochimaru != null && orochimaruGp.isRole(EnumRole.OROCHIMARU))
                         {
                             ((Orochimaru)Main.getInstance().roles.get(orochimaru)).sasukeDie();
                         }
@@ -123,7 +126,7 @@ public class PlayerDeathListener implements Listener
         }
     }
 
-    private void checkForWin()
+    public static void checkForWin()
     {
         int sizeKonoha = 0, sizeAkatsuki = 0, sizeSolo = 0;
 
@@ -214,7 +217,7 @@ public class PlayerDeathListener implements Listener
 
         GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-        if(!gp.isKakuzu())
+        if(!gp.isRole(EnumRole.KAKUZU))
         {
             p.setGameMode(GameMode.SPECTATOR);
         }
@@ -229,9 +232,8 @@ public class PlayerDeathListener implements Listener
             else
             {
                 kakuzu.useAbility();
-                p.getInventory().setContents(kakuzu.respawnInv);
-                Main.getInstance().pluginRunnable.tpPlayer(p, 240, 370);
-                p.setGameMode(GameMode.SPECTATOR);
+                Main.getInstance().pluginRunnable.tpPlayer(p, 150);
+                p.setGameMode(GameMode.SURVIVAL);
             }
         }
     }

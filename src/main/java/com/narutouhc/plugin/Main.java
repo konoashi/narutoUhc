@@ -12,9 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.narutouhc.plugin.commands.CommandAllow;
+import com.narutouhc.plugin.commands.CommandBlacklist;
 import com.narutouhc.plugin.commands.CommandConfig;
 import com.narutouhc.plugin.commands.CommandEpisode;
 import com.narutouhc.plugin.commands.CommandFs;
+import com.narutouhc.plugin.commands.CommandGetRole;
 import com.narutouhc.plugin.commands.CommandInfo;
 import com.narutouhc.plugin.commands.CommandInv;
 import com.narutouhc.plugin.commands.CommandMe;
@@ -43,7 +46,7 @@ public class Main extends JavaPlugin
 
     public HashMap<Player, PermissionAttachment> perms = new HashMap<Player, PermissionAttachment>();
     public List<Player> whitelist = new ArrayList<Player>();
-    
+
     // Teams
     public List<Player> konohas = new ArrayList<Player>(), akatsukis = new ArrayList<Player>(), solos = new ArrayList<Player>();
 
@@ -102,6 +105,9 @@ public class Main extends JavaPlugin
         addCommand("info", new CommandInfo());
         addCommand("config", new CommandConfig());
         addCommand("spec", new CommandSpec());
+        addCommand("allow", new CommandAllow());
+        addCommand("blacklist", new CommandBlacklist());
+        addCommand("getrole", new CommandGetRole());
     }
 
     private void addCommand(String name, CommandExecutor e)

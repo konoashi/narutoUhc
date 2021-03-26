@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -14,7 +15,7 @@ import com.narutouhc.plugin.roles.EnumRole;
 
 public class PlayerInteractListener implements Listener
 {
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
@@ -26,9 +27,8 @@ public class PlayerInteractListener implements Listener
                     Player p = e.getPlayer();
                     GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                    if(gp.isDeidara())
+                    if(gp.isRole(EnumRole.DEIDARA))
                     {
-                        e.setCancelled(true);
                         e.getItem().setAmount(e.getItem().getAmount() - 1);
 
                         p.launchProjectile(Egg.class).setCustomName("§cOeuf explosif");
@@ -38,16 +38,18 @@ public class PlayerInteractListener implements Listener
             else if(e.getItem() != null && e.getItem().getType() == Material.NETHER_STAR)
             {
                 Player p = e.getPlayer();
-                
+
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
-                
-                if(gp.getRole() != EnumRole.NONE && !gp.isShikamaru() && !gp.isOrochimaru() && !gp.isKakuzu() && !gp.isDeidara() && !gp.isNinja() && !gp.isZetsu())
+
+                if(gp.getRole() != EnumRole.NONE && !gp.isRole(EnumRole.SHIKAMARU) && !gp.isRole(EnumRole.OROCHIMARU) && !gp.isRole(EnumRole.KAKUZU) && !gp.isRole(EnumRole.DEIDARA) && !gp.isRole(EnumRole.VILLAGEOIS))
                 {
                     gp.getPower().useAbility();
                 }
                 else
                     p.sendMessage(Main.getInstance().getPrefix() + "§cVous ne pouvez pas utiliser de pouvoir");
             }
+            else
+                return;
         }
     }
 }

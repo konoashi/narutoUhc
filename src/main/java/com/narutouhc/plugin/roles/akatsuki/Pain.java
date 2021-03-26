@@ -21,10 +21,12 @@ public class Pain extends Role
 		this.setDefaultCooldown(2 * 60);
 		Main.getInstance().akatsukis.add(player);
 		
+		this.isPainBody = true;
+		
         if(Main.getInstance().roles.containsKey(p))
         {
             Main.getInstance().roles.remove(p);
-        }
+        }        
         
         this.p.setMaxHealth(20 + 6);
                 

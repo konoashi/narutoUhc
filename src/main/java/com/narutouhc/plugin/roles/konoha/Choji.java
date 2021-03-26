@@ -4,6 +4,7 @@ import com.narutouhc.plugin.Main;
 import com.narutouhc.plugin.roles.EnumRole;
 import com.narutouhc.plugin.roles.Role;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -19,12 +20,12 @@ public class Choji extends Role
         super(player);
         this.type = EnumRole.CHOJI;
         Main.getInstance().konohas.add(player);
-        
+
         if(Main.getInstance().roles.containsKey(p))
         {
             Main.getInstance().roles.remove(p);
         }
-        
+
         Main.getInstance().roles.put(p, this);
     }
 
@@ -34,13 +35,16 @@ public class Choji extends Role
 
         for(Player p : Main.getInstance().getServer().getOnlinePlayers())
         {
-            ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
-            SkullMeta skull = (SkullMeta)item.getItemMeta();
-            skull.setOwner(p.getName());
-            skull.setDisplayName("§6" + p.getName());
-            item.setItemMeta(skull);
+            if(p.getGameMode() == GameMode.SURVIVAL)
+            {
+                ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+                SkullMeta skull = (SkullMeta)item.getItemMeta();
+                skull.setOwner(p.getName());
+                skull.setDisplayName("§6" + p.getName());
+                item.setItemMeta(skull);
 
-            inv.addItem(item);
+                inv.addItem(item);
+            }
         }
 
         this.p.openInventory(inv);
@@ -59,7 +63,8 @@ public class Choji extends Role
         }
     }
 
-    public void damagePlayer(Player pl) {
+    public void damagePlayer(Player pl)
+    {
 
         pl.damage(pl.getMaxHealth() / 2);
 
@@ -67,9 +72,9 @@ public class Choji extends Role
 
         this.used = true;
 
-        this.p.sendMessage(Main.getInstance().getPrefix()+"§cVous venez d'utiliser votre pouvoir sur §6" + pl.getDisplayName());
+        this.p.sendMessage(Main.getInstance().getPrefix() + "§cVous venez d'utiliser votre pouvoir sur §6" + pl.getDisplayName());
     }
-    
+
     public boolean isUsed()
     {
         return this.used;

@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 
 import com.narutouhc.plugin.GamePlayer;
 import com.narutouhc.plugin.recipes.akatsuki.ExplosiveEgg;
+import com.narutouhc.plugin.roles.EnumRole;
 
 public class PlayerCraftListener implements Listener
 {
@@ -19,7 +20,7 @@ public class PlayerCraftListener implements Listener
             
             GamePlayer gp = GamePlayer.gamePlayers.get(p);
             
-            if(!gp.isDeidara())
+            if(!gp.isRole(EnumRole.DEIDARA))
             {
                 e.setCancelled(true);
             }

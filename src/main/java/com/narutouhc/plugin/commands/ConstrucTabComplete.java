@@ -23,7 +23,7 @@ public class ConstrucTabComplete implements TabCompleter
 
                 if(args.length == 1)
                 {
-                    list = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "gai", "pain", "zetsu", "ninja");
+                    list = Arrays.asList("naruto", "sakura", "shikamaru", "choji", "minato", "sasuke", "orochimaru", "kakuzu", "itachi", "deidara", "gai", "pain", "zetsu", "ninja", "hidan");
                 }
 
                 return list;
