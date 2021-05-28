@@ -41,7 +41,7 @@ public class PlayerInteractListener implements Listener
 
                 GamePlayer gp = GamePlayer.gamePlayers.get(p);
 
-                if(gp.getRole() != EnumRole.NONE && !gp.isRole(EnumRole.SHIKAMARU) && !gp.isRole(EnumRole.OROCHIMARU) && !gp.isRole(EnumRole.KAKUZU) && !gp.isRole(EnumRole.DEIDARA) && !gp.isRole(EnumRole.VILLAGEOIS))
+                if(gp.getRole() != EnumRole.NONE && !gp.isRole(EnumRole.SHIKAMARU) && !gp.isRole(EnumRole.OROCHIMARU) && !gp.isRole(EnumRole.KAKUZU) && !gp.isRole(EnumRole.DEIDARA))
                 {
                     gp.getPower().useAbility();
                 }

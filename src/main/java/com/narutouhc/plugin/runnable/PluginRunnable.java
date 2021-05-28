@@ -326,7 +326,7 @@ public class PluginRunnable extends BukkitRunnable
             
             Jiraya jiraya = (Jiraya)gp.getPower();
             
-            if(jiraya.isNearNaruto && !p.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE))
+            if(jiraya.isNearNaruto && !p.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
             {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5 * 20, 0, false, false));
             }

@@ -631,7 +631,7 @@ public class RolesUtils
                 role = new Chikushodo(p);
                 gp.setPower(role);
 
-                hidan = p;
+                chikushodo = p;
             }
             else
                 return getRandomRole(p);

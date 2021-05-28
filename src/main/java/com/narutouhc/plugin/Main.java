@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.narutouhc.plugin.commands.CommandAllow;
 import com.narutouhc.plugin.commands.CommandBlacklist;
+import com.narutouhc.plugin.commands.CommandCancel;
 import com.narutouhc.plugin.commands.CommandConfig;
 import com.narutouhc.plugin.commands.CommandEpisode;
 import com.narutouhc.plugin.commands.CommandFs;
@@ -108,7 +109,8 @@ public class Main extends JavaPlugin
         addCommand("allow", new CommandAllow());
         addCommand("blacklist", new CommandBlacklist());
         addCommand("getrole", new CommandGetRole());
-    }
+        addCommand("cancel", new CommandCancel());
+ }
 
     private void addCommand(String name, CommandExecutor e)
     {

@@ -143,7 +143,8 @@ public enum EnumRole
         {
             return "§e========= §6Zetsu §e=========\n" +
                     "§6Effets : §cAucun\n" +
-                    "§6Pouvoir : - §cAucun§c.\n" +
+                    "§6Pouvoir : - §cVous pouvez avoir Invisibilité pendant 2m.\n" +
+                    "§6Cooldown: §c10 minutes.\n" +
                     "§6Victoire : §cAvec l'Akatsuki\n" +
                     "§e==========================";
         }
@@ -170,7 +171,7 @@ public enum EnumRole
             return "§e========= §6Hidan §e=========\n" +
                     "§6Effets : §cAucun\n" +
                     "§6Pouvoir : - §cVous pouvez sélectionner un joueur dans la partie.\n" +
-                    "            Si celui-ci esssaie de vous attaquer, il prendra les dégats à votre place" +
+                    "            Si celui-ci esssaie de vous attaquer, il prendra les dégats à votre place\n" +
                     "§6Victoire : §cAvec l'Akatsuki\n" +
                     "§e==========================";
         }
@@ -183,7 +184,7 @@ public enum EnumRole
                     "§6Cooldown: §c20 minutes.\n" +
                     "§e==========================";
         }
-        else if(role == CHIKUSHODO)
+        else if(role == NINGENDO)
         {
             return "§e========= §6Ningendo §e=========\n" +
                     "§6Effets : §cAucun\n" +
@@ -199,7 +200,7 @@ public enum EnumRole
             return "§e========= §6Jiraya §e=========\n" +
                     "§6Effets : §cVitesse 1 et Résistance 1\n" +
                     "§6Pouvoir : - §cSi vous êtes proche de Naruto, vous aurez Force 1.\n" +
-                    "§6Victoire : §cAvec l'Akatsuki\n" +
+                    "§6Victoire : §cAvec Konoha\n" +
                     "§6Orochimaru : §c" + orochimaruName + "\n" +
                     "§e==========================";
         } 
