@@ -33,9 +33,15 @@ commands:
   allow:
     description: Permet d'ajouter un joueur dans la whitelist
     permission: narutouhc.allow
+  cancel:
+    desscription: met ce que tu veux
+    permission: narutouhc.cancel
   blacklist:
     description: Permet d'enlever un joueur de la whitelist
     permission: narutouhc.blacklist
   getrole:
     description: Permet de connaître le rôle d'un joueur
     permission: narutouhc.getrole
+  cancel:
+    description: met ce que tu veux
+    permission: narutouhc.cancel
